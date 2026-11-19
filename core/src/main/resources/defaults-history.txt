@@ -8,11 +8,15 @@ config/style_rules_positive.md	9719b4623bb7c55d
 config/style_sample.md	e3b0c44298fc1c14
 prompts/adjudicator.md	90a8b9373759faed
 prompts/director.md	6f6003760bf31502
+prompts/intent.md	d2e507ffbcfa53bb
 prompts/intent.md	e013bd101f68ba67
 prompts/judge.md	280abdb2137c79e8
+prompts/knows_check.md	f682652a93422d24
 prompts/offscreen.md	2bb3f3170d379b00
 prompts/rewrite.md	471f042bde070323
 prompts/scribe.md	537c0afde70b191e
+prompts/scribe.md	7e794e0910169a0a
+prompts/setup.md	41e21cdc73aa7a04
 prompts/setup.md	fb5b0b786a4d6c1b
 prompts/style_picker.md	d71c00757746e600
 prompts/summary.md	bb572b8e87be0483

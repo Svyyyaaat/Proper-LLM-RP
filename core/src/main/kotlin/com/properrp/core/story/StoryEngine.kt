@@ -280,6 +280,11 @@ class StoryEngine(
         File(stateDir, "player_public.md").writeAtomic(o.optString("player_public").ifBlank { o.optString("player") } + "\n")
         val chars = o.getJSONArray("characters")
         for (i in 0 until chars.length()) chars.getJSONObject(i).let { state.writeCharacter(it.getString("name"), it.getString("file")) }
+        o.optJSONArray("extras")?.let { a ->
+            state.writeExtras((0 until a.length()).map { a.getJSONObject(it) }.filter { it.optString("name").isNotBlank() }
+                .associate { it.getString("name") to it.optString("line") })
+        }
+        checkKnows()
         val secrets = o.optJSONArray("secrets")
         File(stateDir, "secrets.md").writeAtomic("# Secrets (game master only)\n\n" + (0 until (secrets?.length() ?: 0)).joinToString("\n") { i ->
             val s = secrets!!.getJSONObject(i)
@@ -322,7 +327,30 @@ class StoryEngine(
     // ------------------------------------------------------------------ sessions
 
     /** Between sessions the world moves (off-screen), then the director plans three beats. */
+    /**
+     * Each character's Knows, checked once per story for the game master's knowledge leaking in ("doesn't know
+     * what he is"): whoever plays them reads every word, and a stated unknown makes the player a mystery to solve.
+     * Stories made before this check get it at their next session. A failed check leaves the file as it was.
+     */
+    fun checkKnows() {
+        val done = File(dir, "state/knows_checked")
+        if (done.exists()) return
+        all(state.characterNames().map { name -> {
+            runCatching {
+                val file = state.character(name) ?: return@runCatching
+                if ("## Knows" !in file) return@runCatching
+                val o = json(call("knows_check", Models.CHARACTERS, Prompts.fill(prompts.prompt("knows_check"), mapOf(
+                    "player" to playerText(), "player_public" to playerPublic(), "file" to file,
+                )), listOf(Msg(Role.USER, "Check the Knows section.")), schema = KNOWS_SCHEMA, maxTokens = 3000, quiet = true))
+                val knows = o.optString("knows").trim()
+                if (knows.isNotEmpty()) state.writeCharacter(name, StoryState.replaceSection(file, "Knows", knows))
+            }
+        } })
+        done.parentFile.mkdirs(); done.writeText("1\n")
+    }
+
     fun startSession(): List<String> {
+        runCatching { checkKnows() }
         val scene = state.scene()
         val log = ArrayList<String>()
         if (scene.session > 0 && scene.turn > 0 && scene.movedForSession != scene.session + 1) {
@@ -490,6 +518,7 @@ class StoryEngine(
         return call("scribe", Models.CHARACTERS, Prompts.fill(prompts.prompt("scribe"), records() + mapOf(
             "present" to s.present.joinToString(), "place" to s.place,
             "beat" to (s.beats.firstOrNull { !it.done }?.goal ?: "none"),
+            "others" to state.extras().entries.joinToString("; ") { "${it.key}: ${it.value}" }.ifEmpty { "none" },
             "clocks" to state.clocks().joinToString("; ") { "${it.name} ${it.filled}/${it.size}" },
             "message" to (t.player ?: "(the player let the scene continue)"), "passage" to passage,
         )), listOf(Msg(Role.USER, "List the changes.")), schema = StateOp.SCHEMA, maxTokens = 4000, quiet = quiet)
@@ -563,7 +592,8 @@ class StoryEngine(
         val beat = s.beats.firstOrNull { !it.done }
         val names = s.present.toSet()
         val characters = s.present.mapNotNull { n -> state.character(n)?.let { "#### $n\n$it" } } +
-            (state.characterNames() - names).map { n -> "- $n (not here)" }
+            (state.characterNames() - names).map { n -> "- $n (not here)" } +
+            listOfNotNull(extrasBlock(names).trim().takeIf { it.isNotEmpty() })
         val tags = names + s.place
         return Prompts.fill(prompts.prompt("turn"), mapOf(
             "player" to playerText(), "player_public" to playerPublic(),
@@ -693,6 +723,8 @@ class StoryEngine(
      * player know can't leak into what they do (code-level separation, not a "don't know this" line).
      */
     private fun decideIntents(t: PendingTurn): String {
+        // stories older than the Knows check get it here once, before anyone decides from a leaky file
+        runCatching { checkKnows() }
         val s = state.scene()
         val cast = state.characterNames().toSet()
         val people = s.present.filter { it in cast }
@@ -762,11 +794,19 @@ class StoryEngine(
         "Place: ${s.place}. Present: ${s.present.joinToString()}. Beat: ${s.beats.firstOrNull { !it.done }?.goal ?: "none"}.\n" +
             "Last passage: " + turnsInChapter(s.chapter).lastOrNull()?.optString("passage").orEmpty()
 
+    /** The one-line people; [here] marks who is in the scene. They know only ordinary things and what they see. */
+    private fun extrasBlock(here: Set<String>? = null): String {
+        val x = state.extras()
+        if (x.isEmpty()) return ""
+        return "\n\n#### Others (one line each: no secrets, they know only ordinary local things and what happens in front of them)\n" +
+            x.entries.joinToString("\n") { (n, l) -> "- $n: $l" + if (here != null && n !in here) " (not here)" else "" }
+    }
+
     private fun records(): Map<String, String> = mapOf(
         "language" to settings.language,
         "plot" to prompts.config("plot.md").orEmpty(),
         "world" to state.world(),
-        "characters" to state.characterNames().joinToString("\n\n") { n -> "### $n\n" + state.character(n) },
+        "characters" to state.characterNames().joinToString("\n\n") { n -> "### $n\n" + state.character(n) } + extrasBlock(),
         "secrets" to state.secrets().joinToString("\n") { "- ${it.id}: ${it.text} [knows: ${it.knows.joinToString()}]" }.ifEmpty { "none" },
         "consequences" to state.consequences().filter { it.open }.joinToString("\n") { "- ${it.id}: ${it.text}" }.ifEmpty { "none" },
         "chronicle" to state.chronicle().takeLast(20).joinToString("\n") { "- ${it.id}: ${it.text}" }.ifEmpty { "none" },
@@ -812,10 +852,13 @@ class StoryEngine(
             "banned phrase" to "Avoid stock phrases (see the style rules); say the plain concrete thing.",
         )
 
-        val SETUP_SCHEMA = """{"type":"object","additionalProperties":false,"required":["title","world","player","history","player_public","characters","secrets","clocks","complications","ambience","opening"],"properties":{
+        val KNOWS_SCHEMA = """{"type":"object","additionalProperties":false,"required":["knows"],"properties":{"knows":{"type":"string"}}}"""
+
+        val SETUP_SCHEMA = """{"type":"object","additionalProperties":false,"required":["title","world","player","history","player_public","characters","extras","secrets","clocks","complications","ambience","opening"],"properties":{
             "title":{"type":"string"},
             "world":{"type":"string"},"player":{"type":"string"},"history":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["text","witnesses"],"properties":{"text":{"type":"string"},"witnesses":{"type":"array","items":{"type":"string"}}}}},"player_public":{"type":"string"},
             "characters":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["name","file"],"properties":{"name":{"type":"string"},"file":{"type":"string"}}}},
+            "extras":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["name","line"],"properties":{"name":{"type":"string"},"line":{"type":"string"}}}},
             "secrets":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["text","knows"],"properties":{"text":{"type":"string"},"knows":{"type":"array","items":{"type":"string"}}}}},
             "clocks":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["name","size","when_full"],"properties":{"name":{"type":"string"},"size":{"type":"integer"},"when_full":{"type":"string"}}}},
             "complications":{"type":"array","items":{"type":"string"}},

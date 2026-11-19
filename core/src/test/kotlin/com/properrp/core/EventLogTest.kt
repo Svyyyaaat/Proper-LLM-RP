@@ -88,4 +88,58 @@ class EventLogTest {
         val packet = fake.sent("writer").last().messages.last().text
         assertTrue("three weeks" in packet && "perceived by" in packet, "the writer gets the record")
     }
+
+    @Test
+    fun `a stance replaces the last one instead of piling up`() {
+        state.writeCharacter("ブルーノ", """
+            ## Goals
+            Get the guards paid double.
+            ## Attitude
+            Guarded and blunt.
+            - (turn 4) Openly suspects Kai over the goat bones.
+            - (turn 6) Now suspects the charm reacts to Kai.
+            ## Learned
+            - (turn 5) The guest has a charm.
+        """.trimIndent())
+        state.save(state.scene().also { it.turn = 9; it.present = mutableListOf("ブルーノ") })
+        state.apply(StateOp.parse("""{"ops":[{"op":"character","a":"ブルーノ","b":"Let the matter drop for tonight; still wary of Kai.","list":[],"n":0}]}"""))
+        val f = state.character("ブルーノ")!!
+        assertFalse("Openly suspects" in f || "Now suspects" in f, f)
+        assertTrue("(turn 9) Let the matter drop" in f, f)
+        assertTrue("- (turn 5) The guest has a charm." in f, "what they learned stays")
+        state.apply(StateOp.parse("""{"ops":[{"op":"character","a":"ブルーノ","b":"Owes Kai a favour.","list":[],"n":0}]}"""))
+        val g = state.character("ブルーノ")!!
+        assertEquals(1, Regex("## Now").findAll(g).count(), g)
+        assertFalse("Let the matter drop" in g)
+        assertTrue("Guarded and blunt." in g)
+    }
+
+    @Test
+    fun `knows is checked once for the game master's knowledge leaking in`() {
+        state.writeCharacter("ゲルダ", "## Goals\nSell the inn.\n## Knows\nKai is a refugee and reliable. She does not know what he is.\n## Attitude\nWarm.")
+        File(dir, "state/player.md").writeText("Kai, a demon in hiding.")
+        val fake = FakeLlm(mapOf("knows_check" to """{"knows":"Kai is a refugee who works hard and turns up on time."}"""))
+        val e = StoryEngine(dir, fake, CostLog(null), "s")
+        e.checkKnows()
+        val f = e.state.character("ゲルダ")!!
+        assertFalse("does not know what he is" in f, f)
+        assertTrue("turns up on time" in f && "## Goals\nSell the inn." in f && "## Attitude\nWarm." in f, f)
+        val sent = fake.sent("knows_check").single().messages.joinToString { it.text }
+        assertTrue("demon in hiding" in sent, "the checker sees the hidden truth so it can spot hints of it")
+        e.checkKnows()
+        assertEquals(1, fake.sent("knows_check").size, "once per story")
+    }
+
+    @Test
+    fun `extras are one line until they matter, then get a file`() {
+        state.writeExtras(mapOf("大槻" to "Gate captain; wants the toll flowing and no talk of demons; indifferent."))
+        state.apply(StateOp.parse("""{"ops":[{"op":"extra","a":"客","b":"A traveller with a glowing charm; curious and chatty.","list":[],"n":0}]}"""))
+        assertEquals(setOf("大槻", "客"), state.extras().keys)
+        assertTrue("大槻" in state.castNameParts(), "extras' names are names too")
+        val refused = state.apply(StateOp.parse("""{"ops":[{"op":"promote","a":"客","b":"Just a line.","list":[],"n":0}]}"""))
+        assertTrue(refused.single().startsWith("refused"), refused.toString())
+        state.apply(StateOp.parse("""{"ops":[{"op":"promote","a":"客","b":"## Goals\\nSee the hero's ward.\\n## Knows\\nThe charm glowed near Kai.","list":[],"n":0}]}"""))
+        assertTrue("客" in state.characterNames())
+        assertEquals(setOf("大槻"), state.extras().keys)
+    }
 }
