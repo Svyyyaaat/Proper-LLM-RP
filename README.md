@@ -31,6 +31,30 @@ parts (Anki, dictionary, vocabulary check, review words, mistake checks): what's
   becomes "the story so far" (its chapter summaries plus a summary of where it stopped), time passes off-screen
   first, and you can say what happens next. The old story stays on the shelf.
 
+## Long games (hundreds of hours)
+
+Every call is sent the same amount however long the story has run: `LongGameTest` plays 400 turns in which
+every passage adds events, learned facts, facts about the player, unsettled debts, secrets, new faces and
+people who come to matter, and checks that no prompt grows. What keeps it that way:
+
+- **The story so far** (`state/saga.md`): rewritten at every chapter close from the old one and the new chapter
+  (old events compressed harder); the writer, director and off-screen moves read it. The writer also gets the
+  previous chapter's summary and the chapter in progress in full.
+- **Each person's long memory**: at a chapter close, everyone who perceived something in it gets the "Remembers"
+  section of their file rewritten from what they perceived (their "Learned" notes folded in), from inside their
+  head, so what they act on stays theirs. On a turn they still get their recent memories and older ones that
+  match the scene.
+- **Your sheet**: "Established in the story" is merged when it passes 25 lines.
+- **Only who's in play in full**: people seen in the last 60 turns, in the scene or in a planned beat get their
+  files; the rest one line each (the oldest by name only). Minor people, secrets and undated debts are capped to
+  the relevant and latest; debts 40 turns overdue (or the oldest past 30 undated) are closed.
+- **Nothing is deleted**: the record (`state/events.jsonl`) and the full log stay; only what's *sent* is bounded.
+  A chapter close whose long-memory update failed is caught up at the next turn.
+- **On the phone**: each chapter's turns are in their own file (`log/chapters/`), the record is parsed once and
+  then only what was added, logs are read from the end, the debug log is capped at ~20 MB.
+- **Backups**: *Stories → Save a backup* writes a story as a .zip; *Open a backup* puts one back on the shelf
+  (on this phone or another).
+
 ## How a turn works
 
 Code owns the state and decides outcomes; each model call does one job. A referee decides whether your move

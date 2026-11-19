@@ -297,4 +297,11 @@
     <string name="stories_keep_cast">Garder ses personnages</string>
     <string name="stories_new_with_cast">Nouvelle histoire avec ses personnages</string>
     <string name="files_sources">Vos fichiers</string>
+    <string name="step_saga">Mise à jour de la mémoire à long terme…</string>
+    <string name="stories_export">Sauvegarder</string>
+    <string name="stories_import">Ouvrir une sauvegarde</string>
+    <string name="stories_backup_about">Les histoires n\'existent que dans cette appli : une sauvegarde (un fichier .zip) en garde une à l\'abri ou la transfère sur un autre téléphone.</string>
+    <string name="stories_exported">Sauvegarde enregistrée.</string>
+    <string name="stories_export_failed">Impossible d\'enregistrer la sauvegarde.</string>
+    <string name="stories_import_failed">Ce fichier n\'est pas une sauvegarde d\'histoire, ou il est illisible.</string>
 </resources>

@@ -297,4 +297,11 @@
     <string name="stories_keep_cast">Conservar a su gente</string>
     <string name="stories_new_with_cast">Nueva historia con su gente</string>
     <string name="files_sources">Tus archivos</string>
+    <string name="step_saga">Actualizando la memoria a largo plazo…</string>
+    <string name="stories_export">Guardar copia</string>
+    <string name="stories_import">Abrir copia</string>
+    <string name="stories_backup_about">Las historias solo están en esta app: una copia de seguridad (un archivo .zip) guarda una a salvo o la lleva a otro teléfono.</string>
+    <string name="stories_exported">Copia guardada.</string>
+    <string name="stories_export_failed">No se pudo guardar la copia.</string>
+    <string name="stories_import_failed">Ese archivo no es una copia de una historia, o no se pudo leer.</string>
 </resources>

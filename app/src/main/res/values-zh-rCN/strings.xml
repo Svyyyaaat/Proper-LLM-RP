@@ -291,4 +291,11 @@
     <string name="stories_keep_cast">保留人物</string>
     <string name="stories_new_with_cast">用这些人物开始新故事</string>
     <string name="files_sources">你的文件</string>
+    <string name="step_saga">正在更新长期记忆…</string>
+    <string name="stories_export">保存备份</string>
+    <string name="stories_import">打开备份</string>
+    <string name="stories_backup_about">故事只保存在本应用中：备份（.zip 文件）可以保护故事，或把它转到另一部手机。</string>
+    <string name="stories_exported">备份已保存。</string>
+    <string name="stories_export_failed">无法保存备份。</string>
+    <string name="stories_import_failed">该文件不是故事备份，或无法读取。</string>
 </resources>

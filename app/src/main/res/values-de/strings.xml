@@ -294,4 +294,11 @@
     <string name="stories_keep_cast">Leute behalten</string>
     <string name="stories_new_with_cast">Neue Geschichte mit ihren Leuten</string>
     <string name="files_sources">Deine Dateien</string>
+    <string name="step_saga">Langzeitgedächtnis wird aktualisiert…</string>
+    <string name="stories_export">Backup speichern</string>
+    <string name="stories_import">Backup öffnen</string>
+    <string name="stories_backup_about">Geschichten gibt es nur in dieser App: Ein Backup (eine .zip-Datei) sichert eine Geschichte oder bringt sie auf ein anderes Handy.</string>
+    <string name="stories_exported">Backup gespeichert.</string>
+    <string name="stories_export_failed">Backup konnte nicht gespeichert werden.</string>
+    <string name="stories_import_failed">Das ist kein Backup einer Geschichte, oder es konnte nicht gelesen werden.</string>
 </resources>

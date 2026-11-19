@@ -294,4 +294,11 @@
     <string name="stories_keep_cast">Karakterleri koru</string>
     <string name="stories_new_with_cast">Karakterleriyle yeni hikâye</string>
     <string name="files_sources">Dosyaların</string>
+    <string name="step_saga">Uzun süreli bellek güncelleniyor…</string>
+    <string name="stories_export">Yedek kaydet</string>
+    <string name="stories_import">Yedek aç</string>
+    <string name="stories_backup_about">Hikâyeler yalnızca bu uygulamada durur: bir yedek (.zip dosyası) hikâyeyi güvende tutar ya da başka bir telefona taşır.</string>
+    <string name="stories_exported">Yedek kaydedildi.</string>
+    <string name="stories_export_failed">Yedek kaydedilemedi.</string>
+    <string name="stories_import_failed">Bu dosya bir hikâye yedeği değil ya da okunamadı.</string>
 </resources>

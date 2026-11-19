@@ -297,4 +297,11 @@
     <string name="stories_keep_cast">Tieni i personaggi</string>
     <string name="stories_new_with_cast">Nuova storia con i suoi personaggi</string>
     <string name="files_sources">I tuoi file</string>
+    <string name="step_saga">Aggiorno la memoria a lungo termine…</string>
+    <string name="stories_export">Salva un backup</string>
+    <string name="stories_import">Apri un backup</string>
+    <string name="stories_backup_about">Le storie esistono solo in questa app: un backup (un file .zip) ne tiene al sicuro una o la porta su un altro telefono.</string>
+    <string name="stories_exported">Backup salvato.</string>
+    <string name="stories_export_failed">Impossibile salvare il backup.</string>
+    <string name="stories_import_failed">Questo file non è il backup di una storia, oppure non è leggibile.</string>
 </resources>

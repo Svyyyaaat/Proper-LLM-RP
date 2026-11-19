@@ -8,6 +8,7 @@ import androidx.compose.runtime.setValue
 import com.properrp.app.AppState
 import com.properrp.app.R
 import com.properrp.core.jsonLines
+import com.properrp.core.tailJson
 import com.properrp.core.llm.AnthropicLlm
 import com.properrp.core.llm.ClaudeCodeLlm
 import com.properrp.core.llm.CostLog
@@ -134,7 +135,7 @@ class StoryController(
         val title = File(d, "state/title.txt").takeIf { it.exists() }?.readText()?.trim()?.ifEmpty { null }
             ?: world.readLines().map { it.trim().trimStart('#').trim() }.firstOrNull { it.isNotEmpty() }?.let { if (it.length > 48) it.take(46) + "…" else it }
         val log = File(d, "log/turns.jsonl")
-        val last = log.takeIf { it.exists() }?.readLines()?.lastOrNull { it.isNotBlank() }?.let { runCatching { JSONObject(it) }.getOrNull() }
+        val last = log.tailJson(1).lastOrNull()
         val active = sc?.lastActive?.takeIf { it > 0 } ?: last?.optLong("at")?.takeIf { it > 0 } ?: world.lastModified()
         return StorySummary(d, title, sc?.place?.ifBlank { null }, sc?.chapter ?: 1, sc?.turn ?: 0, active,
             last?.optString("passage")?.lines()?.filter { it.isNotBlank() }?.takeLast(2)?.joinToString("\n"),
@@ -427,7 +428,7 @@ class StoryController(
         if (history.isNotEmpty()) return
         val f = File(dir, "log/turns.jsonl")
         if (!f.exists()) return
-        f.jsonLines().takeLast(20).forEach { o ->
+        f.tailJson(20).forEach { o ->
             history += ShownTurn(o.optString("player").ifBlank { null }, ShownPassage(o.getInt("turn"), o.getString("passage")))
         }
     }
@@ -444,8 +445,7 @@ class StoryController(
     fun chapter(): Int = scene()?.chapter ?: 1
 
     /** The end of the last passage, for the home screen. */
-    fun lastLines(): String? = File(dir, "log/turns.jsonl").takeIf { it.exists() }?.readLines()?.lastOrNull { it.isNotBlank() }
-        ?.let { runCatching { JSONObject(it).getString("passage") }.getOrNull() }?.lines()?.filter { it.isNotBlank() }?.takeLast(3)?.joinToString("\n")
+    fun lastLines(): String? = File(dir, "log/turns.jsonl").tailJson(1).lastOrNull()?.optString("passage")?.lines()?.filter { it.isNotBlank() }?.takeLast(3)?.joinToString("\n")
 
     /** What the player's character knows: their role, who they've met, the chapters so far. Never secrets. */
     data class StoryInfo(
@@ -465,7 +465,10 @@ class StoryController(
 
     fun storyInfo(): StoryInfo {
         val role = playerSheet()
-        val text = File(dir, "log/turns.jsonl").jsonLines().joinToString("\n") { it.optString("passage") } + "\n" + (current?.passage?.text ?: "")
+        // what you've read, without parsing a long game's whole log: the story so far, the chapters, the latest turns
+        val text = listOfNotNull(File(dir, "state/saga.md").takeIf { it.exists() }?.readText()).joinToString() +
+            File(dir, "state/chapters").listFiles().orEmpty().joinToString("\n") { it.readText() } +
+            File(dir, "log/turns.jsonl").tailJson(200).joinToString("\n") { it.optString("passage") } + "\n" + (current?.passage?.text ?: "")
         val cast = runCatching { StoryState(dir).characterNames() }.getOrDefault(emptyList())
         // met = named in a passage you've read (by full name or any part of it of two characters or more)
         val met = cast.filter { n -> n in text || n.split(' ', '　', '・', '(', ')', '（', '）').any { it.length >= 2 && it in text } }
@@ -477,9 +480,57 @@ class StoryController(
         return StoryInfo(role, met, chapters, remembers, sessionCost(), totalCost())
     }
 
-    /** Every session's costs, from the log file. */
-    fun totalCost(): Double = File(dir, "log/costs.jsonl").takeIf { it.exists() }?.readLines()
-        ?.mapNotNull { runCatching { JSONObject(it).optDouble("dollars") }.getOrNull() }?.sum() ?: 0.0
+    // ------------------------------------------------------------------ backups
+
+    /** Writes the story in [d] as a zip to [uri] (everything but the debug log). Blocking: off the main thread. */
+    fun exportStory(d: File, uri: android.net.Uri): Boolean = runCatching {
+        context.contentResolver.openOutputStream(uri)?.use { out ->
+            java.util.zip.ZipOutputStream(out.buffered()).use { zip ->
+                d.walkTopDown().filter { it.isFile && !it.name.startsWith("calls") && !it.name.startsWith(".") }.forEach { f ->
+                    zip.putNextEntry(java.util.zip.ZipEntry(f.relativeTo(d).path.replace('\\', '/')))
+                    f.inputStream().use { it.copyTo(zip) }
+                    zip.closeEntry()
+                }
+            }
+        } ?: error("can't write there")
+    }.isSuccess
+
+    /** A file name for the export: the title and the date. */
+    fun exportName(s: StorySummary): String = (s.title ?: "story").replace(Regex("[^\\p{L}\\p{N} _-]"), "").trim().take(40).ifEmpty { "story" } +
+        " " + java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US).format(java.util.Date()) + ".zip"
+
+    /** Reads a story exported before onto the shelf; null when it worked, else what to tell the player. */
+    fun importStory(uri: android.net.Uri): String? {
+        val target = File(archiveRoot, "imported-" + java.text.SimpleDateFormat("yyyy-MM-dd_HHmm-ss", java.util.Locale.US).format(java.util.Date()))
+        val ok = runCatching {
+            context.contentResolver.openInputStream(uri)?.use { input ->
+                java.util.zip.ZipInputStream(input.buffered()).use { zip ->
+                    while (true) {
+                        val e = zip.nextEntry ?: break
+                        val out = File(target, e.name).canonicalFile
+                        // nothing outside the story's folder (a crafted zip could name ../../)
+                        check(out.path.startsWith(target.canonicalPath + File.separator)) { "bad entry ${e.name}" }
+                        if (e.isDirectory) out.mkdirs() else { out.parentFile?.mkdirs(); out.outputStream().use { zip.copyTo(it) } }
+                    }
+                }
+            } ?: error("can't read it")
+            check(File(target, "state/world.md").exists()) { "not a story" }
+        }.isSuccess
+        if (!ok) { target.deleteRecursively(); return app.text(R.string.stories_import_failed) }
+        return null
+    }
+
+    private var costMemo: Pair<Long, Double>? = null
+
+    /** Every session's costs, from the log file (a long game's is big: summed again only when it grew). */
+    fun totalCost(): Double {
+        val f = File(dir, "log/costs.jsonl")
+        if (!f.exists()) return 0.0
+        costMemo?.let { (len, sum) -> if (len == f.length()) return sum }
+        val sum = f.readLines().sumOf { runCatching { JSONObject(it).optDouble("dollars") }.getOrNull()?.takeIf { d -> !d.isNaN() } ?: 0.0 }
+        costMemo = f.length() to sum
+        return sum
+    }
 
     companion object {
         /** What's about you, not a story: follows you to a new or another story. */
@@ -494,7 +545,7 @@ class StoryController(
             "director" to R.string.step_director, "intent" to R.string.step_intent,
             "writer" to R.string.step_writer, "rewrite" to R.string.step_rewrite, "judge" to R.string.step_judge,
             "scribe" to R.string.step_scribe, "summary" to R.string.step_summary, "setup" to R.string.step_setup,
-            "style_picker" to R.string.step_style_picker,
+            "style_picker" to R.string.step_style_picker, "saga" to R.string.step_saga,
         )
 
         fun errorText(k: ErrorText.Kind): Int = when (k) {

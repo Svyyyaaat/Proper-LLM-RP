@@ -300,4 +300,11 @@
     <string name="stories_keep_cast">Zachowaj postacie</string>
     <string name="stories_new_with_cast">Nowa historia z jej postaciami</string>
     <string name="files_sources">Twoje pliki</string>
+    <string name="step_saga">Aktualizuję pamięć długotrwałą…</string>
+    <string name="stories_export">Zapisz kopię</string>
+    <string name="stories_import">Otwórz kopię</string>
+    <string name="stories_backup_about">Historie są tylko w tej aplikacji: kopia zapasowa (plik .zip) chroni historię albo przenosi ją na inny telefon.</string>
+    <string name="stories_exported">Kopia zapisana.</string>
+    <string name="stories_export_failed">Nie udało się zapisać kopii.</string>
+    <string name="stories_import_failed">To nie jest kopia historii albo nie udało się jej odczytać.</string>
 </resources>

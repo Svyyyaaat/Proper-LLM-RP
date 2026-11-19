@@ -297,4 +297,11 @@
     <string name="stories_keep_cast">Manter as pessoas</string>
     <string name="stories_new_with_cast">Nova história com essas pessoas</string>
     <string name="files_sources">Seus arquivos</string>
+    <string name="step_saga">Atualizando a memória de longo prazo…</string>
+    <string name="stories_export">Salvar backup</string>
+    <string name="stories_import">Abrir backup</string>
+    <string name="stories_backup_about">As histórias ficam só neste app: um backup (um arquivo .zip) guarda uma em segurança ou leva para outro celular.</string>
+    <string name="stories_exported">Backup salvo.</string>
+    <string name="stories_export_failed">Não foi possível salvar o backup.</string>
+    <string name="stories_import_failed">Esse arquivo não é um backup de história, ou não pôde ser lido.</string>
 </resources>

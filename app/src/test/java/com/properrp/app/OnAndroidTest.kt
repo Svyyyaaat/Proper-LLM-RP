@@ -51,6 +51,10 @@ class OnAndroidTest {
         "judge" to """{"violations":[]}""",
         "scribe" to """{"ops":[{"op":"chronicle","a":"薬の話","b":"","list":["ミナ"],"n":0}]}""",
         "summary" to "Mina wants medicine.\n雨の場面。",
+        // the long memory, at each chapter close
+        "saga" to "## What happened\nMina asked for medicine.\n## Where things stand\nShe is waiting.",
+        "remember" to """{"remembers":"The apothecary's apprentice sold me nothing yet."}""",
+        "condense" to "- an apprentice",
         "writer" to """{"passage":"ミナは瓶を見た。「これ、高いの？」"}""",
         "rewrite" to """{"passage":"ミナは瓶を見た。"}""",
     )

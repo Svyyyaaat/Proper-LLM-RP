@@ -22,6 +22,8 @@ import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.FileOpen
+import androidx.compose.material.icons.filled.SaveAlt
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.HorizontalDivider
@@ -63,11 +65,30 @@ fun StoriesScreen(state: AppState, onContinue: () -> Unit, onNewStory: (StorySum
     val busyText = stringResource(R.string.stories_switch_busy)
     val failedText = stringResource(R.string.stories_switch_failed)
     LaunchedEffect(tick) { stories = withContext(Dispatchers.IO) { state.story.stories() } }
+    val scope = rememberCoroutineScope()
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val exported = stringResource(R.string.stories_exported)
+    val exportFailed = stringResource(R.string.stories_export_failed)
+    var exporting by remember { mutableStateOf<StorySummary?>(null) }
+    val saveTo = androidx.activity.compose.rememberLauncherForActivityResult(
+        androidx.activity.result.contract.ActivityResultContracts.CreateDocument("application/zip")) { uri ->
+        val s = exporting ?: return@rememberLauncherForActivityResult
+        exporting = null
+        if (uri != null) scope.launch {
+            val ok = withContext(Dispatchers.IO) { state.story.exportStory(s.dir, uri) }
+            android.widget.Toast.makeText(context, if (ok) exported else exportFailed, android.widget.Toast.LENGTH_LONG).show()
+        }
+    }
+    val openZip = androidx.activity.compose.rememberLauncherForActivityResult(
+        androidx.activity.result.contract.ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri != null) scope.launch { problem = withContext(Dispatchers.IO) { state.story.importStory(uri) }; tick++ }
+    }
     val list = stories ?: return Busy(stringResource(R.string.busy_opening_stories))
     StoriesContent(list, onContinue, onNewStory, problem, writing = state.story.isWorking, onSwitch = { s ->
         if (state.story.switchTo(s.dir)) { problem = null; tick++; onSwitched() }
         else problem = if (state.story.isWorking) busyText else failedText
-    })
+    }, onExport = { s -> exporting = s; saveTo.launch(state.story.exportName(s)) },
+        onImport = { openZip.launch(arrayOf("application/zip", "application/octet-stream", "*/*")) })
 }
 
 /** Your stories: the one being played as an open book with Continue, the earlier ones as a quiet shelf. */
@@ -75,7 +96,9 @@ fun StoriesScreen(state: AppState, onContinue: () -> Unit, onNewStory: (StorySum
 fun StoriesContent(stories: List<StorySummary>, onContinue: () -> Unit,
                    /** A new story: fresh (null), or with the world and people of the one given. */
                    onNewStory: (StorySummary?) -> Unit, problem: String? = null,
-                   writing: Boolean = false, onSwitch: (StorySummary) -> Unit) {
+                   writing: Boolean = false, onSwitch: (StorySummary) -> Unit,
+                   /** A story to a zip (a backup), and a zip back onto the shelf. */
+                   onExport: (StorySummary) -> Unit = {}, onImport: () -> Unit = {}) {
     var confirmNew by remember { mutableStateOf(false) }
     var confirmSwitch by remember { mutableStateOf<StorySummary?>(null) }
     val current = stories.firstOrNull { it.current }
@@ -97,6 +120,7 @@ fun StoriesContent(stories: List<StorySummary>, onContinue: () -> Unit,
                 }
             }
             PrimaryButton(stringResource(if (current.turn == 0) R.string.begin else R.string.continue_story), onContinue, icon = Icons.AutoMirrored.Filled.MenuBook)
+            QuietButton(stringResource(R.string.stories_export), { onExport(current) }, icon = Icons.Filled.SaveAlt, enabled = !writing)
         } else {
             // nothing set up: the only thing to do here is start one
             Text(stringResource(R.string.stories_none), style = ReadingText.copy(fontSize = 22.sp, lineHeight = 30.sp))
@@ -108,12 +132,14 @@ fun StoriesContent(stories: List<StorySummary>, onContinue: () -> Unit,
             Column {
                 others.forEachIndexed { i, s ->
                     if (i > 0) HorizontalDivider(color = cs.outlineVariant)
-                    ShelfRow(s, enabled = !writing) { confirmSwitch = s }
+                    ShelfRow(s, enabled = !writing, onExport = { onExport(s) }) { confirmSwitch = s }
                 }
             }
         } else if (current != null) {
             Text(stringResource(R.string.stories_many), style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
         }
+        Text(stringResource(R.string.stories_backup_about), style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
+        QuietButton(stringResource(R.string.stories_import), onImport, icon = Icons.Filled.FileOpen, enabled = !writing)
     }
     if (confirmNew) AlertDialog(onDismissRequest = { confirmNew = false }, title = { Text(stringResource(R.string.stories_new_q)) },
         text = { Text(stringResource(R.string.stories_new_keeps, current?.title ?: untitled) + "\n\n" + stringResource(R.string.stories_new_choice)) },
@@ -134,13 +160,16 @@ fun StoriesContent(stories: List<StorySummary>, onContinue: () -> Unit,
 
 /** An earlier story on the shelf: its title in the reading face, where it stands, when you last played it. */
 @Composable
-private fun ShelfRow(s: StorySummary, enabled: Boolean, onPick: () -> Unit) {
+private fun ShelfRow(s: StorySummary, enabled: Boolean, onExport: () -> Unit, onPick: () -> Unit) {
     val cs = MaterialTheme.colorScheme
     Row(Modifier.fillMaxWidth().clickable(enabled = enabled, onClick = onPick).padding(vertical = 14.dp), verticalAlignment = Alignment.CenterVertically) {
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(s.title ?: stringResource(R.string.untitled), style = ReadingText.copy(fontSize = 18.sp, lineHeight = 26.sp), maxLines = 1, overflow = TextOverflow.Ellipsis)
             Text(progress(s), style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis)
             ago(s.lastActive)?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant) }
+        }
+        androidx.compose.material3.IconButton(onExport, enabled = enabled) {
+            Icon(Icons.Filled.SaveAlt, stringResource(R.string.stories_export), tint = cs.onSurfaceVariant)
         }
         TextButton(onPick, enabled = enabled) { Text(stringResource(R.string.continue_story)) }
     }

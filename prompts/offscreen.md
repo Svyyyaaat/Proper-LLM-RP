@@ -21,5 +21,8 @@ Two to five changes; fewer is fine if little would happen. Write every line in {
 ## Owed and due
 {{consequences}}
 
+## The story so far
+{{saga}}
+
 ## Chronicle
 {{chronicle}}

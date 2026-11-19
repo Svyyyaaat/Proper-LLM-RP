@@ -300,4 +300,11 @@
     <string name="stories_keep_cast">Оставить героев</string>
     <string name="stories_new_with_cast">Новая история с её героями</string>
     <string name="files_sources">Ваши файлы</string>
+    <string name="step_saga">Обновляю долгую память…</string>
+    <string name="stories_export">Сохранить копию</string>
+    <string name="stories_import">Открыть копию</string>
+    <string name="stories_backup_about">Истории хранятся только в этом приложении: резервная копия (файл .zip) сбережёт историю или перенесёт её на другой телефон.</string>
+    <string name="stories_exported">Копия сохранена.</string>
+    <string name="stories_export_failed">Не удалось сохранить копию.</string>
+    <string name="stories_import_failed">Это не копия истории, или файл не удалось прочитать.</string>
 </resources>

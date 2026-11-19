@@ -159,6 +159,7 @@
     <string name="step_scribe">Recording what changed…</string>
     <string name="step_summary">Closing the chapter…</string>
     <string name="step_setup">Building the world…</string>
+    <string name="step_saga">Updating the long memory…</string>
     <string name="step_style_picker">Writing four styles…</string>
     <string name="notify_channel">Story in progress</string>
     <string name="notify_channel_about">Shown while a passage is being written, so it isn\'t cut off when you switch apps</string>
@@ -193,6 +194,12 @@
     <string name="stories_fresh">Fresh start</string>
     <string name="stories_keep_cast">Keep its people</string>
     <string name="stories_new_with_cast">New story with its people</string>
+    <string name="stories_export">Save a backup</string>
+    <string name="stories_import">Open a backup</string>
+    <string name="stories_backup_about">Stories live only in this app: a backup (a .zip file) keeps one safe, or moves it to another phone.</string>
+    <string name="stories_exported">Backup saved.</string>
+    <string name="stories_export_failed">Couldn\'t save the backup.</string>
+    <string name="stories_import_failed">That file isn\'t a story backup, or it couldn\'t be read.</string>
     <string name="stories_earlier">Earlier stories</string>
     <string name="stories_many">Start as many stories as you like. Each one waits here where you left it.</string>
     <string name="stories_continue_q">Continue “%1$s”?</string>

@@ -291,4 +291,11 @@
     <string name="stories_keep_cast">인물 유지</string>
     <string name="stories_new_with_cast">이 인물들로 새 이야기</string>
     <string name="files_sources">내 파일</string>
+    <string name="step_saga">장기 기억을 정리하는 중…</string>
+    <string name="stories_export">백업 저장</string>
+    <string name="stories_import">백업 열기</string>
+    <string name="stories_backup_about">이야기는 이 앱 안에만 있어요. 백업(.zip 파일)으로 이야기를 안전하게 보관하거나 다른 휴대폰으로 옮길 수 있어요.</string>
+    <string name="stories_exported">백업을 저장했어요.</string>
+    <string name="stories_export_failed">백업을 저장할 수 없어요.</string>
+    <string name="stories_import_failed">이야기 백업 파일이 아니거나 읽을 수 없어요.</string>
 </resources>
