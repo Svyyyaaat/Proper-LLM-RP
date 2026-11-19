@@ -29,6 +29,7 @@ class AppState(val context: Context) {
         prefs.edit().putString("language", tag).apply()
         localized = null
         story.settingsChanged()
+        runCatching { story.languageChanged() }
     }
 
     /** The locale everything is in now: the chosen language, else the phone's. */

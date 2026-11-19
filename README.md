@@ -80,9 +80,22 @@ the app (*Prompts and story files*). Unedited copies follow app updates.
 
 ## Run it
 
-**Phone:** install the debug APK (CI builds one: *Actions → Android build → proper-rp-debug-apk*). Setup:
-welcome (pick a language) → connect Claude (API key, or Claude Code in Termux on your subscription) → create the
-story (optionally say what it's about) → pick a style.
+**Phone:** install the APK from the releases (or CI's debug build). The app opens on the story itself: read,
+type what your character says or does (or tap *Go on*), and *Ideas* suggests three moves when you're stuck. Risky
+moves show the dice and what they meant (tap them for how rolls work). Everything else is in the menu (☰): your
+stories (switch, start a new one, or a new one with the same people; back up or open a backup), the writing style,
+costs, settings. First run: welcome (language) → connect Claude (an API key, with how to get one, or Claude Code in
+Termux) → your story (a line about it, who you play, your own files; all optional) → the story screen builds the
+world and shows each stage.
+
+**Where things are kept:** each story is plain files in the app's private storage (`files/story/`, earlier ones in
+`files/story-archive/`); the reply you're typing, a new story's description and the files you've picked are saved as
+you type. Backups are .zip files you save wherever you like. The API key is encrypted with a key in the Android
+Keystore and never leaves the phone except to Anthropic.
+
+**Look:** a game master's table at night: felt green, bone-coloured text in Literata (a book face made for screens),
+brass for the main action and the dice, Golos Text for the interface (both under the Open Font License, in
+`app/src/main/assets/licenses/`). A daylight version follows the phone's light mode; wallpaper colours are an option.
 
 **Checks without a phone:** `./gradlew :core:check :app:testDebugUnitTest` (core is also compiled against
 Android 8.0's Java library when `platforms;android-26` is installed; Robolectric runs the story through the real

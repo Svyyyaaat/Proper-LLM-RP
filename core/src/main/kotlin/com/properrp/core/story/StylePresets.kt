@@ -79,62 +79,14 @@ object StylePresets {
      * The same styles with their sample in another language (the writer imitates the sample, so a story in that
      * language gets prose written like it, not translated from English). Same names and instruction lines.
      */
-    private val SAMPLES: Map<String, List<String>> = mapOf(
-        "ru" to listOf(
-            """
-            — Можно мне ещё немного подождать с квартплатой?
-            — Опять? В прошлом месяце ты говорил то же самое.
-            Хозяин закрыл тетрадь.
-            — На следующей неделе зарплата. Честное слово.
-            — Вот на следующей неделе и посмотрим, какое оно честное.
-            — Значит…
-            — Три дня. Больше не могу.
-            — Три дня…
-            — Мне тоже есть кому платить. Банк ждать не станет.
-            Сказав это, он отвернулся к окну.
-            — Через три дня, вечером, придёшь сюда. Не придёшь — сменю замок.
-            """.trimIndent(),
-            """
-            Даня постучал три раза. Третий стук был уже скорее молитвой.
-            — Открыто.
-            Голос у хозяина был как у человека, который не в духе с самого утра. А может, и с рождения.
-            — Я насчёт квартплаты…
-            — Знаю. У тебя на лбу написано.
-            Видимо, и правда написано. Даня на всякий случай потрогал лоб.
-            — Можно подождать до следующей недели? Как только дадут зарплату, сразу отдам.
-            — До следующей недели, — повторил хозяин и вздохнул. Если бы вздохи соревновались в длине, этот взял бы золото.
-            — Я, между прочим, тоже банку должен. Три дня. Больше не могу.
-            Три дня. Мало. Но всё-таки лучше, чем ноль.
-            """.trimIndent(),
-            """
-            Вечером Даня стоял у двери хозяина. За этот месяц он так и не заплатил.
-            Дверь открыл сам хозяин. Из кухни пахло жареной рыбой.
-            — Ты насчёт денег?
-            — Да. Можно подождать до следующей недели?
-            Хозяин помолчал. Потом взял с обувной полки письмо. Письмо было из банка.
-            — Мне тоже надо платить.
-            — Я знаю.
-            — Подожду три дня. Через три дня вечером приходи снова.
-            Даня кивнул. Когда дверь закрылась, на улице уже темнело.
-            """.trimIndent(),
-            """
-            Платить надо было в понедельник. Шёл четверг.
-            Даня поднялся к хозяину пешком: лифт умер ещё весной, и хоронить его никто не собирался.
-            Хозяин приоткрыл дверь на цепочке.
-            — Принёс?
-            — На следующей неделе.
-            — На следующей неделе. — Он произнёс это как слово из чужого языка. — У всех на следующей неделе.
-            — Я отдам.
-            — Банк тоже так говорит, а давит на меня. — Он какое-то время разглядывал Даню, как разглядывают счётчик.
-            — Три дня, — сказал он. — Потом меняю замок, и отдавать будешь с тротуара.
-            Дверь закрылась. Где-то внизу залаяла собака и не унималась.
-            """.trimIndent(),
-        ),
-    )
+    /** Samples in other languages: resources/styles/<language>.txt, the four passages in order, "=====" between them. */
+    private fun samples(language: String): List<String>? =
+        StylePresets::class.java.getResourceAsStream("/styles/$language.txt")?.use { it.readBytes().decodeToString() }
+            ?.split(Regex("(?m)^=====\\s*$"))?.map { it.trim() }?.filter { it.isNotEmpty() }?.takeIf { it.size == ALL.size }
 
     /** The built-in styles with their samples in [language] (a language tag such as "ru"); English where there are none. */
     fun forLanguage(language: String): List<StoryEngine.StyleOption> {
-        val local = SAMPLES[language.substringBefore('-').lowercase()] ?: return ALL
+        val local = samples(language.substringBefore('-').lowercase()) ?: return ALL
         return ALL.mapIndexed { i, o -> local.getOrNull(i)?.let { o.copy(passage = it) } ?: o }
     }
 

@@ -384,6 +384,13 @@ class StoryController(
         }
     }
 
+    /** The language changed: a built-in style (not one written for this story) takes its sample in the new language. */
+    fun languageChanged() {
+        val name = StylePresets.name(dir) ?: return
+        val preset = presets().firstOrNull { it.name == name } ?: return
+        if (styleSample() != preset.passage.trim()) pickStyle(preset)
+    }
+
     /** Sets the story's style (only files: no model call). The next passage is written in it. */
     fun pickStyle(o: StoryEngine.StyleOption) {
         StylePresets.write(dir, o)

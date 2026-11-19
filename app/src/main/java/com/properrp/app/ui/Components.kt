@@ -4,6 +4,8 @@ import androidx.compose.ui.res.stringResource
 import com.properrp.app.R
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.ExpandLess
+import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.filled.ErrorOutline
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -208,8 +210,12 @@ fun ErrorNote(text: String, onRetry: (() -> Unit)? = null) {
             val openState = androidx.compose.runtime.saveable.rememberSaveable { androidx.compose.runtime.mutableStateOf(false) }
             val open = openState.value
             if (open) Text(details, color = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.7f), style = MaterialTheme.typography.bodySmall)
-            Text(stringResource(if (open) R.string.hide_details else R.string.details), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onErrorContainer,
-                modifier = Modifier.clip(MaterialTheme.shapes.small).clickable { openState.value = !open }.padding(vertical = 4.dp))
+            Row(Modifier.clip(MaterialTheme.shapes.small).clickable { openState.value = !open }.padding(vertical = 4.dp),
+                verticalAlignment = Alignment.CenterVertically) {
+                Text(stringResource(if (open) R.string.hide_details else R.string.details), style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onErrorContainer)
+                Icon(if (open) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore, null, Modifier.size(18.dp), tint = MaterialTheme.colorScheme.onErrorContainer)
+            }
         }
         if (onRetry != null) Button(onRetry) {
             Icon(Icons.Filled.Refresh, null, Modifier.size(18.dp)); Spacer(Modifier.width(6.dp)); Text(stringResource(R.string.try_again))

@@ -112,7 +112,7 @@
     <!-- the story -->
     <string name="you_are">You are</string>
     <string name="reply_hint">Say or do something…</string>
-    <string name="reply_waiting">Writing the next passage…</string>
+    <string name="reply_waiting">You can type your next move meanwhile…</string>
     <string name="go_on">Go on</string>
     <string name="send">Send</string>
     <string name="tool_listen">Listen</string>

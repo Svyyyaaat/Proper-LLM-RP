@@ -94,7 +94,7 @@
     <!-- the story -->
     <string name="you_are">Ваш персонаж</string>
     <string name="reply_hint">Что вы говорите или делаете?</string>
-    <string name="reply_waiting">Пишется ответ…</string>
+    <string name="reply_waiting">Пока можно написать следующий ход…</string>
     <string name="go_on">Дальше</string>
     <string name="send">Отправить</string>
     <string name="tool_listen">Озвучить</string>
