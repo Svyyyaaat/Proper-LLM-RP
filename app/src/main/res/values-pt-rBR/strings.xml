@@ -327,7 +327,7 @@
     <string name="key_paste">Colar</string>
     <string name="key_show">Mostrar chave</string>
     <string name="key_hide">Ocultar chave</string>
-    <string name="key_use_cc">Tenho assinatura do Claude: usar Claude Code no Termux</string>
+    <string name="key_use_cc">Usar minha assinatura do Claude</string>
     <string name="key_use_api">Usar uma chave de API</string>
     <string name="story_hero_label">Quem você interpreta? (opcional)</string>
     <string name="story_hero_hint">ex.: um contador que maquia os livros</string>

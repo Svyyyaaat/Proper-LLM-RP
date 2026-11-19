@@ -329,7 +329,7 @@
     <string name="key_paste">Вставити</string>
     <string name="key_show">Показати ключ</string>
     <string name="key_hide">Сховати ключ</string>
-    <string name="key_use_cc">Маю підписку Claude: використати Claude Code у Termux</string>
+    <string name="key_use_cc">Використати підписку Claude</string>
     <string name="key_use_api">Використати API-ключ</string>
     <string name="story_hero_label">За кого ви граєте? (необов’язково)</string>
     <string name="story_hero_hint">наприклад: рахівник, який підправляє книги</string>

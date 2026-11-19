@@ -327,7 +327,7 @@
     <string name="key_paste">Coller</string>
     <string name="key_show">Afficher la clé</string>
     <string name="key_hide">Masquer la clé</string>
-    <string name="key_use_cc">J’ai un abonnement Claude : utiliser Claude Code dans Termux</string>
+    <string name="key_use_cc">Utiliser mon abonnement Claude</string>
     <string name="key_use_api">Utiliser plutôt une clé API</string>
     <string name="story_hero_label">Qui incarnez-vous ? (facultatif)</string>
     <string name="story_hero_hint">ex. : un commis qui maquille les comptes</string>

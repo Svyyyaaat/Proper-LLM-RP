@@ -323,7 +323,7 @@
     <string name="key_paste">貼り付け</string>
     <string name="key_show">キーを表示</string>
     <string name="key_hide">キーを隠す</string>
-    <string name="key_use_cc">Claudeのサブスクリプションを使う（TermuxのClaude Code）</string>
+    <string name="key_use_cc">Claude のサブスクリプションを使う</string>
     <string name="key_use_api">APIキーを使う</string>
     <string name="story_hero_label">あなたが演じるのは？（任意）</string>
     <string name="story_hero_hint">例：帳簿をこっそりごまかしている事務員</string>

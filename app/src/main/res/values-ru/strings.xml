@@ -94,7 +94,7 @@
     <!-- the story -->
     <string name="you_are">Ваш персонаж</string>
     <string name="reply_hint">Что вы говорите или делаете?</string>
-    <string name="reply_waiting">Пока можно написать следующий ход…</string>
+    <string name="reply_waiting">Ваш следующий ход…</string>
     <string name="go_on">Дальше</string>
     <string name="send">Отправить</string>
     <string name="tool_listen">Озвучить</string>
@@ -331,7 +331,7 @@
     <string name="key_paste">Вставить</string>
     <string name="key_show">Показать ключ</string>
     <string name="key_hide">Скрыть ключ</string>
-    <string name="key_use_cc">У меня подписка Claude: использовать Claude Code в Termux</string>
+    <string name="key_use_cc">Использовать подписку Claude</string>
     <string name="key_use_api">Использовать API-ключ</string>
     <string name="story_hero_label">Кого вы играете? (необязательно)</string>
     <string name="story_hero_hint">например: счетовод, который подчищает книги</string>

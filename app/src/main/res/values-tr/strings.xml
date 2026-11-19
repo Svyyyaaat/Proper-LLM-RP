@@ -325,7 +325,7 @@
     <string name="key_paste">Yapıştır</string>
     <string name="key_show">Anahtarı göster</string>
     <string name="key_hide">Anahtarı gizle</string>
-    <string name="key_use_cc">Claude aboneliğim var: Termux\'ta Claude Code kullan</string>
+    <string name="key_use_cc">Claude aboneliğimi kullan</string>
     <string name="key_use_api">Bunun yerine API anahtarı kullan</string>
     <string name="story_hero_label">Kimi oynuyorsunuz? (isteğe bağlı)</string>
     <string name="story_hero_hint">ör. hesap defterlerinden para çalan bir kâtip</string>

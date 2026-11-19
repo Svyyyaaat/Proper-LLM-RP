@@ -327,7 +327,7 @@
     <string name="key_paste">Incolla</string>
     <string name="key_show">Mostra chiave</string>
     <string name="key_hide">Nascondi chiave</string>
-    <string name="key_use_cc">Ho un abbonamento Claude: usa Claude Code in Termux</string>
+    <string name="key_use_cc">Usa il mio abbonamento Claude</string>
     <string name="key_use_api">Usa invece una chiave API</string>
     <string name="story_hero_label">Chi interpreti? (facoltativo)</string>
     <string name="story_hero_hint">es. un impiegato che ritocca i registri</string>

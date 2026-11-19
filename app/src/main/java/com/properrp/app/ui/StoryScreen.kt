@@ -114,21 +114,19 @@ fun TurnBlock(player: String?, passage: ShownPassage, body: @Composable () -> Un
 }
 
 /** The passage's own tools: quiet text buttons, under the text, so they never compete with replying. */
+@OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
 @Composable
 fun PassageTools(p: ShownPassage, enabled: Boolean, onReroll: () -> Unit, onEdit: () -> Unit,
                  onVersion: (Int) -> Unit = {}, listening: Boolean = false, onListen: (() -> Unit)? = null) {
     var notes by remember { mutableStateOf(false) }
     val cs = MaterialTheme.colorScheme
-    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+    // wraps on a narrow phone or a long language rather than squeezing the labels
+    androidx.compose.foundation.layout.FlowRow(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.Center) {
         SmallTool(Icons.Filled.Refresh, stringResource(R.string.tool_rewrite), enabled, onReroll)
         SmallTool(Icons.Filled.Edit, stringResource(R.string.tool_edit), enabled, onEdit)
         if (onListen != null) SmallTool(if (listening) Icons.Filled.Stop else Icons.AutoMirrored.Filled.VolumeUp,
             stringResource(if (listening) R.string.tool_stop else R.string.tool_listen), true, onListen)
-        Spacer(Modifier.weight(1f))
-        IconButton({ notes = !notes }, Modifier.size(36.dp)) {
-            Icon(Icons.Filled.Casino, stringResource(R.string.tool_behind), Modifier.size(18.dp),
-                tint = if (notes) cs.primary else cs.onSurfaceVariant)
-        }
+        SmallTool(Icons.Filled.Casino, stringResource(R.string.tool_behind), true) { notes = !notes }
     }
     // after a rewrite: the versions, to go back to one you liked better
     if (p.versions > 1) Row(verticalAlignment = Alignment.CenterVertically) {
@@ -460,7 +458,8 @@ fun StoryInfoBody(info: StoryController.StoryInfo) {
                 when {
                     l.startsWith("## ") -> Text(l.removePrefix("## "), style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(top = 6.dp))
                     l.startsWith("- ") -> Row { Text("•  ", color = cs.primary)
-                        Text(l.removePrefix("- ").replace(Regex("^\\(turn -?\\d+\\) "), ""), style = MaterialTheme.typography.bodyMedium) }
+                        Text(l.removePrefix("- ").replace(Regex("^\\(turn -?\\d+\\) "), "").replaceFirstChar { it.titlecase() },
+                            style = MaterialTheme.typography.bodyMedium) }
                     else -> Text(l, style = MaterialTheme.typography.bodyLarge)
                 }
             }

@@ -112,7 +112,7 @@
     <!-- the story -->
     <string name="you_are">You are</string>
     <string name="reply_hint">Say or do something…</string>
-    <string name="reply_waiting">You can type your next move meanwhile…</string>
+    <string name="reply_waiting">Type your next move…</string>
     <string name="go_on">Go on</string>
     <string name="send">Send</string>
     <string name="tool_listen">Listen</string>
@@ -339,7 +339,7 @@
     <string name="key_paste">Paste</string>
     <string name="key_show">Show key</string>
     <string name="key_hide">Hide key</string>
-    <string name="key_use_cc">I have a Claude subscription: use Claude Code in Termux</string>
+    <string name="key_use_cc">Use my Claude subscription instead</string>
     <string name="key_use_api">Use an API key instead</string>
     <string name="story_hero_label">Who do you play? (optional)</string>
     <string name="story_hero_hint">e.g. a clerk who skims the ledgers</string>

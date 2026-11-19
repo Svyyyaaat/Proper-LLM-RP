@@ -323,7 +323,7 @@
     <string name="key_paste">粘贴</string>
     <string name="key_show">显示密钥</string>
     <string name="key_hide">隐藏密钥</string>
-    <string name="key_use_cc">我有 Claude 订阅：在 Termux 中使用 Claude Code</string>
+    <string name="key_use_cc">改用我的 Claude 订阅</string>
     <string name="key_use_api">改用 API 密钥</string>
     <string name="story_hero_label">你扮演谁？（可选）</string>
     <string name="story_hero_hint">例如：一个偷偷做假账的账房</string>

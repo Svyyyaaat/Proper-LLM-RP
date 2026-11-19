@@ -79,7 +79,8 @@ class Shots {
         StoryContent("Salt and Water", history = listOf(ShownTurn(null, prev)),
             current = if (error != null) null else ShownTurn("I ask for a few more days.", ShownPassage(3, passage, version = versions - 1, versions = versions, roll = roll)),
             busy = null, error = error, onRetry = if (error != null) ({}) else null, subtitle = "the harbour office",
-            reply = reply, onReroll = {}, onEdit = {}, onSend = {}, onListen = {}, onMenu = {}, onInfo = {}, onIdeas = {}, ideas = ideas)
+            reply = if (error != null) "I ask for a few more days." else reply, onReroll = {}, onEdit = {}, onSend = {}, onListen = {},
+            onMenu = {}, onInfo = {}, onIdeas = {}, ideas = ideas)
     }
 
     @Test fun d1_story() = story()
@@ -99,13 +100,13 @@ class Shots {
     }
     @Test fun d7_streaming() = shot {
         StoryContent("Salt and Water", history = listOf(ShownTurn(null, prev)), current = null, busy = "Writing…", error = null,
-            onReroll = {}, onEdit = {}, onSend = {}, onMenu = {}, sending = "I hide the barrels under the nets.",
+            onReroll = {}, onEdit = {}, onSend = {}, onMenu = {}, onInfo = {}, subtitle = "the third pier", sending = "I hide the barrels under the nets.",
             draft = "writing" to "Hart looked at the nets, then at her. \"That won't fool Oss,\" he said. \"Nothing fools Oss when it's")
     }
     @Test fun d8_first_passage() = shot {
         StoryContent("Salt and Water", history = emptyList(), current = ShownTurn(null, ShownPassage(0, passage)), busy = null, error = null,
-            intro = "A clerk at the salt works who skims the ledgers, and owes Tobias forty silver.",
-            onReroll = {}, onEdit = {}, onSend = {}, onMenu = {}, onIdeas = {})
+            intro = "A clerk at the salt works who skims the ledgers, and owes Tobias forty silver.", subtitle = "the harbour office",
+            onReroll = {}, onEdit = {}, onSend = {}, onMenu = {}, onIdeas = {}, onListen = {}, onInfo = {})
     }
     @Test fun d9_empty() = shot {
         StoryContent("Proper RP", history = emptyList(), current = null, busy = null, error = null, onStartStory = {},

@@ -325,7 +325,7 @@
     <string name="key_paste">Einfügen</string>
     <string name="key_show">Schlüssel zeigen</string>
     <string name="key_hide">Schlüssel verbergen</string>
-    <string name="key_use_cc">Ich habe ein Claude-Abo: Claude Code in Termux nutzen</string>
+    <string name="key_use_cc">Stattdessen mein Claude-Abo nutzen</string>
     <string name="key_use_api">Lieber einen API-Schlüssel nutzen</string>
     <string name="story_hero_label">Wen spielst du? (optional)</string>
     <string name="story_hero_hint">z. B. ein Buchhalter, der in die eigene Tasche wirtschaftet</string>

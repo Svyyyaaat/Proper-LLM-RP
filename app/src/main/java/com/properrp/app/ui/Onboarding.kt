@@ -19,6 +19,8 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AttachFile
 import androidx.compose.material.icons.filled.Close
@@ -120,6 +122,8 @@ fun KeyStepContent(key: String, onKey: (String) -> Unit, onNext: () -> Unit, onB
             QuietButton(stringResource(R.string.key_use_api), { onBackend(false) })
             return@StepFrame
         }
+        // a Claude subscription is the other way in: right under the heading, not after the key steps
+        SecondaryButton(stringResource(R.string.key_use_cc), { onBackend(true) })
         // getting a key is the real task for someone new: the three steps, then the place to paste it
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             listOf(R.string.key_step1, R.string.key_step2, R.string.key_step3).forEachIndexed { i, step ->
@@ -136,7 +140,9 @@ fun KeyStepContent(key: String, onKey: (String) -> Unit, onNext: () -> Unit, onB
         } })
         OutlinedTextField(key, onKey, Modifier.fillMaxWidth(), label = { Text(stringResource(R.string.backend_api)) }, placeholder = { Text("sk-ant-…") },
             singleLine = true, shape = MaterialTheme.shapes.medium,
-            visualTransformation = if (shown) androidx.compose.ui.text.input.VisualTransformation.None else PasswordVisualTransformation(),
+            // a key in the wrong format is shown: you can see what was pasted (a missing piece, a word in front)
+            visualTransformation = if (shown || (key.isNotBlank() && !looksRight)) androidx.compose.ui.text.input.VisualTransformation.None
+                else PasswordVisualTransformation(),
             isError = key.isNotBlank() && !looksRight,
             supportingText = { Text(stringResource(if (key.isNotBlank() && !looksRight) R.string.key_looks_wrong else R.string.key_stored)) },
             trailingIcon = {
@@ -147,8 +153,6 @@ fun KeyStepContent(key: String, onKey: (String) -> Unit, onNext: () -> Unit, onB
                     } else TextButton({ clipboard.getText()?.text?.trim()?.let(onKey) }) { Text(stringResource(R.string.key_paste)) }
                 }
             })
-        Spacer(Modifier.height(8.dp))
-        QuietButton(stringResource(R.string.key_use_cc), { onBackend(true) })
     }
 }
 
@@ -180,10 +184,13 @@ fun StoryStepContent(seed: String, onSeed: (String) -> Unit, onCreate: () -> Uni
         OutlinedTextField(seed, onSeed, Modifier.fillMaxWidth().heightIn(min = 112.dp), shape = MaterialTheme.shapes.medium,
             label = { Text(stringResource(if (sequelOf != null) R.string.story_sequel_seed_label else R.string.story_seed_label)) },
             placeholder = { Text(stringResource(if (sequelOf != null) R.string.story_sequel_seed_hint else R.string.story_seed_hint)) })
-        if (sequelOf == null && seed.isBlank() && examples.isNotEmpty()) FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            for (e in examples) Text(e, Modifier.clip(MaterialTheme.shapes.small).background(cs.surfaceContainerHigh).clickable { onSeed(e) }
-                .padding(horizontal = 12.dp, vertical = 8.dp), style = MaterialTheme.typography.bodyMedium)
+        // one scrolling row that stays: try one, then another, without clearing the box first
+        if (sequelOf == null && examples.isNotEmpty()) Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            for (e in examples) Text(e, Modifier.clip(MaterialTheme.shapes.small)
+                .background(if (e == seed) cs.primaryContainer else cs.surfaceContainerHigh).clickable { onSeed(e) }
+                .padding(horizontal = 12.dp, vertical = 8.dp), style = MaterialTheme.typography.bodyMedium,
+                color = if (e == seed) cs.onPrimaryContainer else cs.onSurface, maxLines = 1)
         }
         if (sequelOf == null) OutlinedTextField(hero, onHero, Modifier.fillMaxWidth(), shape = MaterialTheme.shapes.medium,
             label = { Text(stringResource(R.string.story_hero_label)) }, placeholder = { Text(stringResource(R.string.story_hero_hint)) })

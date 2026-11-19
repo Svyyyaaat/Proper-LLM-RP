@@ -329,7 +329,7 @@
     <string name="key_paste">Wklej</string>
     <string name="key_show">Pokaż klucz</string>
     <string name="key_hide">Ukryj klucz</string>
-    <string name="key_use_cc">Mam subskrypcję Claude: użyj Claude Code w Termux</string>
+    <string name="key_use_cc">Użyj subskrypcji Claude</string>
     <string name="key_use_api">Użyj jednak klucza API</string>
     <string name="story_hero_label">Kim grasz? (opcjonalnie)</string>
     <string name="story_hero_hint">np. księgowy, który podbiera z kasy</string>

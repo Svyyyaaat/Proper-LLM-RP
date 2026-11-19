@@ -323,7 +323,7 @@
     <string name="key_paste">붙여넣기</string>
     <string name="key_show">키 보기</string>
     <string name="key_hide">키 숨기기</string>
-    <string name="key_use_cc">Claude 구독이 있어요: Termux에서 Claude Code 사용</string>
+    <string name="key_use_cc">내 Claude 구독 사용하기</string>
     <string name="key_use_api">API 키 사용하기</string>
     <string name="story_hero_label">누구를 연기할까요? (선택)</string>
     <string name="story_hero_hint">예: 장부에서 돈을 슬쩍하는 직원</string>
