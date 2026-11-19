@@ -318,7 +318,7 @@
     <string name="done">Bitti</string>
     <string name="files_undo">Değişikliklerimi geri al</string>
     <string name="files_autosave">Değişiklikler siz yazarken kaydedilir ve bir sonraki turdan itibaren kullanılır.</string>
-    <string name="colours_app">Uygulamanın</string>
+    <string name="colours_app">Uygulama renkleri</string>
     <string name="key_step1">console.anthropic.com\'da oturum açın</string>
     <string name="key_step2">Billing bölümünden kredi ekleyin: $5 birçok akşama yeter</string>
     <string name="key_step3">API keys bölümünde bir anahtar oluşturup buraya yapıştırın</string>

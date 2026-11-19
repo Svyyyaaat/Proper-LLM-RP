@@ -101,7 +101,7 @@
     <string name="you_are">你扮演</string>
     <string name="reply_hint">说点什么或做点什么…</string>
     <string name="reply_waiting">正在写下一段…</string>
-    <string name="go_on">继续</string>
+    <string name="go_on">下一段</string>
     <string name="send">发送</string>
     <string name="tool_listen">朗读</string>
     <string name="tool_stop">停止</string>
