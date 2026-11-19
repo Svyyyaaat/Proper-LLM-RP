@@ -55,7 +55,7 @@
     <string name="welcome_f2_body">Risky moves are rolled. A failure costs something real.</string>
     <string name="welcome_f3_title">Any language</string>
     <string name="welcome_f3_body">Write in whatever language you like: the story answers in it.</string>
-    <string name="welcome_start">Get started</string>
+    <string name="welcome_start">Start</string>
 
     <string name="key_title">Connect Claude</string>
     <string name="key_body_api">Claude writes the story. Paid from your Anthropic account: a few cents a passage.</string>
@@ -74,8 +74,8 @@
     <string name="story_seed_label">What should it be about? (optional)</string>
     <string name="story_seed_hint">e.g. a fishing town, a debt, a family business</string>
     <string name="story_create">Create the story</string>
-    <string name="story_files_title">Your files (optional)</string>
-    <string name="story_files_about">Lore, character sheets, notes, an old chat log: plain text files (.txt, .md, .json…). The world is built from them, and the game master keeps them in mind for the whole story.</string>
+    <string name="story_files_title">Your own material (optional)</string>
+    <string name="story_files_about">Lore, character sheets, an old chat log: text files (.txt, .md, .json). The world is built from them.</string>
     <string name="story_files_add">Add files</string>
     <!-- a button's spoken label: "Remove lore.md" -->
     <string name="story_files_remove">Remove %1$s</string>
@@ -314,4 +314,19 @@
     <string name="cc_empty_answer">Claude Code answered with nothing</string>
     <string name="tool_ideas">Ideas</string>
     <string name="ideas_thinking">Thinking of what you could do…</string>
+    <string name="menu">Menu</string>
+    <string name="roll_success">Success</string>
+    <string name="roll_cost">Success, at a cost</string>
+    <string name="roll_failure">Failure</string>
+    <string name="creating_title">Building your world</string>
+    <string name="creating_about">The first time takes a minute or two: the place, the people and their secrets, then the opening scene. You can leave the app; it carries on.</string>
+    <string name="key_looks_wrong">Anthropic keys start with sk-ant-</string>
+    <string name="key_get">Get a key at console.anthropic.com</string>
+    <string name="story_create_surprise">Surprise me</string>
+    <string name="story_title_sequel">What happens next</string>
+    <string name="seed_1">A port town where water costs more than wine</string>
+    <string name="seed_2">A night shift at a hotel where guests don\'t check out</string>
+    <string name="seed_3">Smugglers on a dying space station</string>
+    <string name="seed_4">A family farm, a debt, and a stranger who wants to buy it</string>
+    <string name="seed_5">The last inn before the mountain pass, in winter</string>
 </resources>

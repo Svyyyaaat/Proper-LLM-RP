@@ -31,7 +31,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 enum class Screen(val title: Int) {
-    HOME(R.string.app_name), STORY(R.string.screen_story), COSTS(R.string.screen_costs), FILES(R.string.screen_files),
+    STORY(R.string.screen_story), COSTS(R.string.screen_costs), FILES(R.string.screen_files),
     SETTINGS(R.string.screen_settings), STORIES(R.string.screen_stories), STYLE(R.string.screen_style),
 }
 
@@ -84,8 +84,8 @@ class MainActivity : ComponentActivity() {
 fun App(state: AppState) {
     var onboarding by remember { mutableStateOf(!state.onboardingDone) }
     var scale by remember { mutableStateOf(state.textScale) }
-    var home by remember { mutableStateOf<HomeInfo?>(null) }
-    val stack = remember { mutableStateListOf(Screen.HOME) }
+    // the story is the app: everything else opens over it and comes back to it
+    val stack = remember { mutableStateListOf(Screen.STORY) }
     val screen = stack.last()
     val back: () -> Unit = { if (stack.size > 1) stack.removeAt(stack.size - 1) }
     BackHandler(enabled = !onboarding && stack.size > 1) { back() }
@@ -97,23 +97,17 @@ fun App(state: AppState) {
     }
     val restartSetup: () -> Unit = { state.onboardingStep = 0; state.onboardingDone = false; onboarding = true }
 
-    // home data reads files: off the main thread, fresh on each return
-    LaunchedEffect(screen, onboarding) {
-        if (!onboarding && screen == Screen.HOME) home = withContext(Dispatchers.IO) { runCatching { homeInfo(state) }.getOrNull() } ?: home
-    }
-
     androidx.compose.runtime.CompositionLocalProvider(LocalReadingScale provides scale) {
     // a Surface, so every text gets the theme's content colour (dark mode included)
     androidx.compose.material3.Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
     Column(Modifier.fillMaxSize()
         .windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal))) {
         if (onboarding) {
-            OnboardingFlow(state) { onboarding = false; stack.clear(); stack.add(Screen.HOME) }
+            OnboardingFlow(state) { onboarding = false; stack.clear(); stack.add(Screen.STORY) }
             return@Column
         }
         when (screen) {
-            Screen.HOME -> home?.let { HomeContent(it, go = { s -> stack.add(s) }) } ?: Busy(stringResource(R.string.busy_opening_app))
-            Screen.STORY -> StoryScreen(state, onBack = back)
+            Screen.STORY -> StoryScreen(state, go = { s -> stack.add(s) }, onNewStory = { newStory(null) })
             else -> {
                 AppBar(stringResource(screen.title), back)
                 when (screen) {
@@ -121,8 +115,8 @@ fun App(state: AppState) {
                     Screen.FILES -> FilesScreen(state)
                     Screen.SETTINGS -> SettingsScreen(state, onScale = { scale = it }, onPickStyle = { stack.add(Screen.STYLE) },
                         go = { s -> stack.add(s) }, onRestartSetup = restartSetup)
-                    Screen.STORIES -> StoriesScreen(state, onContinue = { stack.add(Screen.STORY) }, onNewStory = newStory,
-                        onSwitched = { home = null; stack.clear(); stack.add(Screen.HOME); stack.add(Screen.STORY) })
+                    Screen.STORIES -> StoriesScreen(state, onContinue = { stack.clear(); stack.add(Screen.STORY) }, onNewStory = newStory,
+                        onSwitched = { stack.clear(); stack.add(Screen.STORY) })
                     Screen.STYLE -> StyleScreen(state)
                     else -> {}
                 }
@@ -131,17 +125,6 @@ fun App(state: AppState) {
     }
     }
     }
-}
-
-/** Everything the home screen shows. Reads files: call off the main thread. */
-fun homeInfo(state: AppState): HomeInfo {
-    val s = state.story
-    val stories = s.stories()
-    return HomeInfo(
-        title = stories.firstOrNull { it.current }?.title, styleName = s.styleName(), storyCount = stories.size,
-        place = s.place(), turn = s.turn(), chapter = s.chapter(), lastLines = s.lastLines(), totalCost = s.totalCost(),
-        claudeCode = state.claudeCode, languageName = languageLabel(state),
-    )
 }
 
 /** The language as the picker names it: the chosen one's own name, or the phone's for System. */

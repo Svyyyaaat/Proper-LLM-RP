@@ -74,7 +74,7 @@ class AppState(val context: Context) {
     fun setTheme(m: ThemeMode) { themeMode = m; prefs.edit().putString("themeMode", m.name).apply() }
 
     /** Colours: the phone's Material You palette (default), or the app's own. */
-    var materialYou by mutableStateOf(prefs.getBoolean("materialYou", true))
+    var materialYou by mutableStateOf(prefs.getBoolean("materialYou", false))
         private set
 
     fun chooseMaterialYou(on: Boolean) { materialYou = on; prefs.edit().putBoolean("materialYou", on).apply() }

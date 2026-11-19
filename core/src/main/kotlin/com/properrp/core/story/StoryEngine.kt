@@ -37,6 +37,8 @@ class PendingTurn(
     var packet: String? = null
     /** What each person present does next, decided from what they know (one call each); null until decided. */
     var intents: String? = null
+    /** What the player's character attempted when there was a roll (the referee's few words), for the dice shown. */
+    var rollAction: String? = null
     /** What others could notice of the player's message (the referee's neutral line); "" if nothing. */
     var observable: String = ""
     val draft get() = drafts[current]
@@ -51,7 +53,7 @@ class PendingTurn(
         .put("drafts", JSONArray(drafts.map { d -> JSONObject().put("passage", d.passage)
             .put("rewritten", d.rewritten)
             .put("checks", JSONArray(d.checks.map { JSONObject().put("name", it.name).put("passed", it.passed).put("detail", it.detail) })) }))
-        .put("intents", intents ?: JSONObject.NULL).put("observable", observable)
+        .put("intents", intents ?: JSONObject.NULL).put("observable", observable).put("rollAction", rollAction ?: JSONObject.NULL)
 
     companion object {
         private fun JSONArray?.objects() = if (this == null) emptyList() else (0 until length()).map { getJSONObject(it) }
@@ -75,6 +77,7 @@ class PendingTurn(
             t.packet = o.str("packet")
             t.intents = o.str("intents")
             t.observable = o.optString("observable")
+            t.rollAction = o.str("rollAction")
             return t
         }
     }
@@ -509,6 +512,7 @@ class StoryEngine(
         }
         val turn = PendingTurn(s.turn, message, roll, rollNote, s.complication)
         turn.observable = adjudication?.optString("observable").orEmpty()
+        if (roll != null) turn.rollAction = adjudication?.optString("action")?.trim()?.ifEmpty { null }
         // saved before the writer runs: if that call fails, the roll and its consequence are already
         // decided and a retry resumes this turn instead of rolling again
         pending = turn
@@ -581,6 +585,8 @@ class StoryEngine(
             .put("place", s.place).put("present", JSONArray(s.present)).put("observable", t.observable).put("language", settings.language)
             .put("checks", JSONArray(t.draft.checks.map { "${it.name}: ${if (it.passed) "ok" else it.detail}" }))
             .put("versions", t.drafts.size)
+        t.roll?.let { r -> entry.put("dice", JSONArray(r.dice)).put("modifier", r.modifier).put("outcome", r.outcome.name)
+            .put("rollAction", t.rollAction ?: "") }
         // the chapter's file first: it is what "already recorded" checks; then the slim line in the whole log
         val full = JSONObject(entry.toString()).put("packet", t.packet ?: "").put("sentAs", sentAs(t, turnsInChapter(s.chapter).isEmpty()))
             .put("ops", JSONArray(applied))

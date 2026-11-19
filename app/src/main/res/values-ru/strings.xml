@@ -274,8 +274,8 @@
     <string name="files_sources">Ваши файлы</string>
 
     <!-- files for a new story, and sequels -->
-    <string name="story_files_title">Свои файлы (необязательно)</string>
-    <string name="story_files_about">Описание мира, анкеты персонажей, заметки, старая переписка — любые текстовые файлы (.txt, .md, .json…). По ним строится мир, и мастер держит их в голове всю историю.</string>
+    <string name="story_files_title">Свои материалы (необязательно)</string>
+    <string name="story_files_about">Описание мира, анкеты персонажей, старая переписка — текстовые файлы (.txt, .md, .json). Мир строится по ним.</string>
     <string name="story_files_add">Добавить файлы</string>
     <string name="story_files_remove">Убрать %1$s</string>
     <string name="story_files_not_text">«%1$s» — не текстовый файл. Сохраните его как .txt или .md и добавьте снова.</string>
@@ -306,4 +306,19 @@
     <string name="cc_empty_answer">Claude Code прислал пустой ответ</string>
     <string name="tool_ideas">Идеи</string>
     <string name="ideas_thinking">Подбираются варианты…</string>
+    <string name="menu">Меню</string>
+    <string name="roll_success">Успех</string>
+    <string name="roll_cost">Успех, но дорогой ценой</string>
+    <string name="roll_failure">Провал</string>
+    <string name="creating_title">Создаётся ваш мир</string>
+    <string name="creating_about">В первый раз это минута-две: место, люди и их секреты, потом первая сцена. Приложение можно свернуть — работа продолжится.</string>
+    <string name="key_looks_wrong">Ключи Anthropic начинаются с sk-ant-</string>
+    <string name="key_get">Получить ключ на console.anthropic.com</string>
+    <string name="story_create_surprise">Удивите меня</string>
+    <string name="story_title_sequel">Что было дальше</string>
+    <string name="seed_1">Портовый город, где вода дороже вина</string>
+    <string name="seed_2">Ночная смена в гостинице, откуда гости не выезжают</string>
+    <string name="seed_3">Контрабандисты на умирающей космической станции</string>
+    <string name="seed_4">Семейная ферма, долг и чужак, который хочет её купить</string>
+    <string name="seed_5">Последний трактир перед перевалом, зимой</string>
 </resources>

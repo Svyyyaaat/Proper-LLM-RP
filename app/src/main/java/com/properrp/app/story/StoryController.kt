@@ -38,7 +38,14 @@ data class ShownPassage(
     /** Which version of this passage is shown, of how many (Reroll and Edit add versions). */
     val version: Int = 0,
     val versions: Int = 1,
+    /** The roll before it, if the player's move was risky: shown with the passage. */
+    val roll: RollUi? = null,
 )
+
+/** A roll as shown: two dice, the modifier, the outcome, and what was attempted (in the story's language). */
+data class RollUi(val dice: List<Int>, val modifier: Int, val outcome: com.properrp.core.story.Dice.Outcome, val action: String?) {
+    val total get() = dice.sum() + modifier
+}
 
 data class ShownTurn(val player: String?, val passage: ShownPassage)
 
@@ -61,6 +68,8 @@ class StoryController(
         private set
 
     var busy by mutableStateOf<String?>(null)
+    /** The stages of the action running now, in order, the last one in progress (shown while nothing streams). */
+    val steps = mutableStateListOf<String>()
     var error by mutableStateOf<String?>(null)
     val history = mutableStateListOf<ShownTurn>()
     var current by mutableStateOf<ShownTurn?>(null)
@@ -68,8 +77,24 @@ class StoryController(
     /** What to do about a failure, in the app's language, then its causes (so a screenshot tells what went wrong). */
     private fun describe(e: Throwable): String = app.text(errorText(ErrorText.kind(e))) + "\n\n" + ErrorText.details(e)
 
-    /** The reply being typed: kept here so leaving the screen or a failed send doesn't lose it. */
-    var replyDraft by mutableStateOf("")
+    private val prefs get() = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+
+    /** The reply being typed: saved as it's typed, so leaving the app or a failed send doesn't lose it. */
+    var replyDraft: String
+        get() = replyState
+        set(v) { replyState = v; prefs.edit().putString("replyDraft", v).apply() }
+    private var replyState by mutableStateOf(context.getSharedPreferences("settings", Context.MODE_PRIVATE).getString("replyDraft", "").orEmpty())
+
+    /** The new story's description, saved as it's typed (and used when the story is created). */
+    var seedDraft: String
+        get() = seedState
+        set(v) { seedState = v; prefs.edit().putString("seedDraft", v).apply() }
+    private var seedState by mutableStateOf(context.getSharedPreferences("settings", Context.MODE_PRIVATE).getString("seedDraft", "").orEmpty())
+
+    /** The story was asked for and will be created when the story screen opens (saved: it survives a restart). */
+    var creationAsked: Boolean
+        get() = prefs.getBoolean("creationAsked", false)
+        set(v) = prefs.edit().putBoolean("creationAsked", v).apply()
     /** Repeats the action that failed ("Try again"). */
     var retry by mutableStateOf<(() -> Unit)?>(null)
         private set
@@ -184,7 +209,7 @@ class StoryController(
         return StoryEngine(dir, llm, costs, session, settings = StoryEngine.Settings(
             firmStyleRules = app.firmStyleRules, length = app.passageLength.text, language = app.storyLanguage)).also { e ->
             engine = e
-            e.onCall = { purpose -> if (isWorking) stepLabel(purpose)?.let { busy = it } }
+            e.onCall = { purpose -> if (isWorking) stepLabel(purpose)?.let { step(it) } }
             var last = 0L
             e.onDraft = { phase, text, final ->
                 // a few updates a second are plenty for the eye; the final one always shows
@@ -192,6 +217,14 @@ class StoryController(
                 if (final || now - last > 60 || draft == null) { last = now; draft = phase to text }
             }
         }
+    }
+
+    private val main = android.os.Handler(android.os.Looper.getMainLooper())
+
+    /** A new stage: the progress line, and one more line in the list (the same stage twice is one line). */
+    private fun step(label: String) {
+        busy = label
+        main.post { if (steps.lastOrNull() != label) steps += label }
     }
 
     private fun stepLabel(purpose: String): String? = STEP_LABELS[purpose]?.let { app.text(it) }
@@ -209,7 +242,8 @@ class StoryController(
             busy = text
             error = null
             retry = null
-            engine?.onCall = { purpose -> if (isWorking) busy = stepLabel(purpose) ?: text }
+            main.post { steps.clear() }
+            engine?.onCall = { purpose -> if (isWorking) step(stepLabel(purpose) ?: text) }
             try {
                 block()
             } catch (e: Throwable) {
@@ -248,7 +282,10 @@ class StoryController(
     // ------------------------------------------------------------------ files and sequels
 
     /** Text files given to the story being created (lore, character sheets, notes). */
-    fun attachments(): List<String> = com.properrp.core.story.Sources(dir).all().map { it.name }
+    fun attachments(): List<String> = com.properrp.core.story.Sources(staging).all().map { it.name }
+
+    /** Where a story being set up keeps its files until it's created: the story you're in stays untouched until then. */
+    private val staging get() = File(context.filesDir, "new-story")
 
     /** Adds the file at [uri]; null when it worked, else what to tell the player. Blocking: call off the main thread. */
     fun attach(uri: android.net.Uri): String? {
@@ -264,13 +301,11 @@ class StoryController(
         } }.getOrNull()
             ?: return app.text(R.string.story_files_failed, name)
         if (!com.properrp.core.story.Sources.looksLikeText(bytes)) return app.text(R.string.story_files_not_text, name)
-        com.properrp.core.story.Sources(dir).add(name, bytes.decodeToString().removePrefix("\uFEFF"))
+        com.properrp.core.story.Sources(staging).add(name, bytes.decodeToString().removePrefix("\uFEFF"))
         return null
     }
 
-    fun detach(name: String) = com.properrp.core.story.Sources(dir).remove(name)
-
-    private val prefs get() = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+    fun detach(name: String) = com.properrp.core.story.Sources(staging).remove(name)
 
     /** The earlier story the one being created continues (its world and people), kept until it's created. */
     fun sequelOf(): File? = prefs.getString("sequelOf", null)?.let(::File)?.takeIf { File(it, "state/world.md").exists() }
@@ -278,19 +313,44 @@ class StoryController(
     private fun setSequelOf(d: File?) = prefs.edit().putString("sequelOf", d?.path).apply()
 
     /** The title of the story being continued, for the setup screen. */
-    fun sequelTitle(): String? = sequelOf()?.let { summary(it, false)?.title }
+    fun sequelTitle(): String? = when (val f = prefs.getString("newFrom", "")) {
+        "" , null -> null
+        CURRENT -> stories().firstOrNull { it.current }?.title
+        else -> summary(File(f), false)?.title
+    }
 
     /**
-     * A new story: the current one is kept on the shelf. With [from], the new one carries over that story's world,
-     * people and memories (the current story, or one on the shelf); without, it starts fresh.
+     * Starts setting up a new story: fresh ([from] null), or with the world and people of [from] (the current story,
+     * or one on the shelf). Nothing is moved yet: backing out leaves you where you were. [commitNewStory] creates it.
      */
     fun startNewStory(from: StorySummary?): Boolean {
-        val archived = archiveAndReset() ?: return false
+        if (isWorking) return false
+        staging.deleteRecursively()
+        seedDraft = ""
+        prefs.edit().putString("newFrom", when { from == null -> ""; from.current -> CURRENT; else -> from.dir.path }).apply()
+        return true
+    }
+
+    /** Backing out of setting up a new story: its files go, the story you were in is as it was. */
+    fun cancelNewStory() { staging.deleteRecursively(); prefs.edit().remove("newFrom").apply(); seedDraft = "" }
+
+    /**
+     * Create was tapped: the story you're in goes onto the shelf (if there is one), the files picked come along, and
+     * the story screen builds the new one (it survives the app closing meanwhile).
+     */
+    fun commitNewStory(): Boolean {
+        if (isWorking) return false
+        val from = prefs.getString("newFrom", "").orEmpty()
+        val archived = if (isSetUp()) archiveAndReset() ?: return false else null
         setSequelOf(when {
-            from == null -> null
-            from.current -> archived
-            else -> from.dir
+            from.isEmpty() -> null
+            from == CURRENT -> archived
+            else -> File(from)
         })
+        File(staging, "state/sources").takeIf { it.isDirectory }?.copyRecursively(File(dir, "state/sources"), overwrite = true)
+        staging.deleteRecursively()
+        prefs.edit().remove("newFrom").apply()
+        creationAsked = true
         return true
     }
 
@@ -326,6 +386,14 @@ class StoryController(
      */
     suspend fun start(): Unit? = work(R.string.busy_opening, again = { start() }) {
         val e = engine()
+        if (!isSetUp()) {
+            if (!creationAsked) return@work
+            val from = sequelOf()
+            if (from != null) { e.carryOver(from, seedDraft); setSequelOf(null) } else e.setup(seedDraft)
+            // a style to start with: the first built-in one, in the story's language (changed any time from the menu)
+            if (!hasStyle()) pickStyle(presets().first())
+            seedDraft = ""; creationAsked = false
+        }
         loadHistory()
         val message = outbox.takeIf { it.exists() }?.readText()?.ifBlank { null }
         val waiting = e.pending
@@ -440,7 +508,8 @@ class StoryController(
             if (d.rewritten) app.text(R.string.note_rewritten) else null,
         )
         current = ShownTurn(t.player, ShownPassage(t.turn, d.passage,
-            d.checks.map { "${it.name}: ${if (it.passed) "ok" else it.detail}" }, notes, t.current, t.drafts.size))
+            d.checks.map { "${it.name}: ${if (it.passed) "ok" else it.detail}" }, notes, t.current, t.drafts.size,
+            t.roll?.let { RollUi(it.dice, it.modifier, it.outcome, t.rollAction) }))
         // the scribe for this version starts now, in the background, while it's read
         runCatching { engine?.prepareCommit() }
     }
@@ -450,7 +519,11 @@ class StoryController(
         val f = File(dir, "log/turns.jsonl")
         if (!f.exists()) return
         f.tailJson(20).forEach { o ->
-            history += ShownTurn(o.optString("player").ifBlank { null }, ShownPassage(o.getInt("turn"), o.getString("passage")))
+            val roll = o.optJSONArray("dice")?.let { a -> runCatching {
+                RollUi((0 until a.length()).map { a.getInt(it) }, o.optInt("modifier"),
+                    com.properrp.core.story.Dice.Outcome.valueOf(o.getString("outcome")), o.optString("rollAction").ifBlank { null })
+            }.getOrNull() }
+            history += ShownTurn(o.optString("player").ifBlank { null }, ShownPassage(o.getInt("turn"), o.getString("passage"), roll = roll))
         }
     }
 
@@ -556,6 +629,7 @@ class StoryController(
     companion object {
         /** What's about you, not a story: follows you to a new or another story. */
         val USER_FILES = listOf("log/costs.jsonl")
+        private const val CURRENT = "current"
 
         /** The most of one file that's read (bigger files are cut when kept anyway). */
         const val MAX_ATTACHMENT = 400_000

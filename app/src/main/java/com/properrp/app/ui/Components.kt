@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -70,10 +71,13 @@ fun AppBar(title: String, onBack: (() -> Unit)? = null, actions: @Composable Row
 /** A scrolling page with the app's margins. */
 @Composable
 fun Page(modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
-    Column(
-        modifier.fillMaxSize().verticalScroll(rememberScrollState()).navigationBarsPadding().padding(horizontal = 20.dp, vertical = 12.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp), content = content,
-    )
+    // a centred column no wider than a comfortable line on tablets; the whole width on a phone
+    Box(modifier.fillMaxSize().verticalScroll(rememberScrollState()), contentAlignment = Alignment.TopCenter) {
+        Column(
+            Modifier.widthIn(max = ContentWidth).fillMaxWidth().navigationBarsPadding().padding(horizontal = 20.dp, vertical = 12.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp), content = content,
+        )
+    }
 }
 
 @Composable
@@ -82,14 +86,13 @@ fun SectionTitle(text: String) {
         modifier = Modifier.padding(top = 10.dp, start = 4.dp))
 }
 
-/** A card: white on the cool paper, lifted by a soft shadow (no outline). */
+/** A panel: a slightly lighter patch of the table, flat (no shadow, no outline). */
 @Composable
 fun PaperCard(modifier: Modifier = Modifier, onClick: (() -> Unit)? = null, content: @Composable ColumnScope.() -> Unit) {
     Surface(
         modifier = modifier.fillMaxWidth().let { if (onClick != null) it.clip(MaterialTheme.shapes.medium).clickable(onClick = onClick) else it },
         shape = MaterialTheme.shapes.medium,
-        color = MaterialTheme.colorScheme.surfaceContainerLowest,
-        shadowElevation = 1.dp,
+        color = MaterialTheme.colorScheme.surfaceContainer,
     ) { Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(10.dp), content = content) }
 }
 
@@ -164,7 +167,6 @@ fun StepHeader(step: Int, of: Int, title: String, body: String) {
                 ))
             }
         }
-        Text(stringResource(R.string.step_of, step, of), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.accent)
         Text(title, style = MaterialTheme.typography.headlineSmall)
         Text(body, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
@@ -173,9 +175,11 @@ fun StepHeader(step: Int, of: Int, title: String, body: String) {
 /** A step's buttons, pinned to the bottom. */
 @Composable
 fun StepFooter(primary: String, onPrimary: () -> Unit, enabled: Boolean = true, secondary: String? = null, onSecondary: (() -> Unit)? = null) {
-    Column(Modifier.fillMaxWidth().navigationBarsPadding().padding(horizontal = 20.dp, vertical = 16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        PrimaryButton(primary, onPrimary, enabled = enabled)
-        if (secondary != null && onSecondary != null) TextButton(onSecondary, Modifier.fillMaxWidth()) { Text(secondary) }
+    Box(Modifier.fillMaxWidth().navigationBarsPadding(), contentAlignment = Alignment.Center) {
+        Column(Modifier.widthIn(max = ContentWidth).fillMaxWidth().padding(horizontal = 20.dp, vertical = 16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            PrimaryButton(primary, onPrimary, enabled = enabled)
+            if (secondary != null && onSecondary != null) TextButton(onSecondary, Modifier.fillMaxWidth()) { Text(secondary) }
+        }
     }
 }
 
@@ -207,8 +211,7 @@ fun ErrorNote(text: String, onRetry: (() -> Unit)? = null) {
             Text(stringResource(if (open) R.string.hide_details else R.string.details), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onErrorContainer,
                 modifier = Modifier.clip(MaterialTheme.shapes.small).clickable { openState.value = !open }.padding(vertical = 4.dp))
         }
-        if (onRetry != null) Button(onRetry, colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.accent, contentColor = MaterialTheme.colorScheme.onAccent)) {
+        if (onRetry != null) Button(onRetry) {
             Icon(Icons.Filled.Refresh, null, Modifier.size(18.dp)); Spacer(Modifier.width(6.dp)); Text(stringResource(R.string.try_again))
         }
     }

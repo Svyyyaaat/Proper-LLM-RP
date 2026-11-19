@@ -61,7 +61,11 @@ class StoryControllerTest {
         shadowOf(Looper.getMainLooper()).idle()
     }
 
-    @Before fun clean() { File(context.filesDir, "story").deleteRecursively(); File(context.filesDir, "story-archive").deleteRecursively() }
+    @Before fun clean() {
+        File(context.filesDir, "story").deleteRecursively(); File(context.filesDir, "story-archive").deleteRecursively()
+        File(context.filesDir, "new-story").deleteRecursively()
+        context.getSharedPreferences("settings", android.content.Context.MODE_PRIVATE).edit().clear().commit()
+    }
 
     @Test
     fun `restart shows the waiting passage without writing a new one`() = runBlocking {
@@ -267,7 +271,7 @@ class StoryControllerTest {
         val first = c.stories().first { it.current }
         assertTrue(c.startNewStory(first))
         assertEquals("The Well", c.sequelTitle())
-        assertTrue(!c.isSetUp())
+        assertTrue("nothing moves until Create", c.isSetUp())
 
         // a lore file, and something that isn't text
         val lore = File(context.cacheDir, "lore.md").apply { writeText("Mina's brother is called Jonas.") }
@@ -275,14 +279,46 @@ class StoryControllerTest {
         assertNull(c.attach(android.net.Uri.fromFile(lore)))
         assertTrue(c.attach(android.net.Uri.fromFile(pdf))!!.contains("map.pdf"))
         assertEquals(listOf("lore.md"), c.attachments())
+        assertTrue("the story you're in is untouched", !File(c.dir, "state/sources/lore.md").exists())
 
-        c.setup("winter comes")
+        c.seedDraft = "winter comes"
+        assertTrue(c.commitNewStory())
+        assertTrue(!c.isSetUp())
+        // the story screen builds it
+        c.start()
         assertTrue(c.error ?: "", c.isSetUp())
         assertNull("used up: the next new story starts fresh", c.sequelOf())
         assertEquals(setOf("ミナ", "老人"), com.properrp.core.story.StoryState(c.dir).characterNames().toSet())
         assertEquals("The Well II", c.stories().first { it.current }.title)
-        c.start()
         assertTrue("Jonas" in fake.sent("writer").last().system.first().text)
         assertTrue("winter comes" in fake.sent("director").last().messages.single().text)
+        assertTrue("a style to start with", c.hasStyle())
+        assertEquals("", c.seedDraft)
     }
+
+    @Test
+    fun `backing out of a new story leaves you where you were`() = runBlocking {
+        val c = controller()
+        c.setup("")
+        c.start()
+        val shown = c.current!!.passage.text
+        assertTrue(c.startNewStory(null))
+        assertNull(c.attach(android.net.Uri.fromFile(File(context.cacheDir, "n.md").apply { writeText("notes") })))
+        c.cancelNewStory()
+        assertTrue(c.isSetUp())
+        assertEquals(emptyList<String>(), c.attachments())
+        assertEquals(shown, c.current!!.passage.text)
+    }
+
+    @Test
+    fun `what you type is kept across a restart`() {
+        val c = controller()
+        c.replyDraft = "I wait by the door."
+        c.seedDraft = "a lighthouse"
+        val again = controller()
+        assertEquals("I wait by the door.", again.replyDraft)
+        assertEquals("a lighthouse", again.seedDraft)
+        again.replyDraft = ""; again.seedDraft = ""
+    }
+
 }
