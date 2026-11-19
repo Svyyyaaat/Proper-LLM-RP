@@ -283,4 +283,18 @@
     <string name="cc_testing">Test in corso…</string>
     <string name="cc_answered">Claude Code ha risposto.</string>
     <string name="cc_empty_answer">Claude Code ha risposto senza contenuto</string>
+    <string name="story_files_title">I tuoi file (facoltativo)</string>
+    <string name="story_files_about">Ambientazione, schede dei personaggi, appunti, una vecchia chat: semplici file di testo (.txt, .md, .json…). Il mondo nasce da questi, e il master li tiene a mente per tutta la storia.</string>
+    <string name="story_files_add">Aggiungi file</string>
+    <string name="story_files_remove">Rimuovi %1$s</string>
+    <string name="story_files_not_text">«%1$s» non è un file di testo. Salvalo come .txt o .md e aggiungilo di nuovo.</string>
+    <string name="story_files_failed">Impossibile leggere «%1$s».</string>
+    <string name="story_sequel_note">Seguito di «%1$s»: lo stesso mondo e le stesse persone, che ricordano cosa è successo. È passato un po\' di tempo.</string>
+    <string name="story_sequel_seed_label">Cosa succede dopo? (facoltativo)</string>
+    <string name="story_sequel_seed_hint">es. un anno dopo; il debito è pagato, ma…</string>
+    <string name="stories_new_choice">Ricomincia da zero o tieni il suo mondo e la sua gente: ricordano cosa è successo.</string>
+    <string name="stories_fresh">Da zero</string>
+    <string name="stories_keep_cast">Tieni i personaggi</string>
+    <string name="stories_new_with_cast">Nuova storia con i suoi personaggi</string>
+    <string name="files_sources">I tuoi file</string>
 </resources>

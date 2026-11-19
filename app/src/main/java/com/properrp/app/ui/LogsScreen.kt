@@ -100,7 +100,8 @@ fun FilesScreen(state: AppState) {
     val f = open
     if (f == null) {
         val titles = mapOf("config" to stringResource(R.string.files_config), "prompts" to stringResource(R.string.files_prompts),
-            "state" to stringResource(R.string.files_state), "state/characters" to stringResource(R.string.files_characters))
+            "state" to stringResource(R.string.files_state), "state/characters" to stringResource(R.string.files_characters),
+            "state/sources" to stringResource(R.string.files_sources))
         val groups = remember {
             titles.entries.map { (d, title) -> Triple(d, title, File(root, d).listFiles { x -> x.isFile }.orEmpty().sortedBy { it.name }) }
                 .filter { it.third.isNotEmpty() }

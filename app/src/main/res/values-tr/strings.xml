@@ -280,4 +280,18 @@
     <string name="cc_testing">Test ediliyor…</string>
     <string name="cc_answered">Claude Code yanıt verdi.</string>
     <string name="cc_empty_answer">Claude Code boş yanıt verdi</string>
+    <string name="story_files_title">Dosyaların (isteğe bağlı)</string>
+    <string name="story_files_about">Dünya bilgisi, karakter kartları, notlar, eski bir sohbet kaydı: düz metin dosyaları (.txt, .md, .json…). Dünya bunlardan kurulur ve oyun yöneticisi hikâye boyunca bunları aklında tutar.</string>
+    <string name="story_files_add">Dosya ekle</string>
+    <string name="story_files_remove">%1$s dosyasını kaldır</string>
+    <string name="story_files_not_text">“%1$s” bir metin dosyası değil. .txt ya da .md olarak kaydedip yeniden ekle.</string>
+    <string name="story_files_failed">“%1$s” okunamadı.</string>
+    <string name="story_sequel_note">“%1$s” devam ediyor: aynı dünya, aynı insanlar ve olanları hatırlıyorlar. Biraz zaman geçti.</string>
+    <string name="story_sequel_seed_label">Sonra ne olacak? (isteğe bağlı)</string>
+    <string name="story_sequel_seed_hint">ör. bir yıl sonra; borç ödendi ama…</string>
+    <string name="stories_new_choice">Sıfırdan başla ya da dünyasını ve insanlarını koru: olanları hatırlıyorlar.</string>
+    <string name="stories_fresh">Sıfırdan başla</string>
+    <string name="stories_keep_cast">Karakterleri koru</string>
+    <string name="stories_new_with_cast">Karakterleriyle yeni hikâye</string>
+    <string name="files_sources">Dosyaların</string>
 </resources>

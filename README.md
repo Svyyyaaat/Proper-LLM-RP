@@ -18,6 +18,19 @@ parts (Anki, dictionary, vocabulary check, review words, mistake checks): what's
   With *System* on a phone in another language, the story is still written in that language; the interface
   falls back to English.
 
+## Your files, and sequels
+
+- **Files:** when you create a story you can add plain text files (lore, character sheets, notes, an old chat log;
+  .txt, .md, .json…). The world and cast are built from them (what they say wins), and the game master keeps them
+  in its prompt for the whole story (about 24,000 characters; setup reads up to 60,000). They're in
+  *Prompts and story files → Your files*, editable. PDFs and other binary files are refused with a note to save
+  them as text.
+- **A new story with the same people:** *Stories → Start a new story → Keep its people* (or, on an earlier story,
+  *New story with its people*). The new story carries over the world, the cast and extras with their current
+  stances, the player's character, secrets, open consequences, clocks and everyone's memories. The earlier story
+  becomes "the story so far" (its chapter summaries plus a summary of where it stopped), time passes off-screen
+  first, and you can say what happens next. The old story stays on the shelf.
+
 ## How a turn works
 
 Code owns the state and decides outcomes; each model call does one job. A referee decides whether your move

@@ -73,6 +73,11 @@ class Shots {
 
     @Test fun a4_story_setup() = shot { StoryStepContent("", {}, null, null, {}, {}, language = "English") }
 
+    @Test fun a4c_story_setup_files_sequel() = shot {
+        StoryStepContent("", {}, null, null, {}, {}, language = "English", files = listOf("vell-lore.md", "ilse-brand.txt"),
+            fileProblem = "“map.pdf” isn't a text file. Save it as .txt or .md and add it again.", sequelOf = "The Well Keeper")
+    }
+
     @Test fun a5_styles() = shot { StyleStepContent(StylePresets.ALL.take(2), null, null, {}, {}, {}) }
 
     // ---------------------------------------------------------------- home, stories, style

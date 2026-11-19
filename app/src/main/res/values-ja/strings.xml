@@ -277,4 +277,18 @@
     <string name="cc_testing">テスト中…</string>
     <string name="cc_answered">Claude Codeが応答しました。</string>
     <string name="cc_empty_answer">Claude Codeから空の応答が返されました</string>
+    <string name="story_files_title">ファイル（任意）</string>
+    <string name="story_files_about">世界設定、キャラクターシート、メモ、昔のチャットログなどのテキストファイル（.txt、.md、.json…）。世界はこれをもとに作られ、ゲームマスターは物語のあいだずっとこれを踏まえます。</string>
+    <string name="story_files_add">ファイルを追加</string>
+    <string name="story_files_remove">%1$sを削除</string>
+    <string name="story_files_not_text">「%1$s」はテキストファイルではありません。.txt か .md で保存してから追加してください。</string>
+    <string name="story_files_failed">「%1$s」を読み込めませんでした。</string>
+    <string name="story_sequel_note">「%1$s」の続き：同じ世界、同じ人々。みんな起きたことを覚えています。少し時間が経ちました。</string>
+    <string name="story_sequel_seed_label">この先はどうなる？（任意）</string>
+    <string name="story_sequel_seed_hint">例：一年後、借金は返したが…</string>
+    <string name="stories_new_choice">最初から始めるか、その世界と人々を引き継ぐか。人々は起きたことを覚えています。</string>
+    <string name="stories_fresh">最初から</string>
+    <string name="stories_keep_cast">人々を引き継ぐ</string>
+    <string name="stories_new_with_cast">この人々で新しい物語</string>
+    <string name="files_sources">あなたのファイル</string>
 </resources>

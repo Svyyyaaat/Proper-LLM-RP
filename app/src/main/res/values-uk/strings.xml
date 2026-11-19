@@ -286,4 +286,18 @@
     <string name="cc_testing">Перевіряємо…</string>
     <string name="cc_answered">Claude Code відповів.</string>
     <string name="cc_empty_answer">Claude Code надіслав порожню відповідь</string>
+    <string name="story_files_title">Ваші файли (необов\'язково)</string>
+    <string name="story_files_about">Світ, анкети персонажів, нотатки, старий лог чату: звичайні текстові файли (.txt, .md, .json…). Світ будується з них, і ведучий пам\'ятає про них усю історію.</string>
+    <string name="story_files_add">Додати файли</string>
+    <string name="story_files_remove">Прибрати %1$s</string>
+    <string name="story_files_not_text">«%1$s» — не текстовий файл. Збережіть його як .txt або .md і додайте знову.</string>
+    <string name="story_files_failed">Не вдалося прочитати «%1$s».</string>
+    <string name="story_sequel_note">Продовження «%1$s»: той самий світ і ті самі люди, і вони пам\'ятають, що було. Минув якийсь час.</string>
+    <string name="story_sequel_seed_label">Що далі? (необов\'язково)</string>
+    <string name="story_sequel_seed_hint">наприклад, через рік; борг сплачено, але…</string>
+    <string name="stories_new_choice">Почніть з чистого аркуша або залиште її світ і людей: вони пам\'ятають, що було.</string>
+    <string name="stories_fresh">З чистого аркуша</string>
+    <string name="stories_keep_cast">Залишити героїв</string>
+    <string name="stories_new_with_cast">Нова історія з її героями</string>
+    <string name="files_sources">Ваші файли</string>
 </resources>

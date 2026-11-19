@@ -56,7 +56,7 @@ import kotlinx.coroutines.withContext
 // ---------------------------------------------------------------- stories
 
 @Composable
-fun StoriesScreen(state: AppState, onContinue: () -> Unit, onNewStory: () -> Unit, onSwitched: () -> Unit) {
+fun StoriesScreen(state: AppState, onContinue: () -> Unit, onNewStory: (StorySummary?) -> Unit, onSwitched: () -> Unit) {
     var stories by remember { mutableStateOf<List<StorySummary>?>(null) }
     var tick by remember { mutableIntStateOf(0) }
     var problem by remember { mutableStateOf<String?>(null) }
@@ -72,7 +72,9 @@ fun StoriesScreen(state: AppState, onContinue: () -> Unit, onNewStory: () -> Uni
 
 /** Your stories: the one being played as an open book with Continue, the earlier ones as a quiet shelf. */
 @Composable
-fun StoriesContent(stories: List<StorySummary>, onContinue: () -> Unit, onNewStory: () -> Unit, problem: String? = null,
+fun StoriesContent(stories: List<StorySummary>, onContinue: () -> Unit,
+                   /** A new story: fresh (null), or with the world and people of the one given. */
+                   onNewStory: (StorySummary?) -> Unit, problem: String? = null,
                    writing: Boolean = false, onSwitch: (StorySummary) -> Unit) {
     var confirmNew by remember { mutableStateOf(false) }
     var confirmSwitch by remember { mutableStateOf<StorySummary?>(null) }
@@ -98,7 +100,7 @@ fun StoriesContent(stories: List<StorySummary>, onContinue: () -> Unit, onNewSto
         } else {
             // nothing set up: the only thing to do here is start one
             Text(stringResource(R.string.stories_none), style = ReadingText.copy(fontSize = 22.sp, lineHeight = 30.sp))
-            PrimaryButton(stringResource(R.string.stories_start), onNewStory, icon = Icons.Filled.Add)
+            PrimaryButton(stringResource(R.string.stories_start), { onNewStory(null) }, icon = Icons.Filled.Add)
         }
         if (current != null) SecondaryButton(stringResource(R.string.stories_new), { confirmNew = true }, icon = Icons.Filled.Add, enabled = !writing)
         if (others.isNotEmpty()) {
@@ -114,14 +116,19 @@ fun StoriesContent(stories: List<StorySummary>, onContinue: () -> Unit, onNewSto
         }
     }
     if (confirmNew) AlertDialog(onDismissRequest = { confirmNew = false }, title = { Text(stringResource(R.string.stories_new_q)) },
-        text = { Text(stringResource(R.string.stories_new_keeps, current?.title ?: untitled)) },
-        confirmButton = { TextButton({ confirmNew = false; onNewStory() }) { Text(stringResource(R.string.stories_new)) } },
+        text = { Text(stringResource(R.string.stories_new_keeps, current?.title ?: untitled) + "\n\n" + stringResource(R.string.stories_new_choice)) },
+        confirmButton = {
+            Row {
+                TextButton({ confirmNew = false; onNewStory(null) }) { Text(stringResource(R.string.stories_fresh)) }
+                TextButton({ confirmNew = false; onNewStory(current) }) { Text(stringResource(R.string.stories_keep_cast)) }
+            }
+        },
         dismissButton = { TextButton({ confirmNew = false }) { Text(stringResource(R.string.cancel)) } })
     confirmSwitch?.let { s ->
         AlertDialog(onDismissRequest = { confirmSwitch = null }, title = { Text(stringResource(R.string.stories_continue_q, s.title ?: untitled)) },
             text = { Text(stringResource(R.string.stories_continue_where) + (current?.let { " " + stringResource(R.string.stories_stays, it.title ?: untitled) } ?: "")) },
             confirmButton = { TextButton({ confirmSwitch = null; onSwitch(s) }) { Text(stringResource(R.string.stories_continue_it)) } },
-            dismissButton = { TextButton({ confirmSwitch = null }) { Text(stringResource(R.string.cancel)) } })
+            dismissButton = { TextButton({ confirmSwitch = null; onNewStory(s) }) { Text(stringResource(R.string.stories_new_with_cast)) } })
     }
 }
 

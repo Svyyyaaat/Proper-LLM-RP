@@ -277,4 +277,18 @@
     <string name="cc_testing">正在测试…</string>
     <string name="cc_answered">Claude Code 已回应。</string>
     <string name="cc_empty_answer">Claude Code 返回了空回应</string>
+    <string name="story_files_title">你的文件（可选）</string>
+    <string name="story_files_about">世界设定、角色卡、笔记、旧的聊天记录：纯文本文件（.txt、.md、.json…）。世界会据此构建，主持人在整个故事中都会记着它们。</string>
+    <string name="story_files_add">添加文件</string>
+    <string name="story_files_remove">移除 %1$s</string>
+    <string name="story_files_not_text">“%1$s”不是文本文件。请另存为 .txt 或 .md 后再添加。</string>
+    <string name="story_files_failed">无法读取“%1$s”。</string>
+    <string name="story_sequel_note">延续“%1$s”：同一个世界、同一群人，他们记得发生过的事。时间已经过去了一段。</string>
+    <string name="story_sequel_seed_label">接下来会发生什么？（可选）</string>
+    <string name="story_sequel_seed_hint">例如：一年后，债还清了，但……</string>
+    <string name="stories_new_choice">从头开始，或保留它的世界和人物：他们记得发生过的事。</string>
+    <string name="stories_fresh">从头开始</string>
+    <string name="stories_keep_cast">保留人物</string>
+    <string name="stories_new_with_cast">用这些人物开始新故事</string>
+    <string name="files_sources">你的文件</string>
 </resources>

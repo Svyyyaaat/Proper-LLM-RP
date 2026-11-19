@@ -89,8 +89,8 @@ fun App(state: AppState) {
     val screen = stack.last()
     val back: () -> Unit = { if (stack.size > 1) stack.removeAt(stack.size - 1) }
     BackHandler(enabled = !onboarding && stack.size > 1) { back() }
-    val newStory: () -> Unit = {
-        if (state.story.archiveAndReset() != null) {
+    val newStory: (com.properrp.app.story.StoryController.StorySummary?) -> Unit = { from ->
+        if (state.story.startNewStory(from)) {
             // straight to "Your story": the rest of setup is done, and the style carries over
             state.onboardingStep = STEP_STORY; state.onboardingDone = false; onboarding = true
         }

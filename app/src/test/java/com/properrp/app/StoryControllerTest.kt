@@ -256,4 +256,33 @@ class StoryControllerTest {
         assertTrue("write this passage in Russian." in fake.sent("writer").last().messages.last().text)
         app.chooseLanguage(Languages.SYSTEM)
     }
+
+    @Test
+    fun `a new story can keep the old one's people, and files given to it reach the world's creation`() = runBlocking {
+        val c = controller()
+        c.setup("")
+        c.start()
+        File(c.dir, "state/title.txt").writeText("The Well\n")
+        fake.queue("offscreen", """{"ops":[]}""")
+        val first = c.stories().first { it.current }
+        assertTrue(c.startNewStory(first))
+        assertEquals("The Well", c.sequelTitle())
+        assertTrue(!c.isSetUp())
+
+        // a lore file, and something that isn't text
+        val lore = File(context.cacheDir, "lore.md").apply { writeText("Mina's brother is called Jonas.") }
+        val pdf = File(context.cacheDir, "map.pdf").apply { writeBytes(byteArrayOf(0x25, 0x50, 0x44, 0x46, 0, 0, 1)) }
+        assertNull(c.attach(android.net.Uri.fromFile(lore)))
+        assertTrue(c.attach(android.net.Uri.fromFile(pdf))!!.contains("map.pdf"))
+        assertEquals(listOf("lore.md"), c.attachments())
+
+        c.setup("winter comes")
+        assertTrue(c.error ?: "", c.isSetUp())
+        assertNull("used up: the next new story starts fresh", c.sequelOf())
+        assertEquals(setOf("ミナ", "老人"), com.properrp.core.story.StoryState(c.dir).characterNames().toSet())
+        assertEquals("The Well II", c.stories().first { it.current }.title)
+        c.start()
+        assertTrue("Jonas" in fake.sent("writer").last().system.first().text)
+        assertTrue("winter comes" in fake.sent("director").last().messages.single().text)
+    }
 }

@@ -286,4 +286,18 @@
     <string name="cc_testing">Testowanie…</string>
     <string name="cc_answered">Claude Code odpowiedział.</string>
     <string name="cc_empty_answer">Claude Code zwrócił pustą odpowiedź</string>
+    <string name="story_files_title">Twoje pliki (opcjonalnie)</string>
+    <string name="story_files_about">Opis świata, karty postaci, notatki, stary zapis czatu: zwykłe pliki tekstowe (.txt, .md, .json…). Świat powstaje na ich podstawie, a mistrz gry pamięta o nich przez całą historię.</string>
+    <string name="story_files_add">Dodaj pliki</string>
+    <string name="story_files_remove">Usuń %1$s</string>
+    <string name="story_files_not_text">„%1$s” to nie plik tekstowy. Zapisz go jako .txt lub .md i dodaj ponownie.</string>
+    <string name="story_files_failed">Nie udało się odczytać „%1$s”.</string>
+    <string name="story_sequel_note">Ciąg dalszy „%1$s”: ten sam świat i ci sami ludzie, którzy pamiętają, co się wydarzyło. Minęło trochę czasu.</string>
+    <string name="story_sequel_seed_label">Co dalej? (opcjonalnie)</string>
+    <string name="story_sequel_seed_hint">np. rok później; dług spłacony, ale…</string>
+    <string name="stories_new_choice">Zacznij od nowa albo zachowaj jej świat i ludzi: pamiętają, co się wydarzyło.</string>
+    <string name="stories_fresh">Od nowa</string>
+    <string name="stories_keep_cast">Zachowaj postacie</string>
+    <string name="stories_new_with_cast">Nowa historia z jej postaciami</string>
+    <string name="files_sources">Twoje pliki</string>
 </resources>

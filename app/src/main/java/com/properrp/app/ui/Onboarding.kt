@@ -18,6 +18,12 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Translate
+import androidx.compose.material.icons.filled.AttachFile
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Description
+import androidx.compose.material.icons.filled.Groups
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -109,11 +115,41 @@ fun KeyStepContent(key: String, onKey: (String) -> Unit, onNext: () -> Unit, onB
 
 @Composable
 fun StoryStepContent(seed: String, onSeed: (String) -> Unit, busy: String?, error: String?, onCreate: () -> Unit, onBack: () -> Unit,
-                     language: String = "") {
+                     language: String = "",
+                     /** The text files given to the story, and how to add or drop one. */
+                     files: List<String> = emptyList(), onAddFiles: () -> Unit = {}, onRemoveFile: (String) -> Unit = {},
+                     fileProblem: String? = null,
+                     /** The earlier story this one continues (its world and people), if any. */
+                     sequelOf: String? = null) {
     StepFrame(onBack, footer = { StepFooter(stringResource(R.string.story_create), onCreate, enabled = busy == null) }) {
         StepHeader(2, SETUP_STEPS, stringResource(R.string.story_title), stringResource(R.string.story_body))
+        if (sequelOf != null) Surface(color = MaterialTheme.colorScheme.secondaryContainer, shape = MaterialTheme.shapes.medium) {
+            Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                Icon(Icons.Filled.Groups, null, Modifier.size(22.dp), tint = MaterialTheme.colorScheme.onSecondaryContainer)
+                Spacer(Modifier.width(12.dp))
+                Text(stringResource(R.string.story_sequel_note, sequelOf), style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSecondaryContainer)
+            }
+        }
         OutlinedTextField(seed, onSeed, Modifier.fillMaxWidth().heightIn(min = 120.dp), shape = MaterialTheme.shapes.medium,
-            label = { Text(stringResource(R.string.story_seed_label)) }, placeholder = { Text(stringResource(R.string.story_seed_hint)) })
+            label = { Text(stringResource(if (sequelOf != null) R.string.story_sequel_seed_label else R.string.story_seed_label)) },
+            placeholder = { Text(stringResource(if (sequelOf != null) R.string.story_sequel_seed_hint else R.string.story_seed_hint)) })
+        PaperCard {
+            Text(stringResource(R.string.story_files_title), style = MaterialTheme.typography.titleSmall)
+            Text(stringResource(R.string.story_files_about), style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant)
+            for (f in files) Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(Icons.Filled.Description, null, Modifier.size(18.dp), tint = MaterialTheme.colorScheme.primary)
+                Spacer(Modifier.width(10.dp))
+                Text(f, Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium, maxLines = 1,
+                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
+                androidx.compose.material3.IconButton({ onRemoveFile(f) }) {
+                    Icon(Icons.Filled.Close, stringResource(R.string.story_files_remove, f), Modifier.size(18.dp))
+                }
+            }
+            if (fileProblem != null) Text(fileProblem, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
+            QuietButton(stringResource(R.string.story_files_add), onAddFiles, icon = Icons.Filled.AttachFile, enabled = busy == null)
+        }
         if (language.isNotBlank()) Text(stringResource(R.string.story_language_note, language), style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant)
         if (busy != null) Busy(busy)
@@ -179,9 +215,24 @@ fun OnboardingFlow(state: AppState, onFinished: () -> Unit) {
         2 -> {
             if (state.story.isSetUp()) { LaunchedEffect(Unit) { go(3) }; return }
             var seed by remember { mutableStateOf("") }
+            var files by remember { mutableStateOf(state.story.attachments()) }
+            var fileProblem by remember { mutableStateOf<String?>(null) }
+            val sequel = remember { state.story.sequelTitle() }
+            // several at once; the type filter is loose (phones label .md and .json oddly): text is checked on reading
+            val picker = androidx.activity.compose.rememberLauncherForActivityResult(
+                androidx.activity.result.contract.ActivityResultContracts.OpenMultipleDocuments()) { uris ->
+                scope.launch {
+                    val problems = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) { uris.mapNotNull { state.story.attach(it) } }
+                    fileProblem = problems.joinToString("\n").ifEmpty { null }
+                    files = state.story.attachments()
+                }
+            }
             StoryStepContent(seed, { seed = it }, state.story.busy, state.story.error,
                 onCreate = { scope.launch { state.story.setup(seed); if (state.story.isSetUp()) go(3) } }, onBack = back,
-                language = state.locale.getDisplayLanguage(state.locale))
+                language = state.locale.getDisplayLanguage(state.locale),
+                files = files, onAddFiles = { picker.launch(arrayOf("text/*", "application/json", "application/octet-stream", "*/*")) },
+                onRemoveFile = { state.story.detach(it); files = state.story.attachments() }, fileProblem = fileProblem,
+                sequelOf = sequel)
         }
         else -> {
             // a new story keeps the style you picked before

@@ -48,6 +48,7 @@ Write the passage in the style of the style sample below (imitate how it is writ
 
 ## The world
 {{world}}
+{{lore}}
 
 ## Style sample (write like this)
 {{style_sample}}

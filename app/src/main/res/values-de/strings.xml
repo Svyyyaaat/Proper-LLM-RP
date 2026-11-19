@@ -280,4 +280,18 @@
     <string name="cc_testing">Wird getestet…</string>
     <string name="cc_answered">Claude Code hat geantwortet.</string>
     <string name="cc_empty_answer">Claude Code hat eine leere Antwort geliefert</string>
+    <string name="story_files_title">Deine Dateien (optional)</string>
+    <string name="story_files_about">Welt, Charakterbögen, Notizen, ein alter Chatverlauf: einfache Textdateien (.txt, .md, .json…). Die Welt wird daraus gebaut, und die Spielleitung behält sie die ganze Geschichte über im Kopf.</string>
+    <string name="story_files_add">Dateien hinzufügen</string>
+    <string name="story_files_remove">%1$s entfernen</string>
+    <string name="story_files_not_text">„%1$s“ ist keine Textdatei. Speichere sie als .txt oder .md und füge sie erneut hinzu.</string>
+    <string name="story_files_failed">„%1$s“ konnte nicht gelesen werden.</string>
+    <string name="story_sequel_note">Fortsetzung von „%1$s“: dieselbe Welt, dieselben Leute, und sie erinnern sich an alles. Etwas Zeit ist vergangen.</string>
+    <string name="story_sequel_seed_label">Wie geht es weiter? (optional)</string>
+    <string name="story_sequel_seed_hint">z. B. ein Jahr später; die Schuld ist bezahlt, aber…</string>
+    <string name="stories_new_choice">Fang neu an oder behalte ihre Welt und ihre Leute: Sie erinnern sich an alles.</string>
+    <string name="stories_fresh">Neu anfangen</string>
+    <string name="stories_keep_cast">Leute behalten</string>
+    <string name="stories_new_with_cast">Neue Geschichte mit ihren Leuten</string>
+    <string name="files_sources">Deine Dateien</string>
 </resources>

@@ -3,6 +3,7 @@ Create the starting material for a roleplaying game, as its game master. The pla
 {{plot}}
 
 {{seed}}
+{{material}}
 
 Write every text field in {{language}} (the JSON keys stay as they are).
 

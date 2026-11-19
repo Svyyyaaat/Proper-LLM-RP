@@ -283,4 +283,18 @@
     <string name="cc_testing">Test en cours…</string>
     <string name="cc_answered">Claude Code a répondu.</string>
     <string name="cc_empty_answer">Claude Code a renvoyé une réponse vide</string>
+    <string name="story_files_title">Vos fichiers (facultatif)</string>
+    <string name="story_files_about">Univers, fiches de personnage, notes, un ancien chat : de simples fichiers texte (.txt, .md, .json…). Le monde est construit à partir d\'eux, et le maître du jeu les garde en tête pendant toute l\'histoire.</string>
+    <string name="story_files_add">Ajouter des fichiers</string>
+    <string name="story_files_remove">Retirer %1$s</string>
+    <string name="story_files_not_text">« %1$s » n\'est pas un fichier texte. Enregistrez-le en .txt ou .md et ajoutez-le à nouveau.</string>
+    <string name="story_files_failed">Impossible de lire « %1$s ».</string>
+    <string name="story_sequel_note">Suite de « %1$s » : le même monde, les mêmes personnes, et elles se souviennent de tout. Un peu de temps a passé.</string>
+    <string name="story_sequel_seed_label">Et ensuite ? (facultatif)</string>
+    <string name="story_sequel_seed_hint">p. ex. un an plus tard ; la dette est payée, mais…</string>
+    <string name="stories_new_choice">Repartez de zéro ou gardez son monde et ses personnages : ils se souviennent de tout.</string>
+    <string name="stories_fresh">Repartir de zéro</string>
+    <string name="stories_keep_cast">Garder ses personnages</string>
+    <string name="stories_new_with_cast">Nouvelle histoire avec ses personnages</string>
+    <string name="files_sources">Vos fichiers</string>
 </resources>

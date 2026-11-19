@@ -151,4 +151,54 @@ class StoryEngineTest {
         assertTrue(ops.any { it.contains("chapter 2") }, ops.toString())
         assertTrue(File(e.dir, "state/chapters/1.md").exists())
     }
+
+    @Test
+    fun `the player's files go into the world's creation and stay with the writer`() {
+        val dir = Files.createTempDirectory("story").toFile()
+        val llm = fake()
+        com.properrp.core.story.Sources(dir).add("lore.md", "The town of Vell sits on salt flats. Its mayor is Ilse Brand.")
+        val e = StoryEngine(dir, llm, CostLog(File(dir, "costs.jsonl")), "s1", dice = Dice(Random(3)))
+        llm.queue("setup", setupJson)
+        e.setup()
+        val asked = llm.sent("setup").single().messages.single().text
+        assertTrue("Material from the player" in asked && "Ilse Brand" in asked, asked.takeLast(400))
+        e.startSession()
+        e.playerTurn(null)
+        assertTrue("Ilse Brand" in llm.sent("writer").last().system.first().text, "the writer keeps it (in the cached prompt)")
+        assertFalse(com.properrp.core.story.Sources.looksLikeText(byteArrayOf(0x25, 0x50, 0x44, 0x46, 0, 1, 2)))
+        assertTrue(com.properrp.core.story.Sources.looksLikeText("Привет, 世界".toByteArray()))
+    }
+
+    @Test
+    fun `a new story can carry the world, the cast and their memories over from an earlier one`() {
+        val llm = fake()
+        val e = engine(llm)
+        e.startSession()
+        e.playerTurn("I'll give you the key tomorrow.")
+        e.commit()
+        e.state.apply(com.properrp.core.story.StateOp.parse(
+            """{"ops":[{"op":"character","a":"Saeki","b":"Let the matter drop, still wary.","list":[],"n":0}]}"""))
+        File(e.dir, "state/title.txt").writeText("The Key\n")
+
+        val dir = Files.createTempDirectory("sequel").toFile()
+        val next = StoryEngine(dir, llm, CostLog(File(dir, "costs.jsonl")), "s2", dice = Dice(Random(3)))
+        llm.queue("summary", "Saeki was promised the key.")
+        llm.queue("offscreen", """{"ops":[]}""")
+        next.carryOver(e.dir, seed = "a year later, a flood")
+        assertTrue(next.isSetUp())
+        assertEquals(setOf("Saeki", "Kitamura"), next.state.characterNames().toSet())
+        assertTrue("still wary" in next.state.character("Saeki")!!, "the stance came along")
+        assertEquals(e.state.events().size, next.state.events().size, "everyone's memories came along")
+        assertEquals("The Key II", File(dir, "state/title.txt").readText().trim())
+        assertFalse(File(dir, "log/turns.jsonl").exists(), "a fresh log")
+        assertTrue(next.needsNewSession())
+
+        next.startSession()
+        assertEquals(1, llm.sent("offscreen").size, "time has passed: the world moves first")
+        assertTrue("a year later, a flood" in llm.sent("director").last().messages.single().text)
+        next.playerTurn(null)
+        val writer = llm.sent("writer").last()
+        assertTrue(writer.system.any { "Saeki was promised the key." in it.text }, "the earlier part is the story so far")
+        assertEquals(StoryEngine.BEGIN, writer.messages[writer.messages.size - 2].text)
+    }
 }

@@ -74,6 +74,17 @@
     <string name="story_seed_label">What should it be about? (optional)</string>
     <string name="story_seed_hint">e.g. a fishing town, a debt, a family business</string>
     <string name="story_create">Create the story</string>
+    <string name="story_files_title">Your files (optional)</string>
+    <string name="story_files_about">Lore, character sheets, notes, an old chat log: plain text files (.txt, .md, .json…). The world is built from them, and the game master keeps them in mind for the whole story.</string>
+    <string name="story_files_add">Add files</string>
+    <!-- a button's spoken label: "Remove lore.md" -->
+    <string name="story_files_remove">Remove %1$s</string>
+    <string name="story_files_not_text">“%1$s” isn\'t a text file. Save it as .txt or .md and add it again.</string>
+    <string name="story_files_failed">Couldn\'t read “%1$s”.</string>
+    <!-- %1$s is the earlier story's title -->
+    <string name="story_sequel_note">Continuing “%1$s”: the same world and people, and they remember what happened. Some time has passed.</string>
+    <string name="story_sequel_seed_label">What happens next? (optional)</string>
+    <string name="story_sequel_seed_hint">e.g. a year later; the debt is paid, but…</string>
     <string name="story_language_note">The story will be written in %1$s. You can change that in Settings, or just write in another language.</string>
 
     <string name="style_step_title">Pick the one you like reading</string>
@@ -178,6 +189,10 @@
     <string name="stories_new_q">Start a new story?</string>
     <!-- %1$s is the current story's title -->
     <string name="stories_new_keeps">“%1$s” stays here; you can pick it up again any time.</string>
+    <string name="stories_new_choice">Start fresh, or keep its world and people: they remember what happened.</string>
+    <string name="stories_fresh">Fresh start</string>
+    <string name="stories_keep_cast">Keep its people</string>
+    <string name="stories_new_with_cast">New story with its people</string>
     <string name="stories_earlier">Earlier stories</string>
     <string name="stories_many">Start as many stories as you like. Each one waits here where you left it.</string>
     <string name="stories_continue_q">Continue “%1$s”?</string>
@@ -268,6 +283,7 @@
     <string name="files_prompts">The game master\'s prompts</string>
     <string name="files_state">Story state</string>
     <string name="files_characters">Characters</string>
+    <string name="files_sources">Your files</string>
     <plurals name="files_characters_count">
         <item quantity="one">%1$,d character</item>
         <item quantity="other">%1$,d characters</item>

@@ -240,7 +240,57 @@ class StoryController(
     }
 
     suspend fun setup(seed: String): Unit? = work(R.string.busy_creating, again = { setup(seed) }) {
-        engine().setup(seed)
+        val from = sequelOf()
+        if (from != null) { engine().carryOver(from, seed); setSequelOf(null) } else engine().setup(seed)
+    }
+
+    // ------------------------------------------------------------------ files and sequels
+
+    /** Text files given to the story being created (lore, character sheets, notes). */
+    fun attachments(): List<String> = com.properrp.core.story.Sources(dir).all().map { it.name }
+
+    /** Adds the file at [uri]; null when it worked, else what to tell the player. Blocking: call off the main thread. */
+    fun attach(uri: android.net.Uri): String? {
+        val r = context.contentResolver
+        val name = runCatching {
+            r.query(uri, arrayOf(android.provider.OpenableColumns.DISPLAY_NAME), null, null, null)?.use { c -> if (c.moveToFirst()) c.getString(0) else null }
+        }.getOrNull() ?: uri.lastPathSegment?.substringAfterLast('/') ?: "notes.txt"
+        val bytes = runCatching { r.openInputStream(uri)?.use { input ->
+            // readNBytes is Android 13+: read up to the limit by hand
+            val out = java.io.ByteArrayOutputStream(); val buf = ByteArray(16_384)
+            while (out.size() < MAX_ATTACHMENT) { val n = input.read(buf, 0, minOf(buf.size, MAX_ATTACHMENT - out.size())); if (n < 0) break; out.write(buf, 0, n) }
+            out.toByteArray()
+        } }.getOrNull()
+            ?: return app.text(R.string.story_files_failed, name)
+        if (!com.properrp.core.story.Sources.looksLikeText(bytes)) return app.text(R.string.story_files_not_text, name)
+        com.properrp.core.story.Sources(dir).add(name, bytes.decodeToString().removePrefix("\uFEFF"))
+        return null
+    }
+
+    fun detach(name: String) = com.properrp.core.story.Sources(dir).remove(name)
+
+    private val prefs get() = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+
+    /** The earlier story the one being created continues (its world and people), kept until it's created. */
+    fun sequelOf(): File? = prefs.getString("sequelOf", null)?.let(::File)?.takeIf { File(it, "state/world.md").exists() }
+
+    private fun setSequelOf(d: File?) = prefs.edit().putString("sequelOf", d?.path).apply()
+
+    /** The title of the story being continued, for the setup screen. */
+    fun sequelTitle(): String? = sequelOf()?.let { summary(it, false)?.title }
+
+    /**
+     * A new story: the current one is kept on the shelf. With [from], the new one carries over that story's world,
+     * people and memories (the current story, or one on the shelf); without, it starts fresh.
+     */
+    fun startNewStory(from: StorySummary?): Boolean {
+        val archived = archiveAndReset() ?: return false
+        setSequelOf(when {
+            from == null -> null
+            from.current -> archived
+            else -> from.dir
+        })
+        return true
     }
 
     private val styleCache = File(dir, "state/style_options.json")
@@ -434,6 +484,9 @@ class StoryController(
     companion object {
         /** What's about you, not a story: follows you to a new or another story. */
         val USER_FILES = listOf("log/costs.jsonl")
+
+        /** The most of one file that's read (bigger files are cut when kept anyway). */
+        const val MAX_ATTACHMENT = 400_000
 
         /** The progress line while each model call runs. */
         val STEP_LABELS = mapOf(
