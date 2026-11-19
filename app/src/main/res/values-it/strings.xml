@@ -61,9 +61,9 @@
     <string name="key_dialog_title">Chiave API di Claude</string>
 
     <string name="story_title">La tua storia</string>
-    <string name="story_body">Descrivi un luogo e una situazione, o tocca un'idea qui sotto. Lascia vuoto e avrai una sorpresa.</string>
+    <string name="story_body">Descrivi un luogo e una situazione, o tocca un\'idea qui sotto. Lascia vuoto e avrai una sorpresa.</string>
     <string name="story_seed_label">Di cosa parla? (facoltativo)</string>
-    <string name="story_seed_hint">es. un paese di pescatori, un debito, un'attività di famiglia</string>
+    <string name="story_seed_hint">es. un paese di pescatori, un debito, un\'attività di famiglia</string>
     <string name="story_create">Crea la storia</string>
     <string name="story_files_title">Materiale tuo (facoltativo)</string>
     <string name="story_files_about">Ambientazione, schede dei personaggi, una vecchia chat: file di testo (.txt, .md, .json). Il mondo nasce da lì.</string>
@@ -71,10 +71,10 @@
     <string name="story_files_remove">Rimuovi %1$s</string>
     <string name="story_files_not_text">«%1$s» non è un file di testo. Salvalo come .txt o .md e aggiungilo di nuovo.</string>
     <string name="story_files_failed">Impossibile leggere «%1$s».</string>
-    <string name="story_sequel_note">Seguito di «%1$s»: stesso mondo, stesse persone, e si ricordano cos'è successo. Nel frattempo è passato del tempo.</string>
+    <string name="story_sequel_note">Seguito di «%1$s»: stesso mondo, stesse persone, e si ricordano cos\'è successo. Nel frattempo è passato del tempo.</string>
     <string name="story_sequel_seed_label">Cosa succede dopo? (facoltativo)</string>
     <string name="story_sequel_seed_hint">es. un anno dopo; il debito è saldato, ma…</string>
-    <string name="story_language_note">La storia sarà scritta in %1$s. Puoi cambiarlo nelle Impostazioni, o semplicemente scrivere in un'altra lingua.</string>
+    <string name="story_language_note">La storia sarà scritta in %1$s. Puoi cambiarlo nelle Impostazioni, o semplicemente scrivere in un\'altra lingua.</string>
 
     <string name="style_step_title">Quale ti piace leggere?</string>
     <string name="style_step_body">La stessa scena in stili diversi. La tua scelta dà la voce alla storia; puoi cambiarla quando vuoi dalla schermata principale.</string>
@@ -94,14 +94,14 @@
     <string name="home_style_none">scegline uno</string>
     <string name="home_more">Altro</string>
     <string name="home_costs">Spese</string>
-    <string name="home_costs_subscription">con l'abbonamento</string>
+    <string name="home_costs_subscription">con l\'abbonamento</string>
     <string name="home_files">File</string>
     <string name="home_files_about">prompt, mondo, personaggi</string>
     <string name="home_settings_about">lingua, aspetto, Claude</string>
 
     <!-- the story -->
     <string name="you_are">Il tuo personaggio</string>
-    <string name="reply_hint">Di' o fai qualcosa…</string>
+    <string name="reply_hint">Di\' o fai qualcosa…</string>
     <string name="reply_waiting">Scrittura del brano successivo…</string>
     <string name="go_on">Prosegui</string>
     <string name="send">Invia</string>
@@ -119,7 +119,7 @@
     <string name="note_complication">Complicazione: %1$s</string>
     <string name="note_rewritten">Riscritto una volta dopo i controlli</string>
     <string name="edit_title">Modifica il brano</string>
-    <string name="tts_no_voice">Sul telefono non c'è una voce per questa lingua. Installane una in Impostazioni → Sintesi vocale (il motore di Google ne ha di più).</string>
+    <string name="tts_no_voice">Sul telefono non c\'è una voce per questa lingua. Installane una in Impostazioni → Sintesi vocale (il motore di Google ne ha di più).</string>
     <string name="tts_unavailable">La sintesi vocale non è disponibile su questo telefono.</string>
 
     <string name="info_title">La storia finora</string>
@@ -139,8 +139,8 @@
     <string name="busy_checking">Controllo…</string>
     <string name="busy_creating">Creazione della storia…</string>
     <string name="busy_opening_stories">Apertura delle tue storie…</string>
-    <string name="step_adjudicator">Cosa c'è in gioco…</string>
-    <string name="step_offscreen">Il mondo è andato avanti mentre non c'eri…</string>
+    <string name="step_adjudicator">Cosa c\'è in gioco…</string>
+    <string name="step_offscreen">Il mondo è andato avanti mentre non c\'eri…</string>
     <string name="step_director">Si preparano le prossime scene…</string>
     <string name="step_intent">Ognuno decide cosa fare…</string>
     <string name="step_writer">Scrittura…</string>
@@ -160,7 +160,7 @@
     <string name="err_timeout">La connessione è scaduta. Con poco segnale succede; riprova.</string>
     <string name="err_tls">La connessione sicura con Claude non è riuscita. Può dipendere da una VPN, dalla pagina di accesso di un Wi-Fi o da un DNS filtrato.</string>
     <string name="err_bad_key">Claude ha rifiutato la chiave API. Incollane una nuova in Impostazioni → Claude.</string>
-    <string name="err_forbidden">Claude ha rifiutato la richiesta (403): forse la chiave non ha accesso, oppure l'API non è disponibile da questa rete.</string>
+    <string name="err_forbidden">Claude ha rifiutato la richiesta (403): forse la chiave non ha accesso, oppure l\'API non è disponibile da questa rete.</string>
     <string name="err_no_credit">Il credito del tuo account Anthropic è finito. Ricaricalo nella Anthropic Console, poi riprova.</string>
     <string name="err_rate_limited">Troppe richieste insieme. Aspetta un minuto e riprova.</string>
     <string name="err_overloaded">Claude è sovraccarico in questo momento. Riprova tra un minuto.</string>
@@ -173,13 +173,13 @@
     <!-- stories -->
     <string name="stories_writing">Si sta scrivendo un brano. Potrai cambiare storia quando sarà pronto.</string>
     <string name="stories_switch_busy">Un brano è ancora in scrittura. Cambia storia quando è pronto.</string>
-    <string name="stories_switch_failed">Impossibile aprire quella storia. È ancora nell'elenco; riprova.</string>
+    <string name="stories_switch_failed">Impossibile aprire quella storia. È ancora nell\'elenco; riprova.</string>
     <string name="stories_none">Ancora nessuna storia.</string>
     <string name="stories_start">Inizia una storia</string>
     <string name="stories_new">Nuova storia</string>
     <string name="stories_new_q">Iniziare una nuova storia?</string>
     <string name="stories_new_keeps">«%1$s» resta qui; puoi riprenderla quando vuoi.</string>
-    <string name="stories_new_choice">Ricomincia da zero, o tieni il suo mondo e i suoi personaggi: si ricordano cos'è successo.</string>
+    <string name="stories_new_choice">Ricomincia da zero, o tieni il suo mondo e i suoi personaggi: si ricordano cos\'è successo.</string>
     <string name="stories_fresh">Da zero</string>
     <string name="stories_keep_cast">Tieni i personaggi</string>
     <string name="stories_new_with_cast">Nuova storia con gli stessi personaggi</string>
@@ -190,9 +190,9 @@
     <string name="stories_export_failed">Impossibile salvare il backup.</string>
     <string name="stories_import_failed">Quel file non è il backup di una storia, oppure non si riesce a leggerlo.</string>
     <string name="stories_earlier">Storie precedenti</string>
-    <string name="stories_many">Inizia tutte le storie che vuoi. Ognuna ti aspetta qui, dove l'hai lasciata.</string>
+    <string name="stories_many">Inizia tutte le storie che vuoi. Ognuna ti aspetta qui, dove l\'hai lasciata.</string>
     <string name="stories_continue_q">Riprendere «%1$s»?</string>
-    <string name="stories_continue_where">Si apre dove l'hai lasciata.</string>
+    <string name="stories_continue_where">Si apre dove l\'hai lasciata.</string>
     <string name="stories_stays">«%1$s» resta qui.</string>
     <string name="stories_continue_it">Riprendi</string>
     <string name="played_today">Oggi</string>
@@ -211,11 +211,11 @@
     <string name="style_write_four">Scrivi quattro nuovi stili (nella tua lingua)</string>
     <string name="style_write_more">Altri quattro</string>
     <string name="style_in_use">In uso</string>
-    <string name="style_read_whole">Leggi tutto l'esempio</string>
+    <string name="style_read_whole">Leggi tutto l\'esempio</string>
     <string name="style_use">Usa questo stile</string>
     <string name="style_not_picked">Non ancora scelto</string>
     <string name="preset_dialogue">Quasi solo dialoghi</string>
-    <string name="preset_dialogue_about">Si parla e si parla; tra una battuta e l'altra, una riga d'azione.</string>
+    <string name="preset_dialogue_about">Si parla e si parla; tra una battuta e l\'altra, una riga d\'azione.</string>
     <string name="preset_wry">Leggero e ironico</string>
     <string name="preset_wry_about">Tanti dialoghi e un narratore chiacchierone a cui piace scherzare.</string>
     <string name="preset_storybook">Racconto semplice</string>
@@ -233,7 +233,7 @@
     <string name="settings_colours">Colori</string>
     <string name="colours_wallpaper">Come lo sfondo</string>
     <string name="colours_about">I colori seguono lo sfondo (Android 12 e successivi).</string>
-    <string name="colours_about_old">I colori dello sfondo richiedono Android 12; si usano i colori dell'app.</string>
+    <string name="colours_about_old">I colori dello sfondo richiedono Android 12; si usano i colori dell\'app.</string>
     <string name="settings_text_size">Dimensione del testo</string>
     <string name="size_small">Piccolo</string>
     <string name="size_normal">Normale</string>
@@ -257,16 +257,16 @@
     <string name="settings_setup_again_about">I passi del primo avvio</string>
 
     <!-- costs and files -->
-    <string name="costs_cc">Con Claude Code non si paga a chiamata; qui vedi quanto costerebbero le stesse chiamate con l'API.</string>
-    <string name="costs_in_all">in tutto · %1$s da quando hai aperto l'app</string>
+    <string name="costs_cc">Con Claude Code non si paga a chiamata; qui vedi quanto costerebbero le stesse chiamate con l\'API.</string>
+    <string name="costs_in_all">in tutto · %1$s da quando hai aperto l\'app</string>
     <string name="costs_none">Ancora nessuna spesa.</string>
-    <string name="costs_by_job">Per voce (da quando hai aperto l'app)</string>
+    <string name="costs_by_job">Per voce (da quando hai aperto l\'app)</string>
     <string name="purpose_writer">Scrittura</string>
     <string name="purpose_rewrite">Correzioni</string>
     <string name="purpose_judge">Controlli</string>
     <string name="purpose_scribe">Appunti del master</string>
     <string name="purpose_intent">Scelte dei personaggi</string>
-    <string name="purpose_adjudicator">Cosa c'è in gioco</string>
+    <string name="purpose_adjudicator">Cosa c\'è in gioco</string>
     <string name="purpose_director">Pianificazione</string>
     <string name="purpose_offscreen">Il mondo che si muove</string>
     <string name="purpose_summary">Riassunti dei capitoli</string>
@@ -284,16 +284,16 @@
     <string name="cc_intro">Usa il tuo abbonamento Claude tramite Claude Code in Termux, al posto di una chiave API. Le chiamate partono più lentamente; nessun costo a turno.</string>
     <string name="cc_step_install">Installa Termux (versione F-Droid o GitHub) e aprilo una volta</string>
     <string name="cc_get">Scarica</string>
-    <string name="cc_step_folder">Dai all'app la cartella home di Termux (nel selettore: ☰ → Termux → Usa questa cartella)</string>
+    <string name="cc_step_folder">Dai all\'app la cartella home di Termux (nel selettore: ☰ → Termux → Usa questa cartella)</string>
     <string name="cc_pick">Scegli</string>
     <string name="cc_step_scripts">Installa gli script, incolla il comando copiato in Termux, poi esegui lì `claude` una volta per accedere</string>
     <string name="cc_install">Installa</string>
     <string name="cc_again">Di nuovo</string>
     <string name="cc_write_failed">Impossibile scrivere in Termux: %1$s</string>
     <string name="cc_copied">Copiato. In Termux: tieni premuto → Paste, poi Invio</string>
-    <string name="cc_step_allow">Consenti all'app di eseguire comandi in Termux</string>
+    <string name="cc_step_allow">Consenti all\'app di eseguire comandi in Termux</string>
     <string name="cc_allow">Consenti</string>
-    <string name="cc_step_battery">Facoltativo: disattiva l'ottimizzazione della batteria per Termux, così Android non lo ferma a metà turno</string>
+    <string name="cc_step_battery">Facoltativo: disattiva l\'ottimizzazione della batteria per Termux, così Android non lo ferma a metà turno</string>
     <string name="cc_open">Apri</string>
     <string name="cc_step_test">Prova una chiamata (la prima può richiedere un minuto)</string>
     <string name="cc_test">Prova</string>
@@ -307,20 +307,20 @@
     <string name="roll_cost">Successo, ma a un prezzo</string>
     <string name="roll_failure">Fallimento</string>
     <string name="creating_title">Creazione della storia</string>
-    <string name="creating_about">La prima volta ci vuole un minuto o due: il luogo, le persone e i loro segreti, poi la scena d'apertura. Puoi uscire dall'app: il lavoro continua.</string>
+    <string name="creating_about">La prima volta ci vuole un minuto o due: il luogo, le persone e i loro segreti, poi la scena d\'apertura. Puoi uscire dall\'app: il lavoro continua.</string>
     <string name="key_looks_wrong">Le chiavi Anthropic iniziano con sk-ant-</string>
     <string name="key_get">Apri console.anthropic.com</string>
     <string name="story_create_surprise">Sorprendimi</string>
     <string name="story_title_sequel">Cosa succede dopo</string>
-    <string name="seed_1">Una città di porto dove l'acqua costa più del vino</string>
+    <string name="seed_1">Una città di porto dove l\'acqua costa più del vino</string>
     <string name="seed_2">Turno di notte in un hotel da cui nessuno riparte</string>
     <string name="seed_3">Contrabbandieri su una stazione spaziale agonizzante</string>
     <string name="seed_4">Una fattoria di famiglia, un debito e uno sconosciuto che vuole comprarla</string>
-    <string name="seed_5">L'ultima locanda prima del passo, in pieno inverno</string>
+    <string name="seed_5">L\'ultima locanda prima del passo, in pieno inverno</string>
     <string name="done">Fatto</string>
     <string name="files_undo">Annulla le mie modifiche</string>
     <string name="files_autosave">Le modifiche si salvano mentre scrivi e valgono dal turno successivo.</string>
-    <string name="colours_app">Quelli dell'app</string>
+    <string name="colours_app">Quelli dell\'app</string>
     <string name="key_step1">Accedi a console.anthropic.com</string>
     <string name="key_step2">Aggiungi credito in Billing: con 5 $ ci passi molte serate</string>
     <string name="key_step3">Crea una chiave in API keys e incollala qui</string>
