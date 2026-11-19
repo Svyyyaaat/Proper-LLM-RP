@@ -102,7 +102,8 @@ Android 8.0's Java library when `platforms;android-26` is installed; Robolectric
 Claude SDK against a local stand-in server). `./gradlew :app:recordPaparazziDebug` renders the screens, in
 several languages, to `app/src/test/snapshots/images/`.
 
-**Desktop (JVM 17+):**
+**Desktop (JVM 17+):** (in a UTF-8 locale, e.g. `export LC_ALL=C.UTF-8`, or Java reads non-Latin arguments such as a
+Russian `--seed` as question marks; `--claude-code yes` runs on your Claude subscription through `claude -p` instead of a key)
 ```
 ./gradlew :cli:installDist
 ANTHROPIC_API_KEY=... cli/build/install/cli/bin/cli play --dir local/mystory --language Russian --seed "a lighthouse, a debt"
