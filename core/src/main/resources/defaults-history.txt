@@ -24,6 +24,7 @@ prompts/scribe.md	537c0afde70b191e
 prompts/scribe.md	7e794e0910169a0a
 prompts/setup.md	41e21cdc73aa7a04
 prompts/setup.md	e382ab35f14b297c
+prompts/setup.md	f87a2a38b508d5e2
 prompts/setup.md	fb5b0b786a4d6c1b
 prompts/style_picker.md	d71c00757746e600
 prompts/summary.md	bb572b8e87be0483

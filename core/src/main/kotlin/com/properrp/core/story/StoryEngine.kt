@@ -271,7 +271,9 @@ class StoryEngine(
             call("setup", Models.WRITER, Prompts.fill(prompts.prompt("setup"), mapOf(
                 "plot" to prompts.config("plot.md"), "language" to settings.language,
                 "material" to Sources(dir).material(MATERIAL_SETUP).let { m -> if (m.isEmpty()) "" else
-                    "\n## Material from the player\n" + MATERIAL_RULES + "\n\n$m\n" }, "seed" to if (seed.isBlank()) "" else "Seed from the player: $seed",
+                    "\n## Material from the player\n" + MATERIAL_RULES + "\n\n$m\n" }, "seed" to if (seed.isBlank()) "" else
+                    "\n## What the player asked for\n$seed\n\nThis is the premise: the story is set where it says and is about what it says, " +
+                        "and if it says who the player plays, that is the player's character. Everything below serves it.\n",
             )), listOf(Msg(Role.USER, "Create the game now, with every field filled in.")), schema = SETUP_SCHEMA, maxTokens = 16000)
         }
         val stateDir = File(dir, "state").apply { mkdirs() }

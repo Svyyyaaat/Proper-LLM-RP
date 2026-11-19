@@ -1,13 +1,12 @@
-Create the starting material for a roleplaying game, as its game master. The player's taste in stories:
+Create the starting material for a roleplaying game, as its game master.
+{{seed}}{{material}}
+The player's taste in stories (how it should feel, whatever it's about):
 
 {{plot}}
 
-{{seed}}
-{{material}}
-
 Write every text field in {{language}} (the JSON keys stay as they are).
 
-Make a small, grounded world: one town or neighbourhood, present day unless the seed says otherwise, adults with work, money and history. The player's character is someone with a stake in it and something to lose (describe them only by situation, never by personality or feelings: the player plays them).
+Where the player said nothing, make a small, grounded world: one place, a handful of people with work, money and history, in the time and genre the premise implies (present day if it implies none). The player's character is someone with a stake in it and something to lose (describe them only by situation, never by personality or feelings: the player plays them).
 
 Return JSON:
 - `title`: a short title for the story (2–6 words), the kind on a book spine.
