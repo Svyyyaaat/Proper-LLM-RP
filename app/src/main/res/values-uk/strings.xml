@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ukrainian translation of values/strings.xml -->
+<resources>
+    <!-- screens -->
+    <string name="screen_story">Історія</string>
+    <string name="screen_costs">Витрати</string>
+    <string name="screen_files">Промпти й файли історії</string>
+    <string name="screen_settings">Налаштування</string>
+    <string name="screen_stories">Ваші історії</string>
+    <string name="screen_style">Стиль тексту</string>
+
+    <!-- shared -->
+    <string name="back">Назад</string>
+    <string name="save">Зберегти</string>
+    <string name="cancel">Скасувати</string>
+    <string name="change">Змінити</string>
+    <string name="add">Додати</string>
+    <string name="replace">Замінити</string>
+    <string name="next">Далі</string>
+    <string name="begin">Почати</string>
+    <string name="continue_story">Продовжити</string>
+    <string name="try_again">Повторити</string>
+    <string name="details">Докладніше</string>
+    <string name="hide_details">Сховати подробиці</string>
+    <string name="untitled">Історія без назви</string>
+    <string name="not_started">Ще не розпочата</string>
+    <string name="step_of">Крок %1$d з %2$d</string>
+    <string name="progress">Розділ %1$d, хід %2$d</string>
+    <string name="progress_in_place">Розділ %1$d, хід %2$d · %3$s</string>
+    <string name="busy_opening_app">Відкриваємо…</string>
+
+    <!-- language -->
+    <string name="settings_language">Мова</string>
+    <string name="settings_language_about">Застосунок та історія — цією мовою. Напишіть в історію іншою мовою, і вона відповість нею ж.</string>
+    <string name="language_system_named">Системна (%1$s)</string>
+    <string name="language_dialog_about">«Системна» — це мова телефона. Хоч що ви оберете, історія відповідає тією мовою, якою ви пишете.</string>
+    <string name="language_button">Мова: %1$s</string>
+
+    <!-- welcome and setup -->
+    <string name="welcome_tagline">Історія, де все чесно.</string>
+    <string name="welcome_body">Рольова історія зі справжнім майстром гри: ви граєте за одного персонажа, а Claude веде світ і всіх, хто в ньому живе.</string>
+    <string name="welcome_f1_title">Живий світ</string>
+    <string name="welcome_f1_body">Люди з власними цілями й таємницями, а події тривають, поки вас немає.</string>
+    <string name="welcome_f2_title">Вирішують кубики, а не оповідач</string>
+    <string name="welcome_f2_body">Ризиковані дії вирішує кидок. Невдача має справжню ціну.</string>
+    <string name="welcome_f3_title">Будь-яка мова</string>
+    <string name="welcome_f3_body">Пишіть будь-якою мовою — історія відповість нею ж.</string>
+    <string name="welcome_start">Почати</string>
+
+    <string name="key_title">Під\'єднайте Claude</string>
+    <string name="key_body_api">Історію пише Claude. Оплата з вашого облікового запису Anthropic: кілька центів за уривок.</string>
+    <string name="key_body_cc">Claude пише історію за вашою підпискою Claude через застосунок Claude Code у Termux.</string>
+    <string name="backend_api">Ключ API</string>
+    <string name="backend_cc">Claude Code</string>
+    <string name="key_save">Зберегти ключ</string>
+    <string name="key_cc_unlocks">Кнопка «Далі» стане доступною, коли тестовий виклик спрацює.</string>
+    <string name="key_stored">Зберігається лише на цьому телефоні, зашифрований ключем з Android Keystore. Вартість кожного виклику записується.</string>
+    <string name="key_saved">Збережено на цьому телефоні в зашифрованому вигляді: %1$s</string>
+    <string name="key_none">Ключа ще немає</string>
+    <string name="key_dialog_title">Ключ API Claude</string>
+
+    <string name="story_title">Ваша історія</string>
+    <string name="story_body">Місце, кілька людей із власними цілями й таємницями та біда, яка не чекає, поки вас немає.</string>
+    <string name="story_seed_label">Про що вона буде? (необов\'язково)</string>
+    <string name="story_seed_hint">наприклад, рибальське містечко, борг, сімейна справа</string>
+    <string name="story_create">Створити історію</string>
+    <string name="story_language_note">Мова історії: %1$s. Її можна змінити в налаштуваннях або просто писати іншою мовою.</string>
+
+    <string name="style_step_title">Оберіть те, що вам приємно читати</string>
+    <string name="style_step_body">Одна сцена в різних стилях. Ваш вибір задає голос історії; змінити його можна будь-коли на головному екрані.</string>
+    <string name="style_this_one">Цей</string>
+    <string name="style_four_more">Ще чотири (вашою мовою)</string>
+
+    <!-- home -->
+    <string name="home_your_story">Ваша історія</string>
+    <string name="home_stories">Історії</string>
+    <string name="home_stories_none">нова або попередня</string>
+    <plurals name="home_stories_count">
+        <item quantity="one">%1$d на цьому телефоні</item>
+        <item quantity="few">%1$d на цьому телефоні</item>
+        <item quantity="many">%1$d на цьому телефоні</item>
+        <item quantity="other">%1$d на цьому телефоні</item>
+    </plurals>
+    <string name="home_style">Стиль</string>
+    <string name="home_style_none">оберіть</string>
+    <string name="home_more">Ще</string>
+    <string name="home_costs">Витрати</string>
+    <string name="home_costs_subscription">за підпискою</string>
+    <string name="home_files">Файли</string>
+    <string name="home_files_about">промпти, світ, персонажі</string>
+    <string name="home_settings_about">мова, вигляд, Claude</string>
+
+    <!-- the story -->
+    <string name="you_are">Ваш персонаж</string>
+    <string name="reply_hint">Скажіть або зробіть щось…</string>
+    <string name="reply_waiting">Пишемо наступний уривок…</string>
+    <string name="go_on">Далі</string>
+    <string name="send">Надіслати</string>
+    <string name="tool_listen">Слухати</string>
+    <string name="tool_stop">Стоп</string>
+    <string name="tool_rewrite">Переписати</string>
+    <string name="tool_edit">Змінити</string>
+    <string name="tool_behind">За кадром</string>
+    <string name="version_previous">Попередня версія</string>
+    <string name="version_next">Наступна версія</string>
+    <string name="version_of">Версія %1$d з %2$d</string>
+    <string name="behind_title">За кадром: кубики, плани й перевірки</string>
+    <string name="behind_nothing">Ні кидка, ні ускладнень; перевірки нічого не знайшли.</string>
+    <string name="note_roll">Кидок: %1$s</string>
+    <string name="note_complication">Ускладнення: %1$s</string>
+    <string name="note_rewritten">Один раз переписано після перевірки</string>
+    <string name="edit_title">Змінити уривок</string>
+    <string name="tts_no_voice">На телефоні немає голосу для цієї мови. Установіть його в розділі «Налаштування → Синтез мовлення» (найбільше голосів у рушія Google).</string>
+    <string name="tts_unavailable">Синтез мовлення на цьому телефоні недоступний.</string>
+
+    <string name="info_title">Що було досі</string>
+    <string name="info_you">Ви</string>
+    <string name="info_remember">Що ви пам\'ятаєте</string>
+    <string name="info_before_story">До початку історії: %1$s</string>
+    <string name="info_met">З ким ви знайомі</string>
+    <string name="info_spent">Claude: %1$s за цей сеанс, усього %2$s</string>
+    <string name="info_chapters">Розділи</string>
+    <string name="info_no_chapters">Розділ 1 ще пишеться. Коли він завершиться, тут з\'явиться підсумок.</string>
+    <string name="info_chapter">Розділ %1$d</string>
+
+    <!-- progress lines while Claude works -->
+    <string name="busy_opening">Відкриваємо історію…</string>
+    <string name="busy_sending">Надсилаємо…</string>
+    <string name="busy_rewriting">Переписуємо…</string>
+    <string name="busy_checking">Перевіряємо…</string>
+    <string name="busy_creating">Створюємо історію…</string>
+    <string name="busy_opening_stories">Відкриваємо ваші історії…</string>
+    <string name="step_adjudicator">Вирішуємо, що на кону…</string>
+    <string name="step_offscreen">Світ жив своїм життям, поки вас не було…</string>
+    <string name="step_director">Плануємо цей сеанс…</string>
+    <string name="step_intent">Вирішуємо, що роблять люди…</string>
+    <string name="step_writer">Пишемо…</string>
+    <string name="step_rewrite">Виправляємо уривок…</string>
+    <string name="step_judge">Перевіряємо уривок…</string>
+    <string name="step_scribe">Записуємо зміни…</string>
+    <string name="step_summary">Завершуємо розділ…</string>
+    <string name="step_setup">Будуємо світ…</string>
+    <string name="step_style_picker">Пишемо чотири стилі…</string>
+    <string name="notify_channel">Історія пишеться</string>
+    <string name="notify_channel_about">Показується, поки пишеться уривок, щоб він не обірвався, коли ви перемикаєте застосунки</string>
+
+    <!-- what went wrong -->
+    <string name="err_no_network">Не вдається зв\'язатися з Claude: телефон не зміг знайти api.anthropic.com. Перевірте з\'єднання з інтернетом (і чи дозволено застосунку мобільний інтернет), потім спробуйте ще раз.</string>
+    <string name="err_cut_off">З\'єднання обірвалося, поки Claude писав. Спробуйте ще раз.</string>
+    <string name="err_timeout">Час очікування з\'єднання вичерпано. За слабкого сигналу таке буває; спробуйте ще раз.</string>
+    <string name="err_tls">Не вдалося встановити захищене з\'єднання з Claude. Причиною може бути VPN, сторінка входу в мережу Wi-Fi або DNS із фільтрацією.</string>
+    <string name="err_bad_key">Claude відхилив ключ API. Вставте новий у розділі «Налаштування → Claude».</string>
+    <string name="err_forbidden">Claude відхилив запит (403): можливо, ключ не має доступу або API недоступний із цієї мережі.</string>
+    <string name="err_no_credit">На обліковому записі Anthropic закінчилися кошти. Поповніть баланс в Anthropic Console, потім спробуйте ще раз.</string>
+    <string name="err_rate_limited">Забагато запитів одночасно. Зачекайте хвилину й спробуйте ще раз.</string>
+    <string name="err_overloaded">Claude зараз перевантажений. Спробуйте ще раз за хвилину.</string>
+    <string name="err_server">На сервері Claude сталася помилка. Спробуйте ще раз.</string>
+    <string name="err_declined">Модель відмовилася писати цей уривок. Спробуйте ще раз або перепишіть його.</string>
+    <string name="err_unusable">Відповідь Claude тричі виявилася непридатною. Спробуйте ще раз.</string>
+    <string name="err_no_key">Спершу додайте ключ API Claude («Налаштування → Claude»).</string>
+    <string name="err_other">Щось пішло не так.</string>
+
+    <!-- stories -->
+    <string name="stories_writing">Зараз пишеться уривок. Перемкнутися на іншу історію можна, коли він буде готовий.</string>
+    <string name="stories_switch_busy">Уривок ще пишеться. Перемкніться, коли він буде готовий.</string>
+    <string name="stories_switch_failed">Не вдалося відкрити цю історію. Вона лишилася в списку; спробуйте ще раз.</string>
+    <string name="stories_none">Історій ще немає.</string>
+    <string name="stories_start">Почати історію</string>
+    <string name="stories_new">Почати нову історію</string>
+    <string name="stories_new_q">Почати нову історію?</string>
+    <string name="stories_new_keeps">«%1$s» залишиться тут — до неї можна повернутися будь-коли.</string>
+    <string name="stories_earlier">Попередні історії</string>
+    <string name="stories_many">Починайте скільки завгодно історій. Кожна чекатиме тут на тому місці, де ви зупинилися.</string>
+    <string name="stories_continue_q">Продовжити «%1$s»?</string>
+    <string name="stories_continue_where">Вона відкриється там, де ви зупинилися.</string>
+    <string name="stories_stays">«%1$s» залишиться тут.</string>
+    <string name="stories_continue_it">Продовжити</string>
+    <string name="played_today">Грали сьогодні</string>
+    <string name="played_yesterday">Грали вчора</string>
+    <plurals name="played_days_ago">
+        <item quantity="one">Грали %1$d день тому</item>
+        <item quantity="few">Грали %1$d дні тому</item>
+        <item quantity="many">Грали %1$d днів тому</item>
+        <item quantity="other">Грали %1$d дня тому</item>
+    </plurals>
+    <string name="played_on">Грали %1$s</string>
+
+    <!-- writing style -->
+    <string name="style_screen_about">Та сама сцена в кожному стилі. Зразки показують манеру; сама історія пишеться вашою мовою. Вибір застосується з наступного уривка.</string>
+    <string name="style_current">Ваш поточний стиль</string>
+    <string name="style_other">Інші стилі</string>
+    <string name="style_write_four">Написати чотири нові стилі (вашою мовою)</string>
+    <string name="style_write_more">Написати ще чотири</string>
+    <string name="style_in_use">Використовується</string>
+    <string name="style_read_whole">Прочитати зразок повністю</string>
+    <string name="style_use">Обрати цей стиль</string>
+    <string name="style_not_picked">Ще не обрано</string>
+    <string name="preset_dialogue">Майже самі діалоги</string>
+    <string name="preset_dialogue_about">Розмови, розмови, розмови; між ними — один короткий рядок дії.</string>
+    <string name="preset_wry">Легко й іронічно</string>
+    <string name="preset_wry_about">Багато діалогів і балакучий оповідач із жартами.</string>
+    <string name="preset_storybook">Просто, як у книжці</string>
+    <string name="preset_storybook_about">Проста, конкретна оповідь, як у книжці для підлітків.</string>
+    <string name="preset_hardboiled">Крутий детектив</string>
+    <string name="preset_hardboiled_about">Стисло, від першої особи, сухо й гостро.</string>
+
+    <!-- settings -->
+    <string name="settings_look">Вигляд і читання</string>
+    <string name="settings_theme">Тема</string>
+    <string name="theme_system">Системна</string>
+    <string name="theme_light">Світла</string>
+    <string name="theme_dark">Темна</string>
+    <string name="theme_about">«Системна» відповідає світлій чи темній темі телефона.</string>
+    <string name="settings_colours">Кольори</string>
+    <string name="colours_wallpaper">Зі шпалер</string>
+    <string name="colours_about">Кольори беруться з ваших шпалер (Material You).</string>
+    <string name="colours_about_old">Для кольорів зі шпалер потрібен Android 12; використовуються власні кольори застосунку.</string>
+    <string name="settings_text_size">Розмір тексту</string>
+    <string name="size_small">Малий</string>
+    <string name="size_normal">Звичайний</string>
+    <string name="size_large">Великий</string>
+    <string name="size_larger">Більший</string>
+    <string name="settings_sample_line">Вона ледве прочинила двері крамниці, як увійшов господар будинку.</string>
+    <string name="settings_story">Історія</string>
+    <string name="settings_length">Довжина уривка</string>
+    <string name="length_short">Короткий</string>
+    <string name="length_normal">Звичайний</string>
+    <string name="length_long">Довгий</string>
+    <string name="length_short_about">Більше діалогу: кілька рядків — і ваш хід.</string>
+    <string name="length_normal_about">По сцені за хід.</string>
+    <string name="length_long_about">Довші уривки: історія просувається далі за кожен хід.</string>
+    <string name="settings_firm">Суворіший стиль</string>
+    <string name="settings_firm_about">Claude отримує стиль у вигляді правил («ніколи…»), а не опису. Спробуйте, якщо уривки відходять від стилю.</string>
+    <string name="settings_claude">Claude</string>
+    <string name="settings_advanced">Додатково</string>
+    <string name="settings_files_about">Усі інструкції для Claude, доступні для редагування</string>
+    <string name="settings_setup_again">Пройти налаштування знову</string>
+    <string name="settings_setup_again_about">Покрокове налаштування під час першого запуску</string>
+
+    <!-- costs and files -->
+    <string name="costs_cc">З Claude Code за виклики нічого не списується; тут показано, скільки ті самі виклики коштували б через API.</string>
+    <string name="costs_in_all">усього · %1$s за цей сеанс</string>
+    <string name="costs_none">Ще нічого не витрачено.</string>
+    <string name="costs_by_job">Цей сеанс за завданнями</string>
+    <string name="purpose_writer">Написання тексту</string>
+    <string name="purpose_rewrite">Виправлення уривків</string>
+    <string name="purpose_judge">Перевірка уривків</string>
+    <string name="purpose_scribe">Ведення записів</string>
+    <string name="purpose_intent">Дії людей</string>
+    <string name="purpose_adjudicator">Що на кону</string>
+    <string name="purpose_director">Планування сеансів</string>
+    <string name="purpose_offscreen">Життя світу</string>
+    <string name="purpose_summary">Підсумки розділів</string>
+    <string name="purpose_setup">Створення історій</string>
+    <string name="purpose_style_picker">Зразки стилів</string>
+    <string name="files_about">Звичайні текстові файли. Змінюйте що завгодно: майстер гри читає їх щоходу.</string>
+    <string name="files_none">Поки порожньо: спершу створіть історію.</string>
+    <string name="files_config">Ваші смаки й стиль</string>
+    <string name="files_prompts">Промпти майстра гри</string>
+    <string name="files_state">Стан історії</string>
+    <string name="files_characters">Персонажі</string>
+    <plurals name="files_characters_count">
+        <item quantity="one">%1$,d персонаж</item>
+        <item quantity="few">%1$,d персонажі</item>
+        <item quantity="many">%1$,d персонажів</item>
+        <item quantity="other">%1$,d персонажа</item>
+    </plurals>
+
+    <!-- Claude Code in Termux -->
+    <string name="cc_intro">Використовує вашу підписку Claude через Claude Code у Termux замість ключа API. Виклики запускаються повільніше; за ходи нічого не списується.</string>
+    <string name="cc_step_install">Установіть Termux (збірку з F-Droid або GitHub) і відкрийте його один раз</string>
+    <string name="cc_get">Завантажити</string>
+    <string name="cc_step_folder">Надайте застосунку доступ до домашньої папки Termux (у вікні вибору: ☰ → Termux → Використовувати цю папку)</string>
+    <string name="cc_pick">Вибрати</string>
+    <string name="cc_step_scripts">Установіть скрипти, вставте скопійовану команду в Termux, потім один раз запустіть там `claude`, щоб увійти</string>
+    <string name="cc_install">Установити</string>
+    <string name="cc_again">Ще раз</string>
+    <string name="cc_write_failed">Не вдалося записати в Termux: %1$s</string>
+    <string name="cc_copied">Скопійовано. У Termux: довге натискання → Вставити, потім Enter</string>
+    <string name="cc_step_allow">Дозвольте застосунку виконувати команди в Termux</string>
+    <string name="cc_allow">Дозволити</string>
+    <string name="cc_step_battery">Необов\'язково: вимкніть оптимізацію батареї для Termux, щоб Android не зупинив його посеред ходу</string>
+    <string name="cc_open">Відкрити</string>
+    <string name="cc_step_test">Перевірте виклик (перший може тривати хвилину)</string>
+    <string name="cc_test">Перевірити</string>
+    <string name="cc_testing">Перевіряємо…</string>
+    <string name="cc_answered">Claude Code відповів.</string>
+    <string name="cc_empty_answer">Claude Code надіслав порожню відповідь</string>
+</resources>
