@@ -77,10 +77,13 @@ private fun play(o: Opts) {
     val script = o.named["--script"]?.let { File(it).readLines() }
     var step = 0
     var message: String? = null
+    var quiet = false
     while (true) {
         if (e.pending == null && e.needsNewSession()) e.startSession()
         val t = if (e.pending != null) e.resume() else e.playerTurn(message)
-        println("\n" + t.draft.passage + "\n")
+        // after /ideas the same passage is still waiting: not printed again
+        if (!quiet) println("\n" + t.draft.passage + "\n")
+        quiet = false
         t.draft.checks.filter { !it.passed }.forEach { System.err.println("  check ${it.name}: ${it.detail}") }
         System.err.println("($${"%.3f".format(costs.total("cli"))} this run)")
         print("> ")
@@ -88,7 +91,7 @@ private fun play(o: Opts) {
         when (line.trim()) {
             "/quit" -> return
             "/reroll" -> { e.reroll(); continue }
-            "/ideas" -> { e.ideas().forEach { println("  idea: $it") }; continue }
+            "/ideas" -> { e.ideas().forEach { println("  idea: $it") }; quiet = true; continue }
         }
         e.commit()
         message = line.ifBlank { null }
