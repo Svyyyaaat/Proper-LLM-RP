@@ -49,13 +49,15 @@ import com.properrp.core.story.StylePresets
 import org.junit.Rule
 import org.junit.Test
 
-/** Screens rendered from sample data: ./gradlew :app:recordPaparazziDebug → app/src/test/snapshots/images */
+/**
+ * Screens rendered from sample data: ./gradlew :app:recordPaparazziDebug → app/src/test/snapshots/images. In English only:
+ * Paparazzi's renderer ignores the locale (the translations are checked in StoryControllerTest).
+ */
 class Shots {
     @get:Rule val paparazzi = Paparazzi(deviceConfig = DeviceConfig.PIXEL_6, maxPercentDifference = 0.1)
 
-    private fun shot(dark: Boolean = false, locale: String? = null, content: @Composable () -> Unit) {
-        paparazzi.unsafeUpdateConfig(deviceConfig = DeviceConfig.PIXEL_6.copy(nightMode = if (dark) NightMode.NIGHT else NightMode.NOTNIGHT,
-            locale = locale))
+    private fun shot(dark: Boolean = false, content: @Composable () -> Unit) {
+        paparazzi.unsafeUpdateConfig(deviceConfig = DeviceConfig.PIXEL_6.copy(nightMode = if (dark) NightMode.NIGHT else NightMode.NOTNIGHT))
         paparazzi.snapshot {
             AppTheme(dark = dark) { androidx.compose.material3.Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) { content() } }
         }
@@ -64,15 +66,12 @@ class Shots {
     // ---------------------------------------------------------------- setup
 
     @Test fun a1_welcome() = shot { WelcomeContent("English", {}) {} }
-    @Test fun a1b_welcome_ru() = shot(locale = "ru") { WelcomeContent("Русский", {}) {} }
-    @Test fun a1c_welcome_ja() = shot(locale = "ja") { WelcomeContent("日本語", {}) {} }
 
     @Test fun a2_language_dialog() = shot { LanguageDialog("system", "English", {}) {} }
 
     @Test fun a3_key() = shot { KeyStepContent("sk-ant-api03-xxxx", {}, {}, {}) }
 
     @Test fun a4_story_setup() = shot { StoryStepContent("", {}, null, null, {}, {}, language = "English") }
-    @Test fun a4b_story_setup_de() = shot(locale = "de") { StoryStepContent("", {}, null, null, {}, {}, language = "Deutsch") }
 
     @Test fun a5_styles() = shot { StyleStepContent(StylePresets.ALL.take(2), null, null, {}, {}, {}) }
 
@@ -83,10 +82,6 @@ class Shots {
 
     @Test fun c1_home() = shot { HomeContent(home) {} }
     @Test fun c2_home_dark() = shot(dark = true) { HomeContent(home) {} }
-    @Test fun c3_home_ru() = shot(locale = "ru") {
-        HomeContent(home.copy(place = "контора у причала", lastLines = "Мураи закрыла сумку и ждала, не вставая.", title = "Хранитель колодца",
-            languageName = "Русский")) {}
-    }
 
     private fun summary(title: String, current: Boolean, turn: Int, style: String?) = StoryController.StorySummary(
         java.io.File(title), title, "the village square", 2, turn, System.currentTimeMillis() - 3 * 86_400_000L,
@@ -108,8 +103,8 @@ class Shots {
     private val passage = "Murai from the credit union looked as neat as ever, early as it was. She set a cloth bag on the desk and took out a thin folder.\n" +
         "\"The repayment plan you promised me last month. Can I have it today?\""
 
-    private fun storyShot(dark: Boolean, error: String? = null, versions: Int = 1, locale: String? = null,
-                          text: String = passage, player: String = "Could you give me a few more days?") = shot(dark, locale) {
+    private fun storyShot(dark: Boolean, error: String? = null, versions: Int = 1,
+                          text: String = passage, player: String = "Could you give me a few more days?") = shot(dark) {
         val p = ShownPassage(3, text, version = versions - 1, versions = versions)
         val prev = ShownPassage(2, "Eight in the morning. The office heating hadn't come on yet.")
         StoryContent("Nishida Works", history = listOf(ShownTurn(null, prev)),
@@ -127,8 +122,6 @@ class Shots {
     // the player writes in Spanish, so the story answers in Spanish (the interface stays in the app's language)
     @Test fun d1d_story_other_language() = storyShot(false, text = "Murai no levantó la vista de la carpeta.\n\"Unos días. ¿Cuántos, exactamente?\"",
         player = "¿Podría darme unos días más?")
-    @Test fun d1e_story_ru() = storyShot(false, locale = "ru", text = "Мураи не подняла глаз от папки.\n«Несколько дней. Сколько именно?»",
-        player = "Можно мне ещё несколько дней?")
 
     @Test fun d5_story_start() = shot {
         StoryContent("The well", history = emptyList(), current = ShownTurn(null, ShownPassage(0, passage)), busy = null, error = null,
@@ -155,12 +148,6 @@ class Shots {
     private val settings = SettingsValues(1f, PassageLength.NORMAL, false, "sk-ant-…a1b2", "Light and wry")
 
     @Test fun e1_settings() = shot { SettingsContent(settings, {}, {}, {}, {}) }
-    @Test fun e1b_settings_ru() = shot(locale = "ru") {
-        SettingsContent(settings.copy(language = "ru", languageName = "Русский", systemLanguageName = "English"), {}, {}, {}, {})
-    }
-    @Test fun e1c_settings_zh() = shot(locale = "zh-rCN") {
-        SettingsContent(settings.copy(language = "zh-CN", languageName = "简体中文", systemLanguageName = "English"), {}, {}, {}, {})
-    }
 
     @Test fun e2_costs() = shot {
         CostsContent(CostsData(1.42, 0.21, mapOf("writer" to 0.12, "intent" to 0.04, "scribe" to 0.03, "judge" to 0.01, "adjudicator" to 0.004)))

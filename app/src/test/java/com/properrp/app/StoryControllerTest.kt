@@ -244,6 +244,12 @@ class StoryControllerTest {
         app.chooseLanguage("ru")
         assertEquals("Russian", app.storyLanguage)
         assertTrue("the interface follows", app.text(R.string.begin) != "Begin")
+        // every translated language loads (the picker's list)
+        for ((tag, _) in Languages.ALL.drop(1)) {
+            app.chooseLanguage(tag)
+            assertTrue(tag, app.text(R.string.begin) != "Begin")
+        }
+        app.chooseLanguage("ru")
         c.setup("")
         assertTrue("Write every text field in Russian" in fake.sent("setup").last().messages.single().text)
         c.start()
