@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Japanese translation of values/strings.xml -->
+<resources>
+    <!-- screens -->
+    <string name="screen_story">ストーリー</string>
+    <string name="screen_costs">費用</string>
+    <string name="screen_files">プロンプトとストーリーファイル</string>
+    <string name="screen_settings">設定</string>
+    <string name="screen_stories">あなたのストーリー</string>
+    <string name="screen_style">文体</string>
+
+    <!-- shared -->
+    <string name="back">戻る</string>
+    <string name="save">保存</string>
+    <string name="cancel">キャンセル</string>
+    <string name="change">変更</string>
+    <string name="add">追加</string>
+    <string name="replace">置き換え</string>
+    <string name="next">次へ</string>
+    <string name="begin">始める</string>
+    <string name="continue_story">続ける</string>
+    <string name="try_again">再試行</string>
+    <string name="details">詳細</string>
+    <string name="hide_details">詳細を隠す</string>
+    <string name="untitled">無題のストーリー</string>
+    <string name="not_started">まだ始まっていません</string>
+    <string name="step_of">ステップ %1$d / %2$d</string>
+    <string name="progress">第%1$d章、%2$dターン目</string>
+    <string name="progress_in_place">第%1$d章、%2$dターン目 · %3$s</string>
+    <string name="busy_opening_app">起動中…</string>
+
+    <!-- language -->
+    <string name="settings_language">言語</string>
+    <string name="settings_language_about">アプリとストーリーはこの言語で表示されます。別の言語でストーリーに書き込むと、その言語で返ってきます。</string>
+    <string name="language_system_named">システム（%1$s）</string>
+    <string name="language_dialog_about">「システム」はスマートフォンの言語に従います。どれを選んでも、ストーリーはあなたが書いた言語で応えます。</string>
+    <string name="language_button">言語: %1$s</string>
+
+    <!-- welcome and setup -->
+    <string name="welcome_tagline">ごまかしのない物語。</string>
+    <string name="welcome_body">本格的なゲームマスターがつくロールプレイ・ストーリー。あなたは1人のキャラクターを演じ、Claudeが世界とそこに生きるすべての人々を動かします。</string>
+    <string name="welcome_f1_title">動き続ける世界</string>
+    <string name="welcome_f1_body">それぞれの目的と秘密を持つ人々。あなたがいない間にも、事態は進んでいきます。</string>
+    <string name="welcome_f2_title">決めるのは語り手ではなくダイス</string>
+    <string name="welcome_f2_body">危険な行動はダイスで判定。失敗すれば、本当に何かを失います。</string>
+    <string name="welcome_f3_title">どんな言語でも</string>
+    <string name="welcome_f3_body">好きな言語で書いてください。ストーリーはその言語で応えます。</string>
+    <string name="welcome_start">はじめる</string>
+
+    <string name="key_title">Claudeに接続</string>
+    <string name="key_body_api">ストーリーを書くのはClaudeです。料金はAnthropicアカウントから支払われ、文章1回につき数セント程度です。</string>
+    <string name="key_body_cc">Termux上のClaude Codeアプリを通じて、あなたのClaudeサブスクリプションでClaudeがストーリーを書きます。</string>
+    <string name="backend_api">APIキー</string>
+    <string name="backend_cc">Claude Code</string>
+    <string name="key_save">キーを保存</string>
+    <string name="key_cc_unlocks">テスト呼び出しが成功すると「次へ」が押せるようになります。</string>
+    <string name="key_stored">このスマートフォンにのみ保存され、Android Keystoreの鍵で暗号化されます。すべての呼び出しの費用が記録されます。</string>
+    <string name="key_saved">このスマートフォンに暗号化して保存済み: %1$s</string>
+    <string name="key_none">キーはまだありません</string>
+    <string name="key_dialog_title">Claude APIキー</string>
+
+    <string name="story_title">あなたのストーリー</string>
+    <string name="story_body">ひとつの舞台、それぞれの目的と秘密を持つ数人の人物、そしてあなたがいない間にも動いていく事件。</string>
+    <string name="story_seed_label">どんな話にしますか？（任意）</string>
+    <string name="story_seed_hint">例: 漁師町、借金、家業</string>
+    <string name="story_create">ストーリーを作成</string>
+    <string name="story_language_note">ストーリーは%1$sで書かれます。設定で変更できるほか、別の言語で書くだけでも切り替わります。</string>
+
+    <string name="style_step_title">読みたいものを選んでください</string>
+    <string name="style_step_body">同じ場面を異なる文体で書いています。選んだ文体がストーリーの語り口になります。ホーム画面からいつでも変更できます。</string>
+    <string name="style_this_one">これにする</string>
+    <string name="style_four_more">さらに4つ書く（あなたの言語で）</string>
+
+    <!-- home -->
+    <string name="home_your_story">あなたのストーリー</string>
+    <string name="home_stories">ストーリー</string>
+    <string name="home_stories_none">新規・過去のストーリー</string>
+    <plurals name="home_stories_count">
+        <item quantity="other">このスマートフォンに%1$d件</item>
+    </plurals>
+    <string name="home_style">文体</string>
+    <string name="home_style_none">選択してください</string>
+    <string name="home_more">その他</string>
+    <string name="home_costs">費用</string>
+    <string name="home_costs_subscription">サブスクリプション利用</string>
+    <string name="home_files">ファイル</string>
+    <string name="home_files_about">プロンプト、世界、登場人物</string>
+    <string name="home_settings_about">言語、表示、Claude</string>
+
+    <!-- the story -->
+    <string name="you_are">あなたの役</string>
+    <string name="reply_hint">セリフや行動を入力…</string>
+    <string name="reply_waiting">次の文章を執筆中…</string>
+    <string name="go_on">続きへ</string>
+    <string name="send">送信</string>
+    <string name="tool_listen">読み上げ</string>
+    <string name="tool_stop">停止</string>
+    <string name="tool_rewrite">書き直し</string>
+    <string name="tool_edit">編集</string>
+    <string name="tool_behind">舞台裏</string>
+    <string name="version_previous">前のバージョン</string>
+    <string name="version_next">次のバージョン</string>
+    <string name="version_of">バージョン %1$d / %2$d</string>
+    <string name="behind_title">文章の舞台裏：ダイス、計画、チェック</string>
+    <string name="behind_nothing">ダイス判定も波乱もなし。チェックでも問題は見つかりませんでした。</string>
+    <string name="note_roll">判定: %1$s</string>
+    <string name="note_complication">波乱: %1$s</string>
+    <string name="note_rewritten">チェックにより1回書き直されました</string>
+    <string name="edit_title">文章を編集</string>
+    <string name="tts_no_voice">このスマートフォンにはこの言語の音声がありません。設定 → テキスト読み上げ からインストールしてください（Googleのエンジンが最も多くの言語に対応しています）。</string>
+    <string name="tts_unavailable">このスマートフォンではテキスト読み上げを利用できません。</string>
+
+    <string name="info_title">これまでのあらすじ</string>
+    <string name="info_you">あなた</string>
+    <string name="info_remember">覚えていること</string>
+    <string name="info_before_story">物語以前: %1$s</string>
+    <string name="info_met">出会った人々</string>
+    <string name="info_spent">Claudeの利用額: 今回のセッション %1$s、合計 %2$s</string>
+    <string name="info_chapters">章</string>
+    <string name="info_no_chapters">第1章はまだ執筆中です。章が終わると、ここにあらすじが表示されます。</string>
+    <string name="info_chapter">第%1$d章</string>
+
+    <!-- progress lines while Claude works -->
+    <string name="busy_opening">ストーリーを開いています…</string>
+    <string name="busy_sending">送信中…</string>
+    <string name="busy_rewriting">書き直し中…</string>
+    <string name="busy_checking">チェック中…</string>
+    <string name="busy_creating">ストーリーを作成中…</string>
+    <string name="busy_opening_stories">ストーリー一覧を開いています…</string>
+    <string name="step_adjudicator">何が懸かっているかを判断中…</string>
+    <string name="step_offscreen">あなたのいない間に世界が動いています…</string>
+    <string name="step_director">このセッションを計画中…</string>
+    <string name="step_intent">人々の行動を決定中…</string>
+    <string name="step_writer">執筆中…</string>
+    <string name="step_rewrite">文章を修正中…</string>
+    <string name="step_judge">文章をチェック中…</string>
+    <string name="step_scribe">変化を記録中…</string>
+    <string name="step_summary">章を締めくくっています…</string>
+    <string name="step_setup">世界を構築中…</string>
+    <string name="step_style_picker">4つの文体を執筆中…</string>
+    <string name="notify_channel">ストーリー進行中</string>
+    <string name="notify_channel_about">文章の執筆中に表示されます。アプリを切り替えても中断されないようにするためのものです</string>
+
+    <!-- what went wrong -->
+    <string name="err_no_network">Claudeに接続できません。スマートフォンが api.anthropic.com を見つけられませんでした。インターネット接続（およびこのアプリがモバイルデータを使用できること）を確認してから、もう一度お試しください。</string>
+    <string name="err_cut_off">Claudeの執筆中に接続が切れました。もう一度お試しください。</string>
+    <string name="err_timeout">接続がタイムアウトしました。電波が弱いと起こることがあります。もう一度お試しください。</string>
+    <string name="err_tls">Claudeへの安全な接続に失敗しました。VPN、Wi-Fiのログインページ、フィルタリング機能のあるDNSが原因の可能性があります。</string>
+    <string name="err_bad_key">ClaudeにAPIキーが拒否されました。設定 → Claude で新しいキーを貼り付けてください。</string>
+    <string name="err_forbidden">Claudeがリクエストを拒否しました（403）。キーにアクセス権がないか、このネットワークからはAPIを利用できない可能性があります。</string>
+    <string name="err_no_credit">Anthropicアカウントのクレジットが不足しています。Anthropic Consoleでクレジットを追加してから、もう一度お試しください。</string>
+    <string name="err_rate_limited">同時に送信されたリクエストが多すぎます。1分ほど待ってから、もう一度お試しください。</string>
+    <string name="err_overloaded">Claudeは現在混み合っています。1分ほどしてから、もう一度お試しください。</string>
+    <string name="err_server">Claudeでサーバーエラーが発生しました。もう一度お試しください。</string>
+    <string name="err_declined">モデルがこの文章の執筆を断りました。もう一度試すか、書き直してください。</string>
+    <string name="err_unusable">Claudeの応答が3回続けて使用できない内容でした。もう一度お試しください。</string>
+    <string name="err_no_key">まずClaude APIキーを追加してください（設定 → Claude）。</string>
+    <string name="err_other">問題が発生しました。</string>
+
+    <!-- stories -->
+    <string name="stories_writing">文章を執筆中です。完了するとストーリーを切り替えられます。</string>
+    <string name="stories_switch_busy">まだ文章を執筆中です。完了してから切り替えてください。</string>
+    <string name="stories_switch_failed">そのストーリーを開けませんでした。一覧には残っています。もう一度お試しください。</string>
+    <string name="stories_none">まだストーリーがありません。</string>
+    <string name="stories_start">ストーリーを始める</string>
+    <string name="stories_new">新しいストーリーを始める</string>
+    <string name="stories_new_q">新しいストーリーを始めますか？</string>
+    <string name="stories_new_keeps">「%1$s」はここに残り、いつでも再開できます。</string>
+    <string name="stories_earlier">過去のストーリー</string>
+    <string name="stories_many">ストーリーはいくつでも始められます。どれも中断したところから、ここで待っています。</string>
+    <string name="stories_continue_q">「%1$s」を続けますか？</string>
+    <string name="stories_continue_where">前回の続きから開きます。</string>
+    <string name="stories_stays">「%1$s」はここに残ります。</string>
+    <string name="stories_continue_it">続ける</string>
+    <string name="played_today">今日プレイ</string>
+    <string name="played_yesterday">昨日プレイ</string>
+    <plurals name="played_days_ago">
+        <item quantity="other">%1$d日前にプレイ</item>
+    </plurals>
+    <string name="played_on">%1$sにプレイ</string>
+
+    <!-- writing style -->
+    <string name="style_screen_about">同じ場面をそれぞれの文体で書いています。サンプルは語り口を示すもので、ストーリーはあなたの言語で書かれます。選んだ文体は次の文章から適用されます。</string>
+    <string name="style_current">現在の文体</string>
+    <string name="style_other">その他の文体</string>
+    <string name="style_write_four">新しい文体を4つ書く（あなたの言語で）</string>
+    <string name="style_write_more">さらに4つ書く</string>
+    <string name="style_in_use">使用中</string>
+    <string name="style_read_whole">サンプルを全文読む</string>
+    <string name="style_use">この文体を使う</string>
+    <string name="style_not_picked">未選択</string>
+    <string name="preset_dialogue">会話中心</string>
+    <string name="preset_dialogue_about">とにかく会話。合間に短い描写が一行だけ。</string>
+    <string name="preset_wry">軽妙洒脱</string>
+    <string name="preset_wry_about">会話が多く、冗談好きでおしゃべりな語り手。</string>
+    <string name="preset_storybook">素朴な物語調</string>
+    <string name="preset_storybook_about">ヤングアダルト小説のような、シンプルで具体的な語り。</string>
+    <string name="preset_hardboiled">ハードボイルド</string>
+    <string name="preset_hardboiled_about">簡潔な一人称。乾いていて鋭い。</string>
+
+    <!-- settings -->
+    <string name="settings_look">表示と読みやすさ</string>
+    <string name="settings_theme">テーマ</string>
+    <string name="theme_system">システム</string>
+    <string name="theme_light">ライト</string>
+    <string name="theme_dark">ダーク</string>
+    <string name="theme_about">「システム」はスマートフォンのライト/ダーク設定に従います。</string>
+    <string name="settings_colours">カラー</string>
+    <string name="colours_wallpaper">壁紙から</string>
+    <string name="colours_about">壁紙から取得したカラー（Material You）。</string>
+    <string name="colours_about_old">壁紙のカラーにはAndroid 12以降が必要です。アプリ独自のカラーを使用します。</string>
+    <string name="settings_text_size">文字サイズ</string>
+    <string name="size_small">小</string>
+    <string name="size_normal">標準</string>
+    <string name="size_large">大</string>
+    <string name="size_larger">特大</string>
+    <string name="settings_sample_line">彼女が店の戸を半ば開けたところへ、家主が入ってきた。</string>
+    <string name="settings_story">ストーリー</string>
+    <string name="settings_length">文章の長さ</string>
+    <string name="length_short">短め</string>
+    <string name="length_normal">標準</string>
+    <string name="length_long">長め</string>
+    <string name="length_short_about">やり取り多め。数行ごとにあなたの番が来ます。</string>
+    <string name="length_normal_about">1ターンごとに1場面分のストーリー。</string>
+    <string name="length_long_about">長めの文章。1ターンでストーリーが大きく進みます。</string>
+    <string name="settings_firm">厳格な文体</string>
+    <string name="settings_firm_about">文体を説明ではなくルール（「決して…しない」）としてClaudeに渡します。文章が文体から外れるときに試してください。</string>
+    <string name="settings_claude">Claude</string>
+    <string name="settings_advanced">詳細設定</string>
+    <string name="settings_files_about">Claudeに伝える内容をすべて編集可能</string>
+    <string name="settings_setup_again">セットアップをやり直す</string>
+    <string name="settings_setup_again_about">初回起動時のガイド</string>
+
+    <!-- costs and files -->
+    <string name="costs_cc">Claude Codeでは呼び出しごとの課金はありません。表示されているのは、同じ呼び出しをAPIで行った場合の費用です。</string>
+    <string name="costs_in_all">（合計）· 今回のセッション %1$s</string>
+    <string name="costs_none">まだ費用は発生していません。</string>
+    <string name="costs_by_job">今回のセッション（処理別）</string>
+    <string name="purpose_writer">執筆</string>
+    <string name="purpose_rewrite">文章の修正</string>
+    <string name="purpose_judge">文章のチェック</string>
+    <string name="purpose_scribe">記録の管理</string>
+    <string name="purpose_intent">人々の行動</string>
+    <string name="purpose_adjudicator">懸かっているもの</string>
+    <string name="purpose_director">セッションの計画</string>
+    <string name="purpose_offscreen">世界の動き</string>
+    <string name="purpose_summary">章のあらすじ</string>
+    <string name="purpose_setup">ストーリーの作成</string>
+    <string name="purpose_style_picker">文体の執筆</string>
+    <string name="files_about">プレーンテキストのファイルです。何でも編集できます。ゲームマスターは毎ターンこれらを読み込みます。</string>
+    <string name="files_none">まだ何もありません。先にストーリーを作成してください。</string>
+    <string name="files_config">好みと文体</string>
+    <string name="files_prompts">ゲームマスターのプロンプト</string>
+    <string name="files_state">ストーリーの状態</string>
+    <string name="files_characters">登場人物</string>
+    <plurals name="files_characters_count">
+        <item quantity="other">%1$,d人</item>
+    </plurals>
+
+    <!-- Claude Code in Termux -->
+    <string name="cc_intro">APIキーの代わりに、Termux上のClaude Codeを通じてClaudeサブスクリプションを使います。呼び出しの開始は遅めですが、ターンごとの課金はありません。</string>
+    <string name="cc_step_install">Termux（F-DroidまたはGitHub版）をインストールし、一度開きます</string>
+    <string name="cc_get">入手</string>
+    <string name="cc_step_folder">Termuxのホームフォルダへのアクセスをアプリに許可します（選択画面で ☰ → Termux → このフォルダを使用）</string>
+    <string name="cc_pick">選択</string>
+    <string name="cc_step_scripts">スクリプトをインストールし、コピーしたコマンドをTermuxに貼り付けます。その後、Termuxで `claude` を一度実行してログインします</string>
+    <string name="cc_install">インストール</string>
+    <string name="cc_again">再インストール</string>
+    <string name="cc_write_failed">Termuxに書き込めませんでした: %1$s</string>
+    <string name="cc_copied">コピーしました。Termuxで長押し → 貼り付け、続けてEnter</string>
+    <string name="cc_step_allow">Termuxでのコマンド実行をアプリに許可します</string>
+    <string name="cc_allow">許可</string>
+    <string name="cc_step_battery">任意: Termuxの電池の最適化をオフにして、ターンの途中でAndroidに停止されないようにします</string>
+    <string name="cc_open">開く</string>
+    <string name="cc_step_test">呼び出しをテストします（初回は1分ほどかかることがあります）</string>
+    <string name="cc_test">テスト</string>
+    <string name="cc_testing">テスト中…</string>
+    <string name="cc_answered">Claude Codeが応答しました。</string>
+    <string name="cc_empty_answer">Claude Codeから空の応答が返されました</string>
+</resources>

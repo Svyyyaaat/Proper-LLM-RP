@@ -181,7 +181,7 @@ fun OnboardingFlow(state: AppState, onFinished: () -> Unit) {
             var seed by remember { mutableStateOf("") }
             StoryStepContent(seed, { seed = it }, state.story.busy, state.story.error,
                 onCreate = { scope.launch { state.story.setup(seed); if (state.story.isSetUp()) go(3) } }, onBack = back,
-                language = languageLabel(state))
+                language = state.locale.getDisplayLanguage(state.locale))
         }
         else -> {
             // a new story keeps the style you picked before

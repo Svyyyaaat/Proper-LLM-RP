@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Turkish translation of values/strings.xml -->
+<resources>
+    <!-- screens -->
+    <string name="screen_story">Hikaye</string>
+    <string name="screen_costs">Maliyetler</string>
+    <string name="screen_files">İstemler ve hikaye dosyaları</string>
+    <string name="screen_settings">Ayarlar</string>
+    <string name="screen_stories">Hikayeleriniz</string>
+    <string name="screen_style">Anlatım tarzı</string>
+
+    <!-- shared -->
+    <string name="back">Geri</string>
+    <string name="save">Kaydet</string>
+    <string name="cancel">İptal</string>
+    <string name="change">Değiştir</string>
+    <string name="add">Ekle</string>
+    <string name="replace">Değiştir</string>
+    <string name="next">İleri</string>
+    <string name="begin">Başla</string>
+    <string name="continue_story">Devam et</string>
+    <string name="try_again">Tekrar dene</string>
+    <string name="details">Ayrıntılar</string>
+    <string name="hide_details">Ayrıntıları gizle</string>
+    <string name="untitled">Adsız hikaye</string>
+    <string name="not_started">Henüz başlamadı</string>
+    <string name="step_of">Adım %1$d / %2$d</string>
+    <string name="progress">Bölüm %1$d, tur %2$d</string>
+    <string name="progress_in_place">Bölüm %1$d, tur %2$d · %3$s</string>
+    <string name="busy_opening_app">Açılıyor…</string>
+
+    <!-- language -->
+    <string name="settings_language">Dil</string>
+    <string name="settings_language_about">Uygulama ve hikaye bu dilde. Hikayeye başka bir dilde yazarsanız, hikaye o dilde yanıt verir.</string>
+    <string name="language_system_named">Sistem (%1$s)</string>
+    <string name="language_dialog_about">Sistem seçeneği telefonunuzun dilini kullanır. Hangisini seçerseniz seçin, hikaye sizin yazdığınız dilde yanıt verir.</string>
+    <string name="language_button">Dil: %1$s</string>
+
+    <!-- welcome and setup -->
+    <string name="welcome_tagline">Hile yok, hikaye var.</string>
+    <string name="welcome_body">Gerçek bir oyun yöneticisiyle rol yapma hikayesi: siz bir karakteri oynarsınız, Claude ise dünyayı ve içindeki herkesi yönetir.</string>
+    <string name="welcome_f1_title">Yaşayan bir dünya</string>
+    <string name="welcome_f1_body">Kendi hedefleri ve sırları olan insanlar; siz yokken de süren dertler.</string>
+    <string name="welcome_f2_title">Anlatıcı değil, zar karar verir</string>
+    <string name="welcome_f2_body">Riskli hamlelerde zar atılır. Başarısızlığın gerçek bir bedeli olur.</string>
+    <string name="welcome_f3_title">Her dilde</string>
+    <string name="welcome_f3_body">İstediğiniz dilde yazın: hikaye de o dilde yanıt verir.</string>
+    <string name="welcome_start">Başlayalım</string>
+
+    <string name="key_title">Claude\'u bağla</string>
+    <string name="key_body_api">Hikayeyi Claude yazar. Ücreti Anthropic hesabınızdan ödenir: pasaj başına birkaç sent.</string>
+    <string name="key_body_cc">Claude, hikayeyi Termux\'taki Claude Code uygulaması üzerinden Claude aboneliğinizle yazar.</string>
+    <string name="backend_api">API anahtarı</string>
+    <string name="backend_cc">Claude Code</string>
+    <string name="key_save">Anahtarı kaydet</string>
+    <string name="key_cc_unlocks">Test çağrısı başarılı olunca İleri düğmesi etkinleşir.</string>
+    <string name="key_stored">Yalnızca bu telefonda, Android Keystore\'dan bir anahtarla şifrelenerek saklanır. Her çağrının maliyeti kaydedilir.</string>
+    <string name="key_saved">Bu telefonda şifrelenmiş olarak kaydedildi: %1$s</string>
+    <string name="key_none">Henüz anahtar yok</string>
+    <string name="key_dialog_title">Claude API anahtarı</string>
+
+    <string name="story_title">Hikayeniz</string>
+    <string name="story_body">Bir mekan, kendi hedefleri ve sırları olan birkaç kişi ve siz yokken de ilerleyen dertler.</string>
+    <string name="story_seed_label">Ne hakkında olsun? (isteğe bağlı)</string>
+    <string name="story_seed_hint">ör. bir balıkçı kasabası, bir borç, bir aile işletmesi</string>
+    <string name="story_create">Hikayeyi oluştur</string>
+    <string name="story_language_note">Hikaye şu dilde yazılacak: %1$s. Bunu Ayarlar\'dan değiştirebilir ya da doğrudan başka bir dilde yazabilirsiniz.</string>
+
+    <string name="style_step_title">Okumayı sevdiğinizi seçin</string>
+    <string name="style_step_body">Tek bir sahne, farklı tarzlarda. Seçiminiz hikayenin anlatım sesini belirler; istediğiniz zaman ana ekrandan değiştirebilirsiniz.</string>
+    <string name="style_this_one">Bunu seç</string>
+    <string name="style_four_more">Dört tane daha yaz (sizin dilinizde)</string>
+
+    <!-- home -->
+    <string name="home_your_story">Hikayeniz</string>
+    <string name="home_stories">Hikayeler</string>
+    <string name="home_stories_none">yeni veya önceki</string>
+    <plurals name="home_stories_count">
+        <item quantity="one">bu telefonda %1$d hikaye</item>
+        <item quantity="other">bu telefonda %1$d hikaye</item>
+    </plurals>
+    <string name="home_style">Tarz</string>
+    <string name="home_style_none">birini seçin</string>
+    <string name="home_more">Daha fazla</string>
+    <string name="home_costs">Maliyetler</string>
+    <string name="home_costs_subscription">aboneliğinizle</string>
+    <string name="home_files">Dosyalar</string>
+    <string name="home_files_about">istemler, dünya, karakterler</string>
+    <string name="home_settings_about">dil, görünüm, Claude</string>
+
+    <!-- the story -->
+    <string name="you_are">Karakteriniz</string>
+    <string name="reply_hint">Bir şey söyleyin veya yapın…</string>
+    <string name="reply_waiting">Sonraki pasaj yazılıyor…</string>
+    <string name="go_on">Devam</string>
+    <string name="send">Gönder</string>
+    <string name="tool_listen">Dinle</string>
+    <string name="tool_stop">Durdur</string>
+    <string name="tool_rewrite">Yeniden yaz</string>
+    <string name="tool_edit">Düzenle</string>
+    <string name="tool_behind">Perde arkası</string>
+    <string name="version_previous">Önceki sürüm</string>
+    <string name="version_next">Sonraki sürüm</string>
+    <string name="version_of">Sürüm %1$d / %2$d</string>
+    <string name="behind_title">Pasajın perde arkası: zarlar, planlar ve kontroller</string>
+    <string name="behind_nothing">Zar atılmadı, aksilik çıkmadı; kontroller bir sorun bulmadı.</string>
+    <string name="note_roll">Zar: %1$s</string>
+    <string name="note_complication">Aksilik: %1$s</string>
+    <string name="note_rewritten">Kontroller tarafından bir kez yeniden yazıldı</string>
+    <string name="edit_title">Pasajı düzenle</string>
+    <string name="tts_no_voice">Telefonda bu dil için ses yok. Ayarlar → Metin okuma çıkışı bölümünden bir ses yükleyin (en çok dili Google\'ın motoru destekler).</string>
+    <string name="tts_unavailable">Bu telefonda metin okuma kullanılamıyor.</string>
+
+    <string name="info_title">Şimdiye kadar olanlar</string>
+    <string name="info_you">Siz</string>
+    <string name="info_remember">Hatırladıklarınız</string>
+    <string name="info_before_story">Hikayeden önce: %1$s</string>
+    <string name="info_met">Tanıştığınız kişiler</string>
+    <string name="info_spent">Claude şu ana kadar: bu oturumda %1$s, toplamda %2$s</string>
+    <string name="info_chapters">Bölümler</string>
+    <string name="info_no_chapters">1. bölüm hâlâ yazılıyor. Bölüm kapandığında özeti burada görünür.</string>
+    <string name="info_chapter">Bölüm %1$d</string>
+
+    <!-- progress lines while Claude works -->
+    <string name="busy_opening">Hikaye açılıyor…</string>
+    <string name="busy_sending">Gönderiliyor…</string>
+    <string name="busy_rewriting">Yeniden yazılıyor…</string>
+    <string name="busy_checking">Kontrol ediliyor…</string>
+    <string name="busy_creating">Hikaye oluşturuluyor…</string>
+    <string name="busy_opening_stories">Hikayeleriniz açılıyor…</string>
+    <string name="step_adjudicator">Neyin tehlikede olduğuna karar veriliyor…</string>
+    <string name="step_offscreen">Siz yokken dünya da yerinde durmuyor…</string>
+    <string name="step_director">Bu oturum planlanıyor…</string>
+    <string name="step_intent">Kişilerin ne yapacağına karar veriliyor…</string>
+    <string name="step_writer">Yazılıyor…</string>
+    <string name="step_rewrite">Pasaj düzeltiliyor…</string>
+    <string name="step_judge">Pasaj kontrol ediliyor…</string>
+    <string name="step_scribe">Değişenler kaydediliyor…</string>
+    <string name="step_summary">Bölüm kapatılıyor…</string>
+    <string name="step_setup">Dünya kuruluyor…</string>
+    <string name="step_style_picker">Dört tarz yazılıyor…</string>
+    <string name="notify_channel">Hikaye sürüyor</string>
+    <string name="notify_channel_about">Bir pasaj yazılırken gösterilir; böylece başka uygulamaya geçtiğinizde yarıda kesilmez</string>
+
+    <!-- what went wrong -->
+    <string name="err_no_network">Claude\'a ulaşılamıyor: telefon api.anthropic.com adresini çözümleyemedi. İnternet bağlantısını (ve bu uygulamanın mobil veri kullanabildiğini) kontrol edip tekrar deneyin.</string>
+    <string name="err_cut_off">Claude yazarken bağlantı koptu. Tekrar deneyin.</string>
+    <string name="err_timeout">Bağlantı zaman aşımına uğradı. Zayıf sinyalde bu olabilir; tekrar deneyin.</string>
+    <string name="err_tls">Claude ile güvenli bağlantı kurulamadı. Buna bir VPN, Wi-Fi giriş sayfası veya filtreleme yapan bir DNS neden olabilir.</string>
+    <string name="err_bad_key">Claude API anahtarını reddetti. Ayarlar → Claude bölümüne yeni bir anahtar yapıştırın.</string>
+    <string name="err_forbidden">Claude isteği reddetti (403): anahtarın erişimi olmayabilir ya da API bu ağdan kullanılamıyor olabilir.</string>
+    <string name="err_no_credit">Anthropic hesabınızın kredisi bitti. Anthropic Console\'dan kredi ekleyip tekrar deneyin.</string>
+    <string name="err_rate_limited">Aynı anda çok fazla istek var. Bir dakika bekleyip tekrar deneyin.</string>
+    <string name="err_overloaded">Claude şu anda aşırı yoğun. Bir dakika sonra tekrar deneyin.</string>
+    <string name="err_server">Claude\'da bir sunucu hatası oluştu. Tekrar deneyin.</string>
+    <string name="err_declined">Model bu pasajı yazmayı reddetti. Tekrar deneyin ya da yeniden yazın.</string>
+    <string name="err_unusable">Claude\'un yanıtı üç kez kullanılamaz geldi. Tekrar deneyin.</string>
+    <string name="err_no_key">Önce Claude API anahtarınızı ekleyin (Ayarlar → Claude).</string>
+    <string name="err_other">Bir şeyler ters gitti.</string>
+
+    <!-- stories -->
+    <string name="stories_writing">Bir pasaj yazılıyor. Bittiğinde hikaye değiştirebilirsiniz.</string>
+    <string name="stories_switch_busy">Bir pasaj hâlâ yazılıyor. Bittiğinde geçiş yapın.</string>
+    <string name="stories_switch_failed">O hikaye açılamadı. Hâlâ listede; tekrar deneyin.</string>
+    <string name="stories_none">Henüz hikaye yok.</string>
+    <string name="stories_start">Hikaye başlat</string>
+    <string name="stories_new">Yeni hikaye başlat</string>
+    <string name="stories_new_q">Yeni bir hikaye başlatılsın mı?</string>
+    <string name="stories_new_keeps">“%1$s” burada kalır; istediğiniz zaman kaldığınız yerden devam edebilirsiniz.</string>
+    <string name="stories_earlier">Önceki hikayeler</string>
+    <string name="stories_many">İstediğiniz kadar hikaye başlatın. Her biri burada, bıraktığınız yerde sizi bekler.</string>
+    <string name="stories_continue_q">“%1$s” hikayesine devam edilsin mi?</string>
+    <string name="stories_continue_where">Kaldığınız yerden açılır.</string>
+    <string name="stories_stays">“%1$s” burada kalır.</string>
+    <string name="stories_continue_it">Devam et</string>
+    <string name="played_today">Bugün oynandı</string>
+    <string name="played_yesterday">Dün oynandı</string>
+    <plurals name="played_days_ago">
+        <item quantity="one">%1$d gün önce oynandı</item>
+        <item quantity="other">%1$d gün önce oynandı</item>
+    </plurals>
+    <string name="played_on">%1$s tarihinde oynandı</string>
+
+    <!-- writing style -->
+    <string name="style_screen_about">Her tarzda aynı sahne. Örnekler anlatım sesini gösterir; hikaye sizin dilinizde yazılır. Seçiminiz sonraki pasajdan itibaren geçerli olur.</string>
+    <string name="style_current">Mevcut tarzınız</string>
+    <string name="style_other">Diğer tarzlar</string>
+    <string name="style_write_four">Dört yeni tarz yaz (sizin dilinizde)</string>
+    <string name="style_write_more">Dört tane daha yaz</string>
+    <string name="style_in_use">Kullanılıyor</string>
+    <string name="style_read_whole">Örneğin tamamını oku</string>
+    <string name="style_use">Bu tarzı kullan</string>
+    <string name="style_not_picked">Henüz seçilmedi</string>
+    <string name="preset_dialogue">Bol diyaloglu</string>
+    <string name="preset_dialogue_about">Konuşma, konuşma, konuşma; arada tek satırlık kısa bir eylem.</string>
+    <string name="preset_wry">Hafif ve esprili</string>
+    <string name="preset_wry_about">Bol diyalog ve şaka yapmayı seven, geveze bir anlatıcı.</string>
+    <string name="preset_storybook">Sade masal kitabı</string>
+    <string name="preset_storybook_about">Gençlik romanı gibi basit, somut bir anlatım.</string>
+    <string name="preset_hardboiled">Sert polisiye</string>
+    <string name="preset_hardboiled_about">Kısa ve öz birinci tekil şahıs; kuru ve keskin.</string>
+
+    <!-- settings -->
+    <string name="settings_look">Görünüm ve okuma</string>
+    <string name="settings_theme">Tema</string>
+    <string name="theme_system">Sistem</string>
+    <string name="theme_light">Açık</string>
+    <string name="theme_dark">Koyu</string>
+    <string name="theme_about">Sistem seçeneği telefonunuzun açık veya koyu tema ayarını izler.</string>
+    <string name="settings_colours">Renkler</string>
+    <string name="colours_wallpaper">Duvar kağıdından</string>
+    <string name="colours_about">Duvar kağıdınızdan alınan renkler (Material You).</string>
+    <string name="colours_about_old">Duvar kağıdı renkleri için Android 12 gerekir; uygulamanın kendi renkleri kullanılıyor.</string>
+    <string name="settings_text_size">Metin boyutu</string>
+    <string name="size_small">Küçük</string>
+    <string name="size_normal">Normal</string>
+    <string name="size_large">Büyük</string>
+    <string name="size_larger">Daha büyük</string>
+    <string name="settings_sample_line">Ev sahibi içeri girdiğinde, dükkânın kapısını yarıya kadar açmıştı.</string>
+    <string name="settings_story">Hikaye</string>
+    <string name="settings_length">Pasaj uzunluğu</string>
+    <string name="length_short">Kısa</string>
+    <string name="length_normal">Normal</string>
+    <string name="length_long">Uzun</string>
+    <string name="length_short_about">Daha çok karşılıklı: birkaç satır, sonra sıra sizde.</string>
+    <string name="length_normal_about">Her turda bir sahnelik hikaye.</string>
+    <string name="length_long_about">Daha uzun pasajlar: hikaye her turda daha çok ilerler.</string>
+    <string name="settings_firm">Daha katı tarz</string>
+    <string name="settings_firm_about">Claude tarzı bir tanım yerine kurallar (“asla…”) olarak alır. Pasajlar tarzdan saparsa bunu deneyin.</string>
+    <string name="settings_claude">Claude</string>
+    <string name="settings_advanced">Gelişmiş</string>
+    <string name="settings_files_about">Claude\'a söylenen her şey, düzenlenebilir</string>
+    <string name="settings_setup_again">Kurulumu yeniden çalıştır</string>
+    <string name="settings_setup_again_about">İlk açılıştaki adım adım kurulum</string>
+
+    <!-- costs and files -->
+    <string name="costs_cc">Claude Code ile çağrı başına ücret alınmaz; bunlar, aynı çağrıların API\'de tutacağı maliyetlerdir.</string>
+    <string name="costs_in_all">toplam · bu oturumda %1$s</string>
+    <string name="costs_none">Henüz harcama yok.</string>
+    <string name="costs_by_job">Bu oturum, işe göre</string>
+    <string name="purpose_writer">Yazma</string>
+    <string name="purpose_rewrite">Pasaj düzeltme</string>
+    <string name="purpose_judge">Pasaj kontrolü</string>
+    <string name="purpose_scribe">Kayıt tutma</string>
+    <string name="purpose_intent">Kişilerin yaptıkları</string>
+    <string name="purpose_adjudicator">Tehlikede olan</string>
+    <string name="purpose_director">Oturum planlama</string>
+    <string name="purpose_offscreen">Dünyanın işleyişi</string>
+    <string name="purpose_summary">Bölüm özetleri</string>
+    <string name="purpose_setup">Hikaye oluşturma</string>
+    <string name="purpose_style_picker">Tarz yazma</string>
+    <string name="files_about">Düz metin dosyaları. Her şeyi düzenleyebilirsiniz; oyun yöneticisi bunları her turda okur.</string>
+    <string name="files_none">Henüz bir şey yok: önce hikayeyi oluşturun.</string>
+    <string name="files_config">Zevkiniz ve tarzınız</string>
+    <string name="files_prompts">Oyun yöneticisinin istemleri</string>
+    <string name="files_state">Hikayenin durumu</string>
+    <string name="files_characters">Karakterler</string>
+    <plurals name="files_characters_count">
+        <item quantity="one">%1$,d karakter</item>
+        <item quantity="other">%1$,d karakter</item>
+    </plurals>
+
+    <!-- Claude Code in Termux -->
+    <string name="cc_intro">API anahtarı yerine Termux\'taki Claude Code üzerinden Claude aboneliğinizi kullanır. Çağrıların başlaması daha yavaştır; tur başına ücret alınmaz.</string>
+    <string name="cc_step_install">Termux\'u yükleyin (F-Droid veya GitHub sürümü) ve bir kez açın</string>
+    <string name="cc_get">İndir</string>
+    <string name="cc_step_folder">Uygulamaya Termux\'un ana klasörünü verin (seçicide: ☰ → Termux → Bu klasörü kullan)</string>
+    <string name="cc_pick">Seç</string>
+    <string name="cc_step_scripts">Betikleri yükleyin, kopyalanan komutu Termux\'a yapıştırın, ardından giriş yapmak için orada `claude` komutunu bir kez çalıştırın</string>
+    <string name="cc_install">Yükle</string>
+    <string name="cc_again">Yeniden yükle</string>
+    <string name="cc_write_failed">Termux\'a yazılamadı: %1$s</string>
+    <string name="cc_copied">Kopyalandı. Termux\'ta: uzun basın → Yapıştır, ardından Enter</string>
+    <string name="cc_step_allow">Uygulamanın Termux\'ta komut çalıştırmasına izin verin</string>
+    <string name="cc_allow">İzin ver</string>
+    <string name="cc_step_battery">İsteğe bağlı: Android\'in Termux\'u tur ortasında durdurmaması için Termux\'un pil optimizasyonunu kapatın</string>
+    <string name="cc_open">Aç</string>
+    <string name="cc_step_test">Bir çağrıyı test edin (ilki bir dakika sürebilir)</string>
+    <string name="cc_test">Test et</string>
+    <string name="cc_testing">Test ediliyor…</string>
+    <string name="cc_answered">Claude Code yanıt verdi.</string>
+    <string name="cc_empty_answer">Claude Code boş yanıt verdi</string>
+</resources>

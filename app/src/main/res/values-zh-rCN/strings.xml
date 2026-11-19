@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Simplified Chinese translation of values/strings.xml -->
+<resources>
+    <!-- screens -->
+    <string name="screen_story">故事</string>
+    <string name="screen_costs">费用</string>
+    <string name="screen_files">提示词与故事文件</string>
+    <string name="screen_settings">设置</string>
+    <string name="screen_stories">你的故事</string>
+    <string name="screen_style">文风</string>
+
+    <!-- shared -->
+    <string name="back">返回</string>
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="change">更改</string>
+    <string name="add">添加</string>
+    <string name="replace">替换</string>
+    <string name="next">下一步</string>
+    <string name="begin">开始</string>
+    <string name="continue_story">继续</string>
+    <string name="try_again">重试</string>
+    <string name="details">详情</string>
+    <string name="hide_details">隐藏详情</string>
+    <string name="untitled">未命名故事</string>
+    <string name="not_started">尚未开始</string>
+    <string name="step_of">第 %1$d 步，共 %2$d 步</string>
+    <string name="progress">第 %1$d 章，第 %2$d 回合</string>
+    <string name="progress_in_place">第 %1$d 章，第 %2$d 回合 · %3$s</string>
+    <string name="busy_opening_app">正在打开…</string>
+
+    <!-- language -->
+    <string name="settings_language">语言</string>
+    <string name="settings_language_about">应用和故事都使用此语言。如果你用其他语言写，故事会用你写的语言回应。</string>
+    <string name="language_system_named">跟随系统（%1$s）</string>
+    <string name="language_dialog_about">“跟随系统”会使用手机的语言。无论选择哪种，故事都会用你书写的语言回应。</string>
+    <string name="language_button">语言：%1$s</string>
+
+    <!-- welcome and setup -->
+    <string name="welcome_tagline">公平，才好玩。</string>
+    <string name="welcome_body">有真正游戏主持人的角色扮演故事：你扮演一个角色，Claude 掌管整个世界和其中的每一个人。</string>
+    <string name="welcome_f1_title">会自己运转的世界</string>
+    <string name="welcome_f1_body">人物各有目标和秘密；你不在的时候，麻烦也在继续发酵。</string>
+    <string name="welcome_f2_title">骰子说了算，不是叙述者</string>
+    <string name="welcome_f2_body">冒险的行动要掷骰。失败就得付出真正的代价。</string>
+    <string name="welcome_f3_title">任何语言</string>
+    <string name="welcome_f3_body">用你喜欢的任何语言书写，故事就用它来回应。</string>
+    <string name="welcome_start">开始使用</string>
+
+    <string name="key_title">连接 Claude</string>
+    <string name="key_body_api">故事由 Claude 撰写，费用从你的 Anthropic 账户扣除：每段只需几美分。</string>
+    <string name="key_body_cc">通过 Termux 中的 Claude Code 应用，Claude 使用你的 Claude 订阅撰写故事。</string>
+    <string name="backend_api">API 密钥</string>
+    <string name="backend_cc">Claude Code</string>
+    <string name="key_save">保存密钥</string>
+    <string name="key_cc_unlocks">测试调用成功后即可点击“下一步”。</string>
+    <string name="key_stored">仅保存在这部手机上，并使用 Android Keystore 中的密钥加密。每次调用的费用都会被记录。</string>
+    <string name="key_saved">已加密保存在这部手机上：%1$s</string>
+    <string name="key_none">尚无密钥</string>
+    <string name="key_dialog_title">Claude API 密钥</string>
+
+    <string name="story_title">你的故事</string>
+    <string name="story_body">一个地点，几位各怀目标与秘密的人物，以及在你不在时仍在发展的麻烦。</string>
+    <string name="story_seed_label">想写什么题材？（可选）</string>
+    <string name="story_seed_hint">例如：渔村、一笔债务、家族生意</string>
+    <string name="story_create">创建故事</string>
+    <string name="story_language_note">故事将用%1$s撰写。你可以在“设置”中更改，或者直接用另一种语言书写。</string>
+
+    <string name="style_step_title">选一个你喜欢读的</string>
+    <string name="style_step_body">同一场景，不同文风。你的选择决定故事的叙述风格；之后随时可以在主屏幕上更改。</string>
+    <string name="style_this_one">就选这个</string>
+    <string name="style_four_more">再写四种（用你的语言）</string>
+
+    <!-- home -->
+    <string name="home_your_story">你的故事</string>
+    <string name="home_stories">故事</string>
+    <string name="home_stories_none">新建或继续</string>
+    <plurals name="home_stories_count">
+        <item quantity="other">本机 %1$d 个</item>
+    </plurals>
+    <string name="home_style">文风</string>
+    <string name="home_style_none">选择一种</string>
+    <string name="home_more">更多</string>
+    <string name="home_costs">费用</string>
+    <string name="home_costs_subscription">使用订阅</string>
+    <string name="home_files">文件</string>
+    <string name="home_files_about">提示词、世界、角色</string>
+    <string name="home_settings_about">语言、外观、Claude</string>
+
+    <!-- the story -->
+    <string name="you_are">你的角色</string>
+    <string name="reply_hint">说点什么或做点什么…</string>
+    <string name="reply_waiting">正在撰写下一段…</string>
+    <string name="go_on">接着写</string>
+    <string name="send">发送</string>
+    <string name="tool_listen">朗读</string>
+    <string name="tool_stop">停止</string>
+    <string name="tool_rewrite">重写</string>
+    <string name="tool_edit">编辑</string>
+    <string name="tool_behind">幕后</string>
+    <string name="version_previous">上一版本</string>
+    <string name="version_next">下一版本</string>
+    <string name="version_of">版本 %1$d/%2$d</string>
+    <string name="behind_title">段落幕后：骰子、计划与检查</string>
+    <string name="behind_nothing">没有掷骰，也没有意外变数；检查没有发现问题。</string>
+    <string name="note_roll">掷骰：%1$s</string>
+    <string name="note_complication">变数：%1$s</string>
+    <string name="note_rewritten">经检查后重写过一次</string>
+    <string name="edit_title">编辑段落</string>
+    <string name="tts_no_voice">手机上没有此语言的语音。请在“设置 → 文字转语音”中安装（Google 引擎支持的语言最多）。</string>
+    <string name="tts_unavailable">此手机不支持文字转语音。</string>
+
+    <string name="info_title">前情提要</string>
+    <string name="info_you">你</string>
+    <string name="info_remember">你记得的事</string>
+    <string name="info_before_story">故事开始前：%1$s</string>
+    <string name="info_met">你遇见过的人</string>
+    <string name="info_spent">Claude 费用：本次会话 %1$s，累计 %2$s</string>
+    <string name="info_chapters">章节</string>
+    <string name="info_no_chapters">第 1 章仍在撰写中。章节结束后，这里会显示摘要。</string>
+    <string name="info_chapter">第 %1$d 章</string>
+
+    <!-- progress lines while Claude works -->
+    <string name="busy_opening">正在打开故事…</string>
+    <string name="busy_sending">正在发送…</string>
+    <string name="busy_rewriting">正在重写…</string>
+    <string name="busy_checking">正在检查…</string>
+    <string name="busy_creating">正在创建故事…</string>
+    <string name="busy_opening_stories">正在打开你的故事…</string>
+    <string name="step_adjudicator">正在判断利害得失…</string>
+    <string name="step_offscreen">你不在时，世界仍在运转…</string>
+    <string name="step_director">正在规划本次会话…</string>
+    <string name="step_intent">正在决定人物的行动…</string>
+    <string name="step_writer">正在撰写…</string>
+    <string name="step_rewrite">正在修改段落…</string>
+    <string name="step_judge">正在检查段落…</string>
+    <string name="step_scribe">正在记录变化…</string>
+    <string name="step_summary">正在为本章收尾…</string>
+    <string name="step_setup">正在构建世界…</string>
+    <string name="step_style_picker">正在撰写四种文风…</string>
+    <string name="notify_channel">故事进行中</string>
+    <string name="notify_channel_about">在撰写段落时显示，以免切换应用时被中断</string>
+
+    <!-- what went wrong -->
+    <string name="err_no_network">无法连接 Claude：手机无法解析 api.anthropic.com。请检查网络连接（并确认此应用可以使用移动数据），然后重试。</string>
+    <string name="err_cut_off">Claude 撰写时连接中断。请重试。</string>
+    <string name="err_timeout">连接超时。信号较弱时可能会这样，请重试。</string>
+    <string name="err_tls">与 Claude 的安全连接失败。VPN、Wi-Fi 登录页面或带过滤功能的 DNS 都可能导致此问题。</string>
+    <string name="err_bad_key">Claude 拒绝了此 API 密钥。请在“设置 → Claude”中粘贴新的密钥。</string>
+    <string name="err_forbidden">Claude 拒绝了请求（403）：密钥可能没有访问权限，或者此网络无法使用 API。</string>
+    <string name="err_no_credit">你的 Anthropic 账户余额不足。请在 Anthropic Console 中充值，然后重试。</string>
+    <string name="err_rate_limited">同时发出的请求过多。请稍等一分钟后重试。</string>
+    <string name="err_overloaded">Claude 当前负载过高。请一分钟后重试。</string>
+    <string name="err_server">Claude 出现服务器错误。请重试。</string>
+    <string name="err_declined">模型拒绝撰写这一段。请重试，或改写内容。</string>
+    <string name="err_unusable">Claude 的回答连续三次无法使用。请重试。</string>
+    <string name="err_no_key">请先添加你的 Claude API 密钥（设置 → Claude）。</string>
+    <string name="err_other">出了点问题。</string>
+
+    <!-- stories -->
+    <string name="stories_writing">正在撰写段落。完成后即可切换故事。</string>
+    <string name="stories_switch_busy">段落仍在撰写中。请完成后再切换。</string>
+    <string name="stories_switch_failed">无法打开该故事。它仍在列表中，请重试。</string>
+    <string name="stories_none">还没有故事。</string>
+    <string name="stories_start">开始一个故事</string>
+    <string name="stories_new">开始新故事</string>
+    <string name="stories_new_q">要开始新故事吗？</string>
+    <string name="stories_new_keeps">“%1$s”会保留在这里，你可以随时继续。</string>
+    <string name="stories_earlier">之前的故事</string>
+    <string name="stories_many">想开多少个故事都可以。每个故事都会停在你离开的地方等你。</string>
+    <string name="stories_continue_q">继续“%1$s”？</string>
+    <string name="stories_continue_where">将从你上次离开的地方继续。</string>
+    <string name="stories_stays">“%1$s”会保留在这里。</string>
+    <string name="stories_continue_it">继续</string>
+    <string name="played_today">今天玩过</string>
+    <string name="played_yesterday">昨天玩过</string>
+    <plurals name="played_days_ago">
+        <item quantity="other">%1$d 天前玩过</item>
+    </plurals>
+    <string name="played_on">%1$s 玩过</string>
+
+    <!-- writing style -->
+    <string name="style_screen_about">同一场景的各种文风。示例展示的是叙述风格；故事会用你的语言撰写。你的选择将从下一段开始生效。</string>
+    <string name="style_current">当前文风</string>
+    <string name="style_other">其他文风</string>
+    <string name="style_write_four">撰写四种新文风（用你的语言）</string>
+    <string name="style_write_more">再写四种</string>
+    <string name="style_in_use">使用中</string>
+    <string name="style_read_whole">阅读完整示例</string>
+    <string name="style_use">使用此文风</string>
+    <string name="style_not_picked">尚未选择</string>
+    <string name="preset_dialogue">对话为主</string>
+    <string name="preset_dialogue_about">说、说、说；中间只穿插一句简短的动作。</string>
+    <string name="preset_wry">轻松诙谐</string>
+    <string name="preset_wry_about">大量对话，外加一个爱开玩笑、话很多的叙述者。</string>
+    <string name="preset_storybook">朴素故事书</string>
+    <string name="preset_storybook_about">简单具体的叙述，像青少年读物。</string>
+    <string name="preset_hardboiled">冷硬派</string>
+    <string name="preset_hardboiled_about">简洁的第一人称，冷峻而犀利。</string>
+
+    <!-- settings -->
+    <string name="settings_look">外观与阅读</string>
+    <string name="settings_theme">主题</string>
+    <string name="theme_system">跟随系统</string>
+    <string name="theme_light">浅色</string>
+    <string name="theme_dark">深色</string>
+    <string name="theme_about">“跟随系统”会根据手机的浅色或深色设置切换。</string>
+    <string name="settings_colours">颜色</string>
+    <string name="colours_wallpaper">取自壁纸</string>
+    <string name="colours_about">取自壁纸的颜色（Material You）。</string>
+    <string name="colours_about_old">壁纸取色需要 Android 12；当前使用应用自带的颜色。</string>
+    <string name="settings_text_size">文字大小</string>
+    <string name="size_small">小</string>
+    <string name="size_normal">标准</string>
+    <string name="size_large">大</string>
+    <string name="size_larger">特大</string>
+    <string name="settings_sample_line">她刚把店门推开一半，房东就走了进来。</string>
+    <string name="settings_story">故事</string>
+    <string name="settings_length">段落长度</string>
+    <string name="length_short">短</string>
+    <string name="length_normal">标准</string>
+    <string name="length_long">长</string>
+    <string name="length_short_about">更多来回互动：几行之后就轮到你。</string>
+    <string name="length_normal_about">每回合一个场景的篇幅。</string>
+    <string name="length_long_about">更长的段落：每回合故事推进得更远。</string>
+    <string name="settings_firm">更严格的文风</string>
+    <string name="settings_firm_about">以规则（“绝不……”）而非描述的形式向 Claude 说明文风。如果段落偏离了文风，可以试试。</string>
+    <string name="settings_claude">Claude</string>
+    <string name="settings_advanced">高级</string>
+    <string name="settings_files_about">Claude 收到的所有指示，均可编辑</string>
+    <string name="settings_setup_again">重新运行设置向导</string>
+    <string name="settings_setup_again_about">首次运行时的引导</string>
+
+    <!-- costs and files -->
+    <string name="costs_cc">使用 Claude Code 时不会按调用计费；这里显示的是同样的调用在 API 上的费用。</string>
+    <string name="costs_in_all">累计 · 本次会话 %1$s</string>
+    <string name="costs_none">尚无花费。</string>
+    <string name="costs_by_job">本次会话（按任务）</string>
+    <string name="purpose_writer">撰写</string>
+    <string name="purpose_rewrite">修改段落</string>
+    <string name="purpose_judge">检查段落</string>
+    <string name="purpose_scribe">记录整理</string>
+    <string name="purpose_intent">人物行动</string>
+    <string name="purpose_adjudicator">利害判断</string>
+    <string name="purpose_director">规划会话</string>
+    <string name="purpose_offscreen">世界运转</string>
+    <string name="purpose_summary">章节摘要</string>
+    <string name="purpose_setup">创建故事</string>
+    <string name="purpose_style_picker">撰写文风</string>
+    <string name="files_about">纯文本文件。任何内容都可以编辑；游戏主持人每回合都会读取。</string>
+    <string name="files_none">还没有内容：请先创建故事。</string>
+    <string name="files_config">你的偏好与文风</string>
+    <string name="files_prompts">游戏主持人的提示词</string>
+    <string name="files_state">故事状态</string>
+    <string name="files_characters">角色</string>
+    <plurals name="files_characters_count">
+        <item quantity="other">%1$,d 个角色</item>
+    </plurals>
+
+    <!-- Claude Code in Termux -->
+    <string name="cc_intro">通过 Termux 中的 Claude Code 使用你的 Claude 订阅，而不是 API 密钥。调用启动较慢；不按回合计费。</string>
+    <string name="cc_step_install">安装 Termux（F-Droid 或 GitHub 版本）并打开一次</string>
+    <string name="cc_get">获取</string>
+    <string name="cc_step_folder">授予应用访问 Termux 主文件夹的权限（在选择器中：☰ → Termux → 使用此文件夹）</string>
+    <string name="cc_pick">选择</string>
+    <string name="cc_step_scripts">安装脚本，将复制的命令粘贴到 Termux 中，然后在那里运行一次 `claude` 以登录</string>
+    <string name="cc_install">安装</string>
+    <string name="cc_again">重新安装</string>
+    <string name="cc_write_failed">无法写入 Termux：%1$s</string>
+    <string name="cc_copied">已复制。在 Termux 中：长按 → 粘贴，然后按 Enter</string>
+    <string name="cc_step_allow">允许应用在 Termux 中运行命令</string>
+    <string name="cc_allow">允许</string>
+    <string name="cc_step_battery">可选：关闭 Termux 的电池优化，以免 Android 在回合中途将其停止</string>
+    <string name="cc_open">打开</string>
+    <string name="cc_step_test">测试调用（第一次可能需要一分钟）</string>
+    <string name="cc_test">测试</string>
+    <string name="cc_testing">正在测试…</string>
+    <string name="cc_answered">Claude Code 已回应。</string>
+    <string name="cc_empty_answer">Claude Code 返回了空回应</string>
+</resources>
