@@ -257,11 +257,6 @@
     <string name="files_prompts">I prompt del master</string>
     <string name="files_state">Stato della storia</string>
     <string name="files_characters">Personaggi</string>
-    <plurals name="files_characters_count">
-        <item quantity="one">%1$,d personaggio</item>
-        <item quantity="many">%1$,d personaggi</item>
-        <item quantity="other">%1$,d personaggi</item>
-    </plurals>
 
     <!-- Claude Code in Termux -->
     <string name="cc_intro">Usa il tuo abbonamento Claude tramite Claude Code in Termux invece di una chiave API. Le chiamate impiegano più tempo ad avviarsi; non viene addebitato nulla per turno.</string>

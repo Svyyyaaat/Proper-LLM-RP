@@ -253,9 +253,6 @@
     <string name="files_prompts">게임 마스터의 프롬프트</string>
     <string name="files_state">스토리 상태</string>
     <string name="files_characters">등장인물</string>
-    <plurals name="files_characters_count">
-        <item quantity="other">등장인물 %1$,d명</item>
-    </plurals>
 
     <!-- Claude Code in Termux -->
     <string name="cc_intro">API 키 대신 Termux의 Claude Code를 통해 Claude 구독을 사용해요. 호출 시작은 느린 편이지만, 턴마다 요금이 청구되지 않아요.</string>

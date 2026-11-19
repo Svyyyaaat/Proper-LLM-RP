@@ -291,10 +291,6 @@
     <string name="files_state">Story state</string>
     <string name="files_characters">Characters</string>
     <string name="files_sources">Your files</string>
-    <plurals name="files_characters_count">
-        <item quantity="one">%1$,d character</item>
-        <item quantity="other">%1$,d characters</item>
-    </plurals>
 
     <!-- Claude Code in Termux -->
     <string name="cc_intro">Uses your Claude subscription through Claude Code in Termux instead of an API key. Calls are slower to start; nothing is billed per turn.</string>

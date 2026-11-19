@@ -117,7 +117,7 @@ fun FilesScreen(state: AppState) {
                         val character = x.parentFile?.name == "characters"
                         val label = if (character) x.useLines { it.firstOrNull() }.orEmpty().removePrefix("#").trim() else x.name
                         ToolRow(if (character) Icons.Filled.Person else if (d == "state") Icons.Filled.Folder else Icons.Filled.Description,
-                            label, pluralStringResource(R.plurals.files_characters_count, x.length().toInt(), x.length().toInt())) { open = x }
+                            label, android.text.format.Formatter.formatShortFileSize(androidx.compose.ui.platform.LocalContext.current, x.length())) { open = x }
                     }
                 }
             }

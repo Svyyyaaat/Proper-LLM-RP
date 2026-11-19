@@ -255,10 +255,6 @@
     <string name="files_prompts">Oyun yöneticisinin istemleri</string>
     <string name="files_state">Hikayenin durumu</string>
     <string name="files_characters">Karakterler</string>
-    <plurals name="files_characters_count">
-        <item quantity="one">%1$,d karakter</item>
-        <item quantity="other">%1$,d karakter</item>
-    </plurals>
 
     <!-- Claude Code in Termux -->
     <string name="cc_intro">API anahtarı yerine Termux\'taki Claude Code üzerinden Claude aboneliğinizi kullanır. Çağrıların başlaması daha yavaştır; tur başına ücret alınmaz.</string>

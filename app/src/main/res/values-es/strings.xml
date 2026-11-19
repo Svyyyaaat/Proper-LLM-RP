@@ -257,11 +257,6 @@
     <string name="files_prompts">Los prompts del director de juego</string>
     <string name="files_state">Estado de la historia</string>
     <string name="files_characters">Personajes</string>
-    <plurals name="files_characters_count">
-        <item quantity="one">%1$,d personaje</item>
-        <item quantity="many">%1$,d personajes</item>
-        <item quantity="other">%1$,d personajes</item>
-    </plurals>
 
     <!-- Claude Code in Termux -->
     <string name="cc_intro">Usa tu suscripción a Claude a través de Claude Code en Termux en lugar de una clave de API. Las llamadas tardan más en arrancar; no se cobra nada por turno.</string>

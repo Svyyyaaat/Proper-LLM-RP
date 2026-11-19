@@ -234,10 +234,11 @@ fun StyleContent(currentName: String?, currentSample: String?, presets: List<Sty
     Page {
         Text(stringResource(R.string.style_screen_about), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         // the one in use first: you see what you have, then the alternatives
-        for (o in presets.sortedByDescending { it.passage.trim() == currentSample?.trim() })
-            StylePage(o, o.passage.trim() == currentSample?.trim(), onPick)
+        // a built-in style is the one in use by its name (its sample may be in another language than when picked)
+        fun inUse(o: StyleOption) = o.passage.trim() == currentSample?.trim() || (o.name == currentName && presets.any { it.name == o.name })
+        for (o in presets.sortedByDescending { inUse(it) }) StylePage(o, inUse(o), onPick)
         // a style picked earlier from generated ones, not in the list: still shown, so you can see what you have
-        if (currentSample != null && (presets + generated.orEmpty()).none { it.passage.trim() == currentSample.trim() })
+        if (currentSample != null && presets.none { inUse(it) } && generated.orEmpty().none { it.passage.trim() == currentSample.trim() })
             StylePage(StyleOption(currentName ?: stringResource(R.string.style_current), "", currentSample), true, onPick)
         SectionTitle(stringResource(R.string.style_other))
         if (generated != null) for (o in generated) StylePage(o, o.passage.trim() == currentSample?.trim(), onPick)

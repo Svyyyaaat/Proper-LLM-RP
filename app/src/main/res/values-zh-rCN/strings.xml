@@ -253,9 +253,6 @@
     <string name="files_prompts">游戏主持人的提示词</string>
     <string name="files_state">故事状态</string>
     <string name="files_characters">角色</string>
-    <plurals name="files_characters_count">
-        <item quantity="other">%1$,d 个角色</item>
-    </plurals>
 
     <!-- Claude Code in Termux -->
     <string name="cc_intro">通过 Termux 中的 Claude Code 使用你的 Claude 订阅，而不是 API 密钥。调用启动较慢；不按回合计费。</string>

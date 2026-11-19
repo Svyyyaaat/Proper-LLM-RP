@@ -173,7 +173,7 @@ class StoryController(
     fun styleSample(): String? = File(dir, "config/style_sample.md").takeIf { it.exists() }?.readText()?.trim()?.ifEmpty { null }
 
     /** The built-in styles. */
-    fun presets(): List<StoryEngine.StyleOption> = StylePresets.ALL
+    fun presets(): List<StoryEngine.StyleOption> = StylePresets.forLanguage(app.locale.language)
 
     private var engine: StoryEngine? = null
 

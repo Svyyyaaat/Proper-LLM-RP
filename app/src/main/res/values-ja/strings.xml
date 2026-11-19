@@ -253,9 +253,6 @@
     <string name="files_prompts">ゲームマスターのプロンプト</string>
     <string name="files_state">ストーリーの状態</string>
     <string name="files_characters">登場人物</string>
-    <plurals name="files_characters_count">
-        <item quantity="other">%1$,d人</item>
-    </plurals>
 
     <!-- Claude Code in Termux -->
     <string name="cc_intro">APIキーの代わりに、Termux上のClaude Codeを通じてClaudeサブスクリプションを使います。呼び出しの開始は遅めですが、ターンごとの課金はありません。</string>

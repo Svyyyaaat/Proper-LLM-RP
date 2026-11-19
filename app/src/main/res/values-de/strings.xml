@@ -255,10 +255,6 @@
     <string name="files_prompts">Die Prompts des Spielleiters</string>
     <string name="files_state">Stand der Geschichte</string>
     <string name="files_characters">Figuren</string>
-    <plurals name="files_characters_count">
-        <item quantity="one">%1$,d Figur</item>
-        <item quantity="other">%1$,d Figuren</item>
-    </plurals>
 
     <!-- Claude Code in Termux -->
     <string name="cc_intro">Nutzt dein Claude-Abo über Claude Code in Termux statt eines API-Schlüssels. Aufrufe starten langsamer; pro Runde wird nichts abgerechnet.</string>

@@ -259,12 +259,6 @@
     <string name="files_prompts">Промпти майстра гри</string>
     <string name="files_state">Стан історії</string>
     <string name="files_characters">Персонажі</string>
-    <plurals name="files_characters_count">
-        <item quantity="one">%1$,d персонаж</item>
-        <item quantity="few">%1$,d персонажі</item>
-        <item quantity="many">%1$,d персонажів</item>
-        <item quantity="other">%1$,d персонажа</item>
-    </plurals>
 
     <!-- Claude Code in Termux -->
     <string name="cc_intro">Використовує вашу підписку Claude через Claude Code у Termux замість ключа API. Виклики запускаються повільніше; за ходи нічого не списується.</string>
