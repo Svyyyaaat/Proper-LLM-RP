@@ -1,0 +1,32 @@
+# One regular expression per line (case-sensitive; add (?i) for any case). A hit sends the sentence back for one rewrite.
+# Stock phrases models reach for, in the languages the app is most often played in; grow it from what shows up.
+# English: stock bodily reactions
+(?i)breath (he|she|they|I|you) (didn't|did not) know
+(?i)let out a breath
+(?i)a shiver (ran|went) down
+(?i)(his|her|their|my) heart (hammered|pounded|skipped)
+(?i)jaw (clenched|tightened)
+(?i)knuckles (went |turned )?white
+# English: time, silence, air
+(?i)time (seemed to )?(stood|stop(ped)?) still
+(?i)(the )?silence (stretched|hung|settled|was deafening)
+(?i)the air (grew|was) (thick|heavy|charged)
+(?i)hung in the air
+# English: announcing impact or meaning
+(?i)the weight of (his|her|their|the) words
+(?i)words? (landed|hit (him|her|them) like)
+(?i)something shifted
+(?i)a testament to
+# English: "not X but Y", smells the model reaches for
+(?i)\bozone\b
+(?i)(coppery|metallic) (tang|taste|smell)
+# Russian
+(?i)затаи(л|ла|ли) дыхание
+(?i)время (остановилось|замерло)
+(?i)тишина (повисла|звенела)
+(?i)повисл[аио] в воздухе
+# Japanese
+息を(呑|の)[むんみ]
+時が止まった
+沈黙が(落ち|降り|満ち)
+空気が(凍|張り詰め|張りつめ)

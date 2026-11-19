@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Brazilian Portuguese translation of values/strings.xml -->
+<resources>
+    <!-- screens -->
+    <string name="screen_story">História</string>
+    <string name="screen_costs">Custos</string>
+    <string name="screen_files">Prompts e arquivos da história</string>
+    <string name="screen_settings">Configurações</string>
+    <string name="screen_stories">Suas histórias</string>
+    <string name="screen_style">Estilo de escrita</string>
+
+    <!-- shared -->
+    <string name="back">Voltar</string>
+    <string name="save">Salvar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="change">Alterar</string>
+    <string name="add">Adicionar</string>
+    <string name="replace">Substituir</string>
+    <string name="next">Próximo</string>
+    <string name="begin">Começar</string>
+    <string name="continue_story">Continuar</string>
+    <string name="try_again">Tentar de novo</string>
+    <string name="details">Detalhes</string>
+    <string name="hide_details">Ocultar detalhes</string>
+    <string name="untitled">História sem título</string>
+    <string name="not_started">Ainda não começou</string>
+    <string name="step_of">Etapa %1$d de %2$d</string>
+    <string name="progress">Capítulo %1$d, turno %2$d</string>
+    <string name="progress_in_place">Capítulo %1$d, turno %2$d · %3$s</string>
+    <string name="busy_opening_app">Abrindo…</string>
+
+    <!-- language -->
+    <string name="settings_language">Idioma</string>
+    <string name="settings_language_about">O app e a história ficam neste idioma. Escreva para a história em outro idioma e ela responde no seu.</string>
+    <string name="language_system_named">Sistema (%1$s)</string>
+    <string name="language_dialog_about">Sistema segue o idioma do seu celular. Seja qual for a sua escolha, a história responde no idioma em que você escrever.</string>
+    <string name="language_button">Idioma: %1$s</string>
+
+    <!-- welcome and setup -->
+    <string name="welcome_tagline">Uma história que joga limpo.</string>
+    <string name="welcome_body">Uma história de RPG com um mestre de verdade: você interpreta um personagem, e o Claude comanda o mundo e todos que vivem nele.</string>
+    <string name="welcome_f1_title">Um mundo que se move</string>
+    <string name="welcome_f1_body">Pessoas com objetivos e segredos próprios, e problemas que continuam enquanto você está fora.</string>
+    <string name="welcome_f2_title">Os dados decidem, não o narrador</string>
+    <string name="welcome_f2_body">Jogadas arriscadas vão para os dados. Uma falha custa algo de verdade.</string>
+    <string name="welcome_f3_title">Qualquer idioma</string>
+    <string name="welcome_f3_body">Escreva no idioma que quiser: a história responde nele.</string>
+    <string name="welcome_start">Começar</string>
+
+    <string name="key_title">Conectar o Claude</string>
+    <string name="key_body_api">O Claude escreve a história. Pago pela sua conta da Anthropic: alguns centavos por trecho.</string>
+    <string name="key_body_cc">O Claude escreve a história com a sua assinatura do Claude, pelo app Claude Code no Termux.</string>
+    <string name="backend_api">Chave de API</string>
+    <string name="backend_cc">Claude Code</string>
+    <string name="key_save">Salvar chave</string>
+    <string name="key_cc_unlocks">“Próximo” é liberado quando a chamada de teste funcionar.</string>
+    <string name="key_stored">Armazenada apenas neste celular, criptografada com uma chave do Android Keystore. O custo de cada chamada é registrado.</string>
+    <string name="key_saved">Salva neste celular, criptografada: %1$s</string>
+    <string name="key_none">Nenhuma chave ainda</string>
+    <string name="key_dialog_title">Chave de API do Claude</string>
+
+    <string name="story_title">Sua história</string>
+    <string name="story_body">Um lugar, algumas pessoas com objetivos e segredos próprios, e problemas que avançam enquanto você está fora.</string>
+    <string name="story_seed_label">Sobre o que ela deve ser? (opcional)</string>
+    <string name="story_seed_hint">ex.: uma vila de pescadores, uma dívida, um negócio de família</string>
+    <string name="story_create">Criar a história</string>
+    <string name="story_language_note">A história será escrita em %1$s. Você pode mudar isso nas Configurações ou simplesmente escrever em outro idioma.</string>
+
+    <string name="style_step_title">Escolha o que você mais gosta de ler</string>
+    <string name="style_step_body">A mesma cena em estilos diferentes. Sua escolha define a voz da história; você pode mudar a qualquer momento na tela inicial.</string>
+    <string name="style_this_one">Este</string>
+    <string name="style_four_more">Escrever mais quatro (no seu idioma)</string>
+
+    <!-- home -->
+    <string name="home_your_story">Sua história</string>
+    <string name="home_stories">Histórias</string>
+    <string name="home_stories_none">novas ou anteriores</string>
+    <plurals name="home_stories_count">
+        <item quantity="one">%1$d neste celular</item>
+        <item quantity="many">%1$d neste celular</item>
+        <item quantity="other">%1$d neste celular</item>
+    </plurals>
+    <string name="home_style">Estilo</string>
+    <string name="home_style_none">escolha um</string>
+    <string name="home_more">Mais</string>
+    <string name="home_costs">Custos</string>
+    <string name="home_costs_subscription">na sua assinatura</string>
+    <string name="home_files">Arquivos</string>
+    <string name="home_files_about">prompts, mundo, elenco</string>
+    <string name="home_settings_about">idioma, visual, Claude</string>
+
+    <!-- the story -->
+    <string name="you_are">Você é</string>
+    <string name="reply_hint">Diga ou faça algo…</string>
+    <string name="reply_waiting">Escrevendo o próximo trecho…</string>
+    <string name="go_on">Seguir</string>
+    <string name="send">Enviar</string>
+    <string name="tool_listen">Ouvir</string>
+    <string name="tool_stop">Parar</string>
+    <string name="tool_rewrite">Reescrever</string>
+    <string name="tool_edit">Editar</string>
+    <string name="tool_behind">Bastidores</string>
+    <string name="version_previous">Versão anterior</string>
+    <string name="version_next">Próxima versão</string>
+    <string name="version_of">Versão %1$d de %2$d</string>
+    <string name="behind_title">Bastidores do trecho: dados, planos e verificações</string>
+    <string name="behind_nothing">Sem rolagem, sem complicação; as verificações não encontraram nada.</string>
+    <string name="note_roll">Rolagem: %1$s</string>
+    <string name="note_complication">Complicação: %1$s</string>
+    <string name="note_rewritten">Reescrito uma vez pelas verificações</string>
+    <string name="edit_title">Editar o trecho</string>
+    <string name="tts_no_voice">Não há voz para este idioma no celular. Instale uma em Configurações → Conversão de texto em voz (o mecanismo do Google tem a maioria).</string>
+    <string name="tts_unavailable">A conversão de texto em voz não está disponível neste celular.</string>
+
+    <string name="info_title">A história até agora</string>
+    <string name="info_you">Você</string>
+    <string name="info_remember">O que você lembra</string>
+    <string name="info_before_story">Antes da história: %1$s</string>
+    <string name="info_met">Pessoas que você conheceu</string>
+    <string name="info_spent">Claude até agora: %1$s nesta sessão, %2$s no total</string>
+    <string name="info_chapters">Capítulos</string>
+    <string name="info_no_chapters">O capítulo 1 ainda está sendo escrito. Um resumo aparece aqui quando ele terminar.</string>
+    <string name="info_chapter">Capítulo %1$d</string>
+
+    <!-- progress lines while Claude works -->
+    <string name="busy_opening">Abrindo a história…</string>
+    <string name="busy_sending">Enviando…</string>
+    <string name="busy_rewriting">Reescrevendo…</string>
+    <string name="busy_checking">Verificando…</string>
+    <string name="busy_creating">Criando a história…</string>
+    <string name="busy_opening_stories">Abrindo suas histórias…</string>
+    <string name="step_adjudicator">Decidindo o que está em jogo…</string>
+    <string name="step_offscreen">O mundo segue enquanto você esteve fora…</string>
+    <string name="step_director">Planejando esta sessão…</string>
+    <string name="step_intent">Decidindo o que cada um faz…</string>
+    <string name="step_writer">Escrevendo…</string>
+    <string name="step_rewrite">Corrigindo o trecho…</string>
+    <string name="step_judge">Verificando o trecho…</string>
+    <string name="step_scribe">Registrando o que mudou…</string>
+    <string name="step_summary">Fechando o capítulo…</string>
+    <string name="step_setup">Construindo o mundo…</string>
+    <string name="step_style_picker">Escrevendo quatro estilos…</string>
+    <string name="notify_channel">História em andamento</string>
+    <string name="notify_channel_about">Exibida enquanto um trecho está sendo escrito, para que ele não seja interrompido quando você trocar de app</string>
+
+    <!-- what went wrong -->
+    <string name="err_no_network">Não foi possível acessar o Claude: o celular não conseguiu localizar api.anthropic.com. Verifique a conexão com a internet (e se este app pode usar dados móveis) e tente de novo.</string>
+    <string name="err_cut_off">A conexão caiu enquanto o Claude escrevia. Tente de novo.</string>
+    <string name="err_timeout">A conexão expirou. Isso acontece com sinal fraco; tente de novo.</string>
+    <string name="err_tls">A conexão segura com o Claude falhou. Uma VPN, uma página de login de Wi-Fi ou um DNS com filtro pode causar isso.</string>
+    <string name="err_bad_key">O Claude recusou a chave de API. Cole uma nova em Configurações → Claude.</string>
+    <string name="err_forbidden">O Claude recusou a solicitação (403): talvez a chave não tenha acesso, ou a API não esteja disponível nesta rede.</string>
+    <string name="err_no_credit">Sua conta da Anthropic está sem créditos. Adicione créditos no Anthropic Console e tente de novo.</string>
+    <string name="err_rate_limited">Muitas solicitações ao mesmo tempo. Aguarde um minuto e tente de novo.</string>
+    <string name="err_overloaded">O Claude está sobrecarregado agora. Tente de novo em um minuto.</string>
+    <string name="err_server">O Claude teve um erro no servidor. Tente de novo.</string>
+    <string name="err_declined">O modelo se recusou a escrever este trecho. Tente de novo ou reescreva.</string>
+    <string name="err_unusable">A resposta do Claude veio inutilizável três vezes. Tente de novo.</string>
+    <string name="err_no_key">Primeiro adicione sua chave de API do Claude (Configurações → Claude).</string>
+    <string name="err_other">Algo deu errado.</string>
+
+    <!-- stories -->
+    <string name="stories_writing">Um trecho está sendo escrito. Você pode trocar de história quando ele terminar.</string>
+    <string name="stories_switch_busy">Um trecho ainda está sendo escrito. Troque quando ele terminar.</string>
+    <string name="stories_switch_failed">Não foi possível abrir essa história. Ela continua na lista; tente de novo.</string>
+    <string name="stories_none">Nenhuma história ainda.</string>
+    <string name="stories_start">Começar uma história</string>
+    <string name="stories_new">Começar uma nova história</string>
+    <string name="stories_new_q">Começar uma nova história?</string>
+    <string name="stories_new_keeps">“%1$s” fica aqui; você pode retomá-la quando quiser.</string>
+    <string name="stories_earlier">Histórias anteriores</string>
+    <string name="stories_many">Comece quantas histórias quiser. Cada uma espera aqui, onde você parou.</string>
+    <string name="stories_continue_q">Continuar “%1$s”?</string>
+    <string name="stories_continue_where">Ela abre onde você parou.</string>
+    <string name="stories_stays">“%1$s” fica aqui.</string>
+    <string name="stories_continue_it">Continuar</string>
+    <string name="played_today">Jogada hoje</string>
+    <string name="played_yesterday">Jogada ontem</string>
+    <plurals name="played_days_ago">
+        <item quantity="one">Jogada há %1$d dia</item>
+        <item quantity="many">Jogada há %1$d dias</item>
+        <item quantity="other">Jogada há %1$d dias</item>
+    </plurals>
+    <string name="played_on">Jogada em %1$s</string>
+
+    <!-- writing style -->
+    <string name="style_screen_about">A mesma cena em cada estilo. As amostras mostram a voz; a história é escrita no seu idioma. Sua escolha vale a partir do próximo trecho.</string>
+    <string name="style_current">Seu estilo atual</string>
+    <string name="style_other">Outros estilos</string>
+    <string name="style_write_four">Escrever quatro novos estilos (no seu idioma)</string>
+    <string name="style_write_more">Escrever mais quatro</string>
+    <string name="style_in_use">Em uso</string>
+    <string name="style_read_whole">Ler a amostra inteira</string>
+    <string name="style_use">Usar este estilo</string>
+    <string name="style_not_picked">Ainda não escolhido</string>
+    <string name="preset_dialogue">Quase só diálogo</string>
+    <string name="preset_dialogue_about">Conversa, conversa, conversa; uma linha curta de ação no meio.</string>
+    <string name="preset_wry">Leve e irônico</string>
+    <string name="preset_wry_about">Muito diálogo e um narrador falante e cheio de piadas.</string>
+    <string name="preset_storybook">Conto simples</string>
+    <string name="preset_storybook_about">Narração simples e concreta, como um livro juvenil.</string>
+    <string name="preset_hardboiled">Noir policial</string>
+    <string name="preset_hardboiled_about">Primeira pessoa enxuta, seca e afiada.</string>
+
+    <!-- settings -->
+    <string name="settings_look">Aparência e leitura</string>
+    <string name="settings_theme">Tema</string>
+    <string name="theme_system">Sistema</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Escuro</string>
+    <string name="theme_about">Sistema segue a configuração de tema claro ou escuro do seu celular.</string>
+    <string name="settings_colours">Cores</string>
+    <string name="colours_wallpaper">Do plano de fundo</string>
+    <string name="colours_about">Cores tiradas do seu plano de fundo (Material You).</string>
+    <string name="colours_about_old">As cores do plano de fundo precisam do Android 12; são usadas as cores próprias do app.</string>
+    <string name="settings_text_size">Tamanho do texto</string>
+    <string name="size_small">Pequeno</string>
+    <string name="size_normal">Normal</string>
+    <string name="size_large">Grande</string>
+    <string name="size_larger">Maior</string>
+    <string name="settings_sample_line">Ela estava com a porta da loja entreaberta quando o senhorio entrou.</string>
+    <string name="settings_story">A história</string>
+    <string name="settings_length">Tamanho dos trechos</string>
+    <string name="length_short">Curto</string>
+    <string name="length_normal">Normal</string>
+    <string name="length_long">Longo</string>
+    <string name="length_short_about">Mais vaivém: algumas linhas e já é a sua vez.</string>
+    <string name="length_normal_about">Uma cena inteira de história a cada turno.</string>
+    <string name="length_long_about">Trechos mais longos: a história avança mais a cada turno.</string>
+    <string name="settings_firm">Estilo mais rígido</string>
+    <string name="settings_firm_about">O Claude recebe o estilo como regras (“nunca…”) em vez de uma descrição. Experimente se os trechos se afastarem do estilo.</string>
+    <string name="settings_claude">Claude</string>
+    <string name="settings_advanced">Avançado</string>
+    <string name="settings_files_about">Tudo o que é dito ao Claude, editável</string>
+    <string name="settings_setup_again">Refazer a configuração</string>
+    <string name="settings_setup_again_about">O passo a passo do primeiro uso</string>
+
+    <!-- costs and files -->
+    <string name="costs_cc">Com o Claude Code, nada é cobrado por chamada; estes são os valores que as mesmas chamadas custariam na API.</string>
+    <string name="costs_in_all">no total · %1$s nesta sessão</string>
+    <string name="costs_none">Nada gasto ainda.</string>
+    <string name="costs_by_job">Esta sessão, por tarefa</string>
+    <string name="purpose_writer">Escrita</string>
+    <string name="purpose_rewrite">Correção de trechos</string>
+    <string name="purpose_judge">Verificação de trechos</string>
+    <string name="purpose_scribe">Registros</string>
+    <string name="purpose_intent">O que as pessoas fazem</string>
+    <string name="purpose_adjudicator">O que está em jogo</string>
+    <string name="purpose_director">Planejamento de sessões</string>
+    <string name="purpose_offscreen">O mundo em movimento</string>
+    <string name="purpose_summary">Resumos de capítulos</string>
+    <string name="purpose_setup">Criação de histórias</string>
+    <string name="purpose_style_picker">Estilos de escrita</string>
+    <string name="files_about">Arquivos de texto simples. Edite o que quiser; o mestre os lê a cada turno.</string>
+    <string name="files_none">Nada ainda: crie a história primeiro.</string>
+    <string name="files_config">Seus gostos e estilo</string>
+    <string name="files_prompts">Os prompts do mestre</string>
+    <string name="files_state">Estado da história</string>
+    <string name="files_characters">Personagens</string>
+    <plurals name="files_characters_count">
+        <item quantity="one">%1$,d personagem</item>
+        <item quantity="many">%1$,d personagens</item>
+        <item quantity="other">%1$,d personagens</item>
+    </plurals>
+
+    <!-- Claude Code in Termux -->
+    <string name="cc_intro">Usa a sua assinatura do Claude pelo Claude Code no Termux em vez de uma chave de API. As chamadas demoram mais para começar; nada é cobrado por turno.</string>
+    <string name="cc_step_install">Instale o Termux (versão do F-Droid ou do GitHub) e abra-o uma vez</string>
+    <string name="cc_get">Obter</string>
+    <string name="cc_step_folder">Dê ao app a pasta inicial do Termux (no seletor: ☰ → Termux → Usar esta pasta)</string>
+    <string name="cc_pick">Escolher</string>
+    <string name="cc_step_scripts">Instale os scripts, cole o comando copiado no Termux e depois execute `claude` lá uma vez para fazer login</string>
+    <string name="cc_install">Instalar</string>
+    <string name="cc_again">De novo</string>
+    <string name="cc_write_failed">Não foi possível gravar no Termux: %1$s</string>
+    <string name="cc_copied">Copiado. No Termux: toque e segure → Colar, depois Enter</string>
+    <string name="cc_step_allow">Permita que o app execute comandos no Termux</string>
+    <string name="cc_allow">Permitir</string>
+    <string name="cc_step_battery">Opcional: desative a otimização de bateria para o Termux, para que o Android não o interrompa no meio de um turno</string>
+    <string name="cc_open">Abrir</string>
+    <string name="cc_step_test">Teste uma chamada (a primeira pode levar um minuto)</string>
+    <string name="cc_test">Testar</string>
+    <string name="cc_testing">Testando…</string>
+    <string name="cc_answered">O Claude Code respondeu.</string>
+    <string name="cc_empty_answer">O Claude Code respondeu sem conteúdo</string>
+</resources>

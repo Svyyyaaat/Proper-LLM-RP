@@ -1,0 +1,22 @@
+Create the starting material for a roleplaying game, as its game master. The player's taste in stories:
+
+{{plot}}
+
+{{seed}}
+
+Write every text field in {{language}} (the JSON keys stay as they are).
+
+Make a small, grounded world: one town or neighbourhood, present day unless the seed says otherwise, adults with work, money and history. The player's character is someone with a stake in it and something to lose (describe them only by situation, never by personality or feelings: the player plays them).
+
+Return JSON:
+- `title`: a short title for the story (2–6 words), the kind on a book spine.
+- `world`: markdown, under 250 words: the place, the institutions and money that matter, what is going wrong.
+- `player`: two sentences: who the player character really is, what they have, what they owe, including anything hidden.
+- `history`: eight to twelve things that happened before the story starts, the record everyone's memory is built from. Each is `text` (one concrete line: what happened, when, how long, to whom) and `witnesses` (the names of who saw it, took part or was told it; "PLAYER" for the player's character). Cover the player's character's recent past, how they know each person, and what each person saw or was told about them. Anything not in here, a person doesn't know.
+- `player_public`: one or two sentences: only what other people can see or have heard about the player character (looks, role, reputation). Anything hidden stays out.
+- `characters`: three or four people, each `name` (a name that fits the world and its culture), `file` (markdown, under 170 words, with sections Goals, Busy with, Limits, Secrets, Knows, Attitude). Each person has a life that doesn't revolve around the player: `Busy with` is their own errands, work and worries right now. `Knows` lists what they actually know, including what they know and don't know about the player character (usually only the public side). Each person wants something that conflicts with someone else. Give them different attitudes (some warm, some guarded, some indifferent): how readily they trust or agree is part of who they are, not a rule for everyone.
+- `secrets`: `text` and `knows` (names).
+- `clocks`: two or three off-screen threats, `name`, `size` 4–8, `when_full`.
+- `complications`: ten grounded complications for this world, each one line, optionally starting with a place tag in brackets.
+- `ambience`: fifteen small background happenings in this world's places (sounds, weather, animals, people passing, work going on nearby), each one line, optionally starting with brackets holding place tags and options separated by ";": "sticky N" for something that goes on a few turns (weather, a festival, work next door), "group G" for things that exclude each other (weather). Example: "[market; sticky 3] A bell-ringer calls out the hour, again and again." Ordinary things, nothing that drives the plot.
+- `opening`: `place`, `present` (names), and one sentence on the situation the first passage starts in.
