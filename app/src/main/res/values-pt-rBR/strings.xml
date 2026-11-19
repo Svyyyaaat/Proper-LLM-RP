@@ -299,4 +299,6 @@
     <string name="stories_exported">Backup salvo.</string>
     <string name="stories_export_failed">Não foi possível salvar o backup.</string>
     <string name="stories_import_failed">Esse arquivo não é um backup de história, ou não pôde ser lido.</string>
+    <string name="tool_ideas">Ideias</string>
+    <string name="ideas_thinking">Pensando no que você pode fazer…</string>
 </resources>

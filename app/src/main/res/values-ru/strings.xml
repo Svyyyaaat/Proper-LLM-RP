@@ -304,4 +304,6 @@
     <string name="cc_testing">Проверка…</string>
     <string name="cc_answered">Claude Code ответил.</string>
     <string name="cc_empty_answer">Claude Code прислал пустой ответ</string>
+    <string name="tool_ideas">Идеи</string>
+    <string name="ideas_thinking">Подбираются варианты…</string>
 </resources>

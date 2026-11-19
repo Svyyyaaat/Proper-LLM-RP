@@ -295,4 +295,6 @@
     <string name="stories_exported">バックアップを保存しました。</string>
     <string name="stories_export_failed">バックアップを保存できませんでした。</string>
     <string name="stories_import_failed">物語のバックアップではないか、読み込めませんでした。</string>
+    <string name="tool_ideas">アイデア</string>
+    <string name="ideas_thinking">できそうなことを考えています…</string>
 </resources>

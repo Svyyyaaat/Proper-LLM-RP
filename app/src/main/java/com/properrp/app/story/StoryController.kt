@@ -393,6 +393,26 @@ class StoryController(
         show(engine().pending!!)
     }
 
+    /** Ideas for what to do next, for the passage on screen (asked for with the Ideas button). */
+    var ideas by mutableStateOf<List<String>>(emptyList())
+        private set
+    var thinking by mutableStateOf(false)
+        private set
+    private var ideasFor: String? = null
+
+    /** Asks for three ideas (a quick, cheap call); they stay until the passage changes. */
+    fun suggest() {
+        val shown = current?.passage?.text ?: return
+        if (thinking || isWorking) return
+        if (ideasFor == shown && ideas.isNotEmpty()) return
+        thinking = true
+        scope.launch {
+            val got = withContext(Dispatchers.IO) { runCatching { engine().ideas() }.getOrDefault(emptyList()) }
+            if (current?.passage?.text == shown) { ideas = got; ideasFor = shown }
+            thinking = false
+        }
+    }
+
     /** Switches between the versions of this passage (Reroll keeps all of them). */
     fun selectVersion(i: Int) {
         val e = engine
@@ -412,6 +432,7 @@ class StoryController(
 
     private fun show(t: PendingTurn) {
         title = place()
+        if (ideasFor != t.draft.passage) { ideas = emptyList(); ideasFor = null }
         val d = t.draft
         val notes = listOfNotNull(
             t.roll?.let { app.text(R.string.note_roll, it.toString()) },

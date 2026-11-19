@@ -299,4 +299,6 @@
     <string name="stories_exported">Sauvegarde enregistrée.</string>
     <string name="stories_export_failed">Impossible d\'enregistrer la sauvegarde.</string>
     <string name="stories_import_failed">Ce fichier n\'est pas une sauvegarde d\'histoire, ou il est illisible.</string>
+    <string name="tool_ideas">Idées</string>
+    <string name="ideas_thinking">Je cherche ce que vous pourriez faire…</string>
 </resources>

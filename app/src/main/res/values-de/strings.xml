@@ -297,4 +297,6 @@
     <string name="stories_exported">Backup gespeichert.</string>
     <string name="stories_export_failed">Backup konnte nicht gespeichert werden.</string>
     <string name="stories_import_failed">Das ist kein Backup einer Geschichte, oder es konnte nicht gelesen werden.</string>
+    <string name="tool_ideas">Ideen</string>
+    <string name="ideas_thinking">Überlege, was du tun könntest…</string>
 </resources>

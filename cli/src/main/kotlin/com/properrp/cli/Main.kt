@@ -8,14 +8,17 @@ import java.io.File
 
 private const val USAGE = """Proper RP CLI
 
-  play --dir DIR [--language LANG] [--seed TEXT]
+  play --dir DIR [--language LANG] [--seed TEXT] [--files a.md,b.txt] [--claude-code yes] [--script replies.txt]
       Plays a story in the terminal (creates it in DIR the first time). Type what your character says or does;
       an empty line lets the scene go on, /reroll writes the passage again, /quit stops.
   story-smoke --dir DIR [--language LANG]
       A real run against the API: setup, the style picker, three turns. Costs about $0.30–0.50.
 
 LANG is the language the story is written in unless you write in another one (English name: "Russian").
-ANTHROPIC_API_KEY must be set."""
+--files: text files given to a new story (lore, character sheets), as in the app.
+--claude-code yes: calls go through Claude Code (claude -p, your subscription) like the app's Termux backend,
+  instead of the API (ANTHROPIC_API_KEY).
+--script: replies to send, one per line (an empty line lets the scene go on), instead of typing; then it stops."""
 
 fun main(args: Array<String>) {
     val o = Opts(args.drop(1))
@@ -43,29 +46,49 @@ private class Opts(args: List<String>) {
 }
 
 private fun engine(o: Opts, dir: File, session: String): Pair<StoryEngine, CostLog> {
-    val llm = AnthropicLlm(System.getenv("ANTHROPIC_API_KEY") ?: error("set ANTHROPIC_API_KEY"))
+    val llm = if (o.named["--claude-code"] == "yes") claudeCode() else
+        AnthropicLlm(System.getenv("ANTHROPIC_API_KEY") ?: error("set ANTHROPIC_API_KEY"))
     val costs = CostLog(File(dir, "log/costs.jsonl"))
     val e = StoryEngine(dir, llm, costs, session, settings = StoryEngine.Settings(language = o.named["--language"] ?: "English"))
     e.onCall = { purpose -> System.err.println("· $purpose") }
     return e to costs
 }
 
+/** The app's Termux script, run here: one claude -p per call. */
+private fun claudeCode() = com.properrp.core.llm.ClaudeCodeLlm { request, _ ->
+    val script = listOf("app/src/main/assets/termux/claude_call.py", "../app/src/main/assets/termux/claude_call.py").map(::File).first { it.exists() }
+    val req = File.createTempFile("call", ".json").apply { writeText(request.toString()); deleteOnExit() }
+    val stream = File.createTempFile("stream", ".txt").apply { deleteOnExit() }
+    val p = ProcessBuilder("python3", script.path, req.path, stream.path).redirectError(ProcessBuilder.Redirect.INHERIT).start()
+    p.inputStream.bufferedReader().readText().also { p.waitFor() }
+}
+
 private fun play(o: Opts) {
     val dir = File(o.need("--dir")).apply { mkdirs() }
     val (e, costs) = engine(o, dir, "cli")
-    if (!e.isSetUp()) { e.setup(o.named["--seed"].orEmpty()); println(File(dir, "state/player.md").readText()) }
+    if (!e.isSetUp()) {
+        o.named["--files"]?.split(',')?.filter { it.isNotBlank() }?.forEach { f ->
+            com.properrp.core.story.Sources(dir).add(File(f).name, File(f).readText())
+        }
+        e.setup(o.named["--seed"].orEmpty())
+        println(File(dir, "state/player.md").readText())
+    }
     if (!e.hasStyle()) e.pickStyle(StylePresets.ALL.first())
+    val script = o.named["--script"]?.let { File(it).readLines() }
+    var step = 0
     var message: String? = null
     while (true) {
         if (e.pending == null && e.needsNewSession()) e.startSession()
         val t = if (e.pending != null) e.resume() else e.playerTurn(message)
         println("\n" + t.draft.passage + "\n")
+        t.draft.checks.filter { !it.passed }.forEach { System.err.println("  check ${it.name}: ${it.detail}") }
         System.err.println("($${"%.3f".format(costs.total("cli"))} this run)")
         print("> ")
-        val line = readLine() ?: return
+        val line = if (script != null) (script.getOrNull(step++) ?: return).also { println(it) } else readLine() ?: return
         when (line.trim()) {
             "/quit" -> return
             "/reroll" -> { e.reroll(); continue }
+            "/ideas" -> { e.ideas().forEach { println("  idea: $it") }; continue }
         }
         e.commit()
         message = line.ifBlank { null }

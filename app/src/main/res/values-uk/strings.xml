@@ -301,4 +301,6 @@
     <string name="stories_exported">Копію збережено.</string>
     <string name="stories_export_failed">Не вдалося зберегти копію.</string>
     <string name="stories_import_failed">Це не копія історії, або файл не вдалося прочитати.</string>
+    <string name="tool_ideas">Ідеї</string>
+    <string name="ideas_thinking">Вигадую, що можна зробити…</string>
 </resources>

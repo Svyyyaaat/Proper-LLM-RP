@@ -268,8 +268,7 @@ class StoryEngine(
             call("setup", Models.WRITER, Prompts.fill(prompts.prompt("setup"), mapOf(
                 "plot" to prompts.config("plot.md"), "language" to settings.language,
                 "material" to Sources(dir).material(MATERIAL_SETUP).let { m -> if (m.isEmpty()) "" else
-                    "\n## Material from the player\nBuild the world from this: use its places, people, names and facts as given (they win " +
-                        "over everything else here), and fill in only what it leaves open. Characters it describes are the cast.\n\n$m\n" }, "seed" to if (seed.isBlank()) "" else "Seed from the player: $seed",
+                    "\n## Material from the player\n" + MATERIAL_RULES + "\n\n$m\n" }, "seed" to if (seed.isBlank()) "" else "Seed from the player: $seed",
             )), listOf(Msg(Role.USER, "Create the game now, with every field filled in.")), schema = SETUP_SCHEMA, maxTokens = 16000)
         }
         val stateDir = File(dir, "state").apply { mkdirs() }
@@ -301,12 +300,15 @@ class StoryEngine(
             val s = secrets!!.getJSONObject(i)
             "- S${i + 1}: ${s.getString("text")} [knows: ${(0 until s.getJSONArray("knows").length()).joinToString(", ") { s.getJSONArray("knows").getString(it) }}]"
         } + "\n")
-        o.optJSONArray("complications")?.let { a ->
+        o.optJSONArray("complications")?.takeIf { it.length() > 0 }?.let { a ->
             val f = File(dir, "config/complications.md")
+            // the world's own replace the generic ones (phones and trains don't belong in every world)
+            f.writeAtomic(defaultsHeader(f))
             f.appendText((0 until a.length()).joinToString("") { "- ${a.getString(it).removePrefix("- ")}\n" })
         }
-        o.optJSONArray("ambience")?.let { a ->
+        o.optJSONArray("ambience")?.takeIf { it.length() > 0 }?.let { a ->
             val f = File(dir, "config/ambience.md")
+            f.writeAtomic(defaultsHeader(f))
             f.appendText((0 until a.length()).joinToString("") { "- ${a.getString(it).removePrefix("- ")}\n" })
         }
         val opening = o.getJSONObject("opening")
@@ -316,6 +318,11 @@ class StoryEngine(
             beats = mutableListOf(StoryState.Beat(opening.getString("situation"), place, present.toList(), ""))
         })
     }
+
+    /** A config file's comment lines (how it works), without its generic entries. */
+    private fun defaultsHeader(f: File): String =
+        (f.takeIf { it.exists() }?.readText() ?: prompts.config(f.name).orEmpty()).lines().takeWhile { it.startsWith("#") || it.isBlank() }
+            .joinToString("\n").trimEnd() + "\n"
 
     data class StyleOption(val name: String, val line: String, val passage: String)
 
@@ -760,7 +767,9 @@ class StoryEngine(
             "plot" to prompts.config("plot.md"), "world" to state.world().substringBefore("## Clocks").trim() + "\n\n## The player's character\n" + playerText(),
             "style_sample" to prompts.config("style_sample.md"),
             "lore" to Sources(dir).material(MATERIAL_WRITER).let { m -> if (m.isEmpty()) "" else
-                "\n## Background from the player (true in this story; the records above say what has changed since)\n$m\n" },
+                "\n## Reference: the player's files (background, true unless the records say it changed)\nLook things up here " +
+                    "when the scene needs them: a name, a rule, how a place looks. Don't bring in an object, place or person from it " +
+                    "just because it's there, and don't retell it.\n$m\n" },
         ))
         val chapter = state.scene().chapter
         val prev = File(chaptersDir, "${chapter - 1}.md")
@@ -975,6 +984,16 @@ class StoryEngine(
         }
     }
 
+    /** Three things the player's character could do next (on request: the player is stuck). */
+    fun ideas(): List<String> {
+        val t = pending?.takeIf { it.ready } ?: return emptyList()
+        val o = json(call("ideas", Models.CHECKS, Prompts.fill(prompts.prompt("ideas"), mapOf(
+            "player" to playerText(), "scene" to state.scene().let { "Place: ${it.place}. Present: ${it.present.joinToString().ifEmpty { "nobody else" }}." },
+            "passage" to t.draft.passage,
+        )), listOf(Msg(Role.USER, "Three ideas.")), schema = IDEAS_SCHEMA, maxTokens = 600, quiet = true))
+        return o.optJSONArray("ideas")?.let { a -> (0 until a.length()).map { a.optString(it).trim() } }.orEmpty().filter { it.isNotEmpty() }.take(3)
+    }
+
     // ------------------------------------------------------------------ helpers
 
     private fun memoryLine(e: StoryState.Event) =
@@ -1029,6 +1048,20 @@ class StoryEngine(
         const val CONTINUE = "(continue)"
 
         /** How much of the player's files the setup reads, and the writer keeps (cached) every turn. */
+        /** How setup reads the player's files: they replace the defaults below them, each file for what it is. */
+        const val MATERIAL_RULES = "The player gave these files. They are the story: where they describe the world, the people or the " +
+            "player's character, that is what the game uses, and the defaults further down (a small present-day town, two or three " +
+            "people, two sentences about the player) apply only to what the files leave open. Read each file for what it is:\n" +
+            "- A world description: the world, its places, rules and troubles; keep its tone and genre.\n" +
+            "- A sheet for the player's character (\"my character\", \"I\", the one the player plays): `player` holds it all " +
+            "(not two sentences), `player_public` what others can see of it.\n" +
+            "- A sheet for someone else: one of `characters` (or `extras` if minor), keeping their name, goals, secrets and what they know.\n" +
+            "- A log or summary of earlier play: what already happened. It goes into `history` (with who saw it), and `opening` " +
+            "continues from where it ends; never replay it.\n" +
+            "- Several separate settings or casts that don't belong together: build the world from the one about the player's " +
+            "character (or the first), and bring others in only where the files themselves connect them.\n" +
+            "Don't put every object, place and person from the files into the opening: start with what this scene needs; the rest " +
+            "stays in the world for later."
         const val MATERIAL_SETUP = 60_000
         const val MATERIAL_WRITER = 24_000
 
@@ -1061,6 +1094,7 @@ class StoryEngine(
             "banned phrase" to "Avoid stock phrases (see the style rules); say the plain concrete thing.",
         )
 
+        val IDEAS_SCHEMA = """{"type":"object","additionalProperties":false,"required":["ideas"],"properties":{"ideas":{"type":"array","items":{"type":"string"}}}}"""
         val REMEMBER_SCHEMA = """{"type":"object","additionalProperties":false,"required":["remembers"],"properties":{"remembers":{"type":"string"}}}"""
         val KNOWS_SCHEMA = """{"type":"object","additionalProperties":false,"required":["knows"],"properties":{"knows":{"type":"string"}}}"""
 

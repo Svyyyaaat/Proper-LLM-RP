@@ -312,4 +312,6 @@
     <string name="cc_testing">Testing…</string>
     <string name="cc_answered">Claude Code answered.</string>
     <string name="cc_empty_answer">Claude Code answered with nothing</string>
+    <string name="tool_ideas">Ideas</string>
+    <string name="ideas_thinking">Thinking of what you could do…</string>
 </resources>

@@ -295,4 +295,6 @@
     <string name="stories_exported">备份已保存。</string>
     <string name="stories_export_failed">无法保存备份。</string>
     <string name="stories_import_failed">该文件不是故事备份，或无法读取。</string>
+    <string name="tool_ideas">灵感</string>
+    <string name="ideas_thinking">正在想你可以做什么……</string>
 </resources>

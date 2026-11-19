@@ -301,4 +301,6 @@
     <string name="stories_exported">Kopia zapisana.</string>
     <string name="stories_export_failed">Nie udało się zapisać kopii.</string>
     <string name="stories_import_failed">To nie jest kopia historii albo nie udało się jej odczytać.</string>
+    <string name="tool_ideas">Pomysły</string>
+    <string name="ideas_thinking">Wymyślam, co możesz zrobić…</string>
 </resources>

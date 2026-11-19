@@ -10,6 +10,7 @@ prompts/adjudicator.md	90a8b9373759faed
 prompts/condense.md	04bd9b85d890c602
 prompts/director.md	6f6003760bf31502
 prompts/director.md	d45199334512e774
+prompts/ideas.md	d5154b0a52700a24
 prompts/intent.md	d2e507ffbcfa53bb
 prompts/intent.md	e013bd101f68ba67
 prompts/judge.md	280abdb2137c79e8

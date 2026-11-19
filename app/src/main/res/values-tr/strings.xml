@@ -297,4 +297,6 @@
     <string name="stories_exported">Yedek kaydedildi.</string>
     <string name="stories_export_failed">Yedek kaydedilemedi.</string>
     <string name="stories_import_failed">Bu dosya bir hikâye yedeği değil ya da okunamadı.</string>
+    <string name="tool_ideas">Fikirler</string>
+    <string name="ideas_thinking">Neler yapabileceğini düşünüyorum…</string>
 </resources>

@@ -31,6 +31,8 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material.icons.filled.Casino
+import androidx.compose.material.icons.filled.Lightbulb
+import androidx.compose.foundation.clickable
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Refresh
@@ -102,7 +104,9 @@ fun PassageText(p: ShownPassage) {
 
 @Composable
 fun PassageTools(p: ShownPassage, enabled: Boolean, onReroll: () -> Unit, onEdit: () -> Unit,
-                 onVersion: (Int) -> Unit = {}, listening: Boolean = false, onListen: (() -> Unit)? = null) {
+                 onVersion: (Int) -> Unit = {}, listening: Boolean = false, onListen: (() -> Unit)? = null,
+                 /** Ideas for what to do next: ask, while asking, what came back, and picking one. */
+                 onIdeas: (() -> Unit)? = null, thinking: Boolean = false, ideas: List<String> = emptyList(), onIdea: (String) -> Unit = {}) {
     var notes by remember { mutableStateOf(false) }
     // a quiet row of round tools; the passage is what matters
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -110,6 +114,8 @@ fun PassageTools(p: ShownPassage, enabled: Boolean, onReroll: () -> Unit, onEdit
             stringResource(if (listening) R.string.tool_stop else R.string.tool_listen), active = listening, onClick = onListen)
         Tool(Icons.Filled.Refresh, stringResource(R.string.tool_rewrite), enabled = enabled, onClick = onReroll)
         Tool(Icons.Filled.Edit, stringResource(R.string.tool_edit), enabled = enabled, onClick = onEdit)
+        if (onIdeas != null) Tool(Icons.Filled.Lightbulb, stringResource(R.string.tool_ideas), enabled = enabled && !thinking,
+            active = ideas.isNotEmpty(), onClick = onIdeas)
         Tool(Icons.Filled.Casino, stringResource(R.string.tool_behind), active = notes) { notes = !notes }
         Spacer(Modifier.weight(1f))
         if (p.versions > 1) Row(verticalAlignment = Alignment.CenterVertically) {
@@ -121,6 +127,14 @@ fun PassageTools(p: ShownPassage, enabled: Boolean, onReroll: () -> Unit, onEdit
             IconButton({ onVersion(p.version + 1) }, enabled = enabled && p.version < p.versions - 1) {
                 Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, stringResource(R.string.version_next))
             }
+        }
+    }
+    if (thinking) Busy(stringResource(R.string.ideas_thinking))
+    if (ideas.isNotEmpty()) Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        for (idea in ideas) Surface(Modifier.fillMaxWidth().clip(MaterialTheme.shapes.small).clickable { onIdea(idea) },
+            shape = MaterialTheme.shapes.small, color = MaterialTheme.colorScheme.secondaryContainer) {
+            Text(idea, Modifier.padding(horizontal = 14.dp, vertical = 10.dp), style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSecondaryContainer)
         }
     }
     if (notes) PaperCard {
@@ -181,6 +195,7 @@ fun StoryContent(
     /** The message just sent, shown as a bubble while its turn is written. */
     sending: String? = null,
     onInfo: (() -> Unit)? = null,
+    onIdeas: (() -> Unit)? = null, thinking: Boolean = false, ideas: List<String> = emptyList(),
 ) {
     val listState = rememberLazyListState()
     LaunchedEffect(history.size, current) {
@@ -216,7 +231,7 @@ fun StoryContent(
                     if (busy != null && draft != null) DraftPassage(busy, draft.second)
                     else PassageText(current.passage)
                     PassageTools(current.passage, busy == null, onReroll, onEdit, onVersion, listening,
-                        onListen?.let { l -> { l(current.passage.text) } })
+                        onListen?.let { l -> { l(current.passage.text) } }, onIdeas, thinking, ideas, onIdea = onReply)
                     // sent while this passage is still being recorded: the bubble shows already
                     if (busy != null && sending != null) PlayerBubble(sending)
                 }
@@ -281,6 +296,7 @@ fun StoryScreen(state: AppState, onBack: () -> Unit) {
         listening = state.speaker.speaking,
         draft = story.draft, sending = story.sending,
         onListen = { text -> if (state.speaker.speaking) state.speaker.stop() else state.speaker.say(text) },
+        onIdeas = { story.suggest() }, thinking = story.thinking, ideas = story.ideas,
     )
     info?.let { i -> StoryInfoSheet(i) { info = null } }
     editing?.let { text ->

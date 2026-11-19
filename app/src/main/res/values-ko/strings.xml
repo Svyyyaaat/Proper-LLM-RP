@@ -295,4 +295,6 @@
     <string name="stories_exported">백업을 저장했어요.</string>
     <string name="stories_export_failed">백업을 저장할 수 없어요.</string>
     <string name="stories_import_failed">이야기 백업 파일이 아니거나 읽을 수 없어요.</string>
+    <string name="tool_ideas">아이디어</string>
+    <string name="ideas_thinking">할 수 있는 일을 떠올리는 중…</string>
 </resources>
