@@ -30,6 +30,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -83,7 +87,6 @@ fun StoryMenu(info: MenuInfo, go: (Screen) -> Unit, onNewStory: () -> Unit) {
             HorizontalDivider(Modifier.padding(horizontal = 24.dp, vertical = 8.dp), color = MaterialTheme.colorScheme.outlineVariant)
             MenuRow(Icons.Filled.BarChart, stringResource(R.string.screen_costs),
                 if (info.claudeCode) stringResource(R.string.home_costs_subscription) else "$%.2f".format(info.totalCost)) { go(Screen.COSTS) }
-            MenuRow(Icons.Filled.Description, stringResource(R.string.screen_files), null) { go(Screen.FILES) }
             MenuRow(Icons.Filled.Settings, stringResource(R.string.screen_settings), null) { go(Screen.SETTINGS) }
         }
     }
@@ -158,16 +161,22 @@ fun RollLine(roll: com.properrp.app.story.RollUi) {
         Dice.Outcome.COST -> cs.accent to stringResource(R.string.roll_cost)
         Dice.Outcome.FAILURE -> cs.error to stringResource(R.string.roll_failure)
     }
-    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+    var explain by remember { mutableStateOf(false) }
+    Row(Modifier.clip(MaterialTheme.shapes.small).clickable { explain = true }.padding(vertical = 4.dp),
+        verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             roll.dice.forEach { DieFace(it, 26.dp, cs.onBackground.copy(alpha = 0.92f), cs.background) }
         }
         Column(Modifier.weight(1f)) {
             // the dice show the numbers; the words say what they mean
             Text(label, style = MaterialTheme.typography.labelLarge, color = tone)
-            roll.action?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant, maxLines = 2, overflow = TextOverflow.Ellipsis) }
+            roll.action?.let { Text(stringResource(R.string.roll_tried, it), style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant,
+                maxLines = 2, overflow = TextOverflow.Ellipsis) }
         }
     }
+    if (explain) androidx.compose.material3.AlertDialog(onDismissRequest = { explain = false },
+        title = { Text(stringResource(R.string.roll_explain_title)) }, text = { Text(stringResource(R.string.roll_explain)) },
+        confirmButton = { androidx.compose.material3.TextButton({ explain = false }) { Text(stringResource(R.string.done)) } })
 }
 
 /** The menu's numbers: reads files, call off the main thread. */

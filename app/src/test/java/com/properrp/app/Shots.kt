@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.android.resources.NightMode
@@ -92,8 +93,9 @@ class Shots {
     @Test fun d5_story_tablet() = story(device = DeviceConfig.PIXEL_C, roll = RollUi(listOf(6, 5), 0, Dice.Outcome.SUCCESS, "slip out through the yard"))
 
     @Test fun d6_creating() = shot {
-        StoryContent("Proper RP", history = emptyList(), current = null, busy = "Planning the first session…", error = null, creating = true,
-            steps = listOf("Building the world…", "Planning the first session…"), onReroll = {}, onEdit = {}, onSend = {}, onMenu = {})
+        StoryContent("Proper RP", history = emptyList(), current = null, busy = "Planning the next scenes…", error = null, creating = true,
+            steps = listOf("The place and the people…", "Planning the next scenes…"), onReroll = {}, onEdit = {}, onSend = {}, onMenu = {},
+            premise = "A port town where water costs more than wine")
     }
     @Test fun d7_streaming() = shot {
         StoryContent("Salt and Water", history = listOf(ShownTurn(null, prev)), current = null, busy = "Writing…", error = null,
@@ -129,6 +131,14 @@ class Shots {
     }
     @Test fun f2_style() = shot { StyleContent("Mostly dialogue", StylePresets.ALL[0].passage, StylePresets.ALL, null, null, null, {}, {}) }
     @Test fun g1_settings() = shot { SettingsContent(SettingsValues(1f, PassageLength.NORMAL, false, "sk-ant-…a1b2", "Mostly dialogue"), {}, {}, {}, {}) }
+    @Test fun z1_icon() = shot {
+        androidx.compose.foundation.layout.Row(Modifier.fillMaxSize(), horizontalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceEvenly,
+            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+            com.properrp.app.ui.AppMark(140.dp)
+            androidx.compose.runtime.CompositionLocalProvider(com.properrp.app.ui.LocalDynamicColor provides true) { com.properrp.app.ui.AppMark(140.dp) }
+        }
+    }
+
     @Test fun g2_costs() = shot {
         CostsContent(CostsData(1.42, 0.21, mapOf("writer" to 0.12, "intent" to 0.04, "scribe" to 0.03, "judge" to 0.01, "adjudicator" to 0.004)))
     }

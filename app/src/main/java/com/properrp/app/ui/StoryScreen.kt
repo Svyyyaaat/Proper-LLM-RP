@@ -27,6 +27,7 @@ import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.automirrored.filled.VolumeUp
@@ -124,18 +125,19 @@ fun PassageTools(p: ShownPassage, enabled: Boolean, onReroll: () -> Unit, onEdit
         if (onListen != null) SmallTool(if (listening) Icons.Filled.Stop else Icons.AutoMirrored.Filled.VolumeUp,
             stringResource(if (listening) R.string.tool_stop else R.string.tool_listen), true, onListen)
         Spacer(Modifier.weight(1f))
-        if (p.versions > 1) {
-            IconButton({ onVersion(p.version - 1) }, enabled = enabled && p.version > 0, modifier = Modifier.size(36.dp)) {
-                Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, stringResource(R.string.version_previous))
-            }
-            Text("${p.version + 1}/${p.versions}", style = MaterialTheme.typography.labelMedium, color = cs.onSurfaceVariant)
-            IconButton({ onVersion(p.version + 1) }, enabled = enabled && p.version < p.versions - 1, modifier = Modifier.size(36.dp)) {
-                Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, stringResource(R.string.version_next))
-            }
-        }
         IconButton({ notes = !notes }, Modifier.size(36.dp)) {
             Icon(Icons.Filled.Casino, stringResource(R.string.tool_behind), Modifier.size(18.dp),
                 tint = if (notes) cs.primary else cs.onSurfaceVariant)
+        }
+    }
+    // after a rewrite: the versions, to go back to one you liked better
+    if (p.versions > 1) Row(verticalAlignment = Alignment.CenterVertically) {
+        IconButton({ onVersion(p.version - 1) }, enabled = enabled && p.version > 0, modifier = Modifier.size(36.dp)) {
+            Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, stringResource(R.string.version_previous))
+        }
+        Text(stringResource(R.string.version_of, p.version + 1, p.versions), style = MaterialTheme.typography.labelMedium, color = cs.onSurfaceVariant)
+        IconButton({ onVersion(p.version + 1) }, enabled = enabled && p.version < p.versions - 1, modifier = Modifier.size(36.dp)) {
+            Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, stringResource(R.string.version_next))
         }
     }
     if (notes) Column(Modifier.fillMaxWidth().clip(MaterialTheme.shapes.medium).background(cs.surfaceContainer).padding(16.dp),
@@ -161,7 +163,9 @@ private fun SmallTool(icon: androidx.compose.ui.graphics.vector.ImageVector, lab
  */
 @Composable
 fun ReplyBar(busy: String?, canSend: Boolean, input: String, onInput: (String) -> Unit, onSend: (String) -> Unit,
-             ideas: List<String> = emptyList(), thinking: Boolean = false, onIdeas: (() -> Unit)? = null) {
+             ideas: List<String> = emptyList(), thinking: Boolean = false, onIdeas: (() -> Unit)? = null,
+             /** The very first turn: say what the box and the button do. */
+             firstTurn: Boolean = false) {
     val cs = MaterialTheme.colorScheme
     Surface(color = cs.surfaceContainer) {
         Column(Modifier.fillMaxWidth().navigationBarsPadding(), horizontalAlignment = Alignment.CenterHorizontally) {
@@ -173,12 +177,18 @@ fun ReplyBar(busy: String?, canSend: Boolean, input: String, onInput: (String) -
                         .background(cs.surfaceContainerHigh).clickable { onInput(idea) }.padding(horizontal = 14.dp, vertical = 10.dp),
                         style = MaterialTheme.typography.bodyMedium, color = cs.onSurface)
                 }
-                Row(Modifier.padding(start = 4.dp, end = 12.dp, top = 8.dp, bottom = 10.dp), verticalAlignment = Alignment.CenterVertically) {
-                    if (onIdeas != null) IconButton(onIdeas, enabled = canSend && busy == null && !thinking) {
-                        if (thinking) CircularProgressIndicator(Modifier.size(18.dp), strokeWidth = 2.dp, color = cs.primary)
-                        else Icon(Icons.Filled.Lightbulb, stringResource(R.string.tool_ideas),
-                            tint = if (ideas.isNotEmpty()) cs.primary else cs.onSurfaceVariant)
-                    } else Spacer(Modifier.width(8.dp))
+                if (busy == null && canSend && input.isBlank() && (onIdeas != null || firstTurn))
+                    Row(Modifier.padding(start = 6.dp, end = 16.dp, top = 6.dp), verticalAlignment = Alignment.CenterVertically) {
+                        if (onIdeas != null && ideas.isEmpty()) TextButton(onIdeas, enabled = !thinking,
+                            contentPadding = PaddingValues(horizontal = 10.dp)) {
+                            if (thinking) CircularProgressIndicator(Modifier.size(16.dp), strokeWidth = 2.dp, color = cs.primary)
+                            else Icon(Icons.Filled.Lightbulb, null, Modifier.size(18.dp))
+                            Spacer(Modifier.width(8.dp)); Text(stringResource(if (thinking) R.string.ideas_thinking else R.string.tool_ideas))
+                        }
+                        if (firstTurn && !thinking) Text(stringResource(R.string.first_turn_hint), Modifier.weight(1f).padding(start = 6.dp),
+                            style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
+                    }
+                Row(Modifier.padding(start = 12.dp, end = 12.dp, top = 6.dp, bottom = 10.dp), verticalAlignment = Alignment.CenterVertically) {
                     OutlinedTextField(input, onInput, Modifier.weight(1f).heightIn(min = 52.dp),
                         placeholder = { Text(stringResource(if (busy != null) R.string.reply_waiting else R.string.reply_hint), maxLines = 1,
                             overflow = TextOverflow.Ellipsis) },
@@ -272,6 +282,8 @@ fun StoryContent(
     onMenu: (() -> Unit)? = null,
     onInfo: (() -> Unit)? = null,
     onIdeas: (() -> Unit)? = null, thinking: Boolean = false, ideas: List<String> = emptyList(),
+    /** What the story being made is about (what you typed), shown while it's made. */
+    premise: String? = null,
 ) {
     val listState = rememberLazyListState()
     LaunchedEffect(history.size, current, draft != null) {
@@ -290,7 +302,7 @@ fun StoryContent(
             },
             navigationIcon = { if (onMenu != null) IconButton(onMenu) { Icon(Icons.Filled.Menu, stringResource(R.string.menu)) } },
             actions = { if (onInfo != null && (current != null || history.isNotEmpty())) IconButton(onInfo) {
-                Icon(Icons.Outlined.Info, stringResource(R.string.info_title)) } },
+                Icon(Icons.AutoMirrored.Filled.MenuBook, stringResource(R.string.info_title)) } },
             colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = cs.background),
         )
         Box(Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.TopCenter) {
@@ -321,9 +333,15 @@ fun StoryContent(
                         // your message, at once, above what's being written for it
                         sending?.let { PlayerBubble(it) }
                         if (draft != null) DraftPassage(busy, draft.second)
-                        else Stages(steps.ifEmpty { listOf(busy) }, if (creating) stringResource(R.string.creating_title) else null)
-                        if (creating && draft == null) Text(stringResource(R.string.creating_about), style = MaterialTheme.typography.bodyMedium,
-                            color = cs.onSurfaceVariant)
+                        else {
+                            if (creating) {
+                                Text(stringResource(R.string.creating_title), style = MaterialTheme.typography.headlineSmall)
+                                premise?.let { Text(it, style = readingStyle(), color = cs.onSurfaceVariant) }
+                            }
+                            Stages(steps.ifEmpty { listOf(busy) })
+                            if (creating) Text(stringResource(R.string.creating_about), style = MaterialTheme.typography.bodyMedium,
+                                color = cs.onSurfaceVariant)
+                        }
                     }
                 } else if (error == null && history.isEmpty() && onStartStory != null) item {
                     EmptyStory(onStartStory)
@@ -333,7 +351,10 @@ fun StoryContent(
         }
         if (notice != null && busy == null) Text(notice, Modifier.fillMaxWidth().background(cs.surfaceContainer)
             .padding(horizontal = 20.dp, vertical = 8.dp), style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
-        ReplyBar(busy, current != null, reply, onReply, onSend, ideas, thinking, onIdeas)
+        // nothing to answer yet (the world is being built, or there's no story): no box to type into
+        if (!creating && (current != null || history.isNotEmpty() || busy != null))
+            ReplyBar(busy, current != null, reply, onReply, onSend, ideas, thinking, onIdeas,
+                firstTurn = history.isEmpty() && current != null && current.player == null)
     }
 }
 
@@ -402,6 +423,7 @@ fun StoryScreen(state: AppState, go: (Screen) -> Unit, onNewStory: () -> Unit) {
             notice = state.speaker.problem()?.let { stringResource(it) },
             listening = state.speaker.speaking,
             draft = story.draft, sending = story.sending, steps = story.steps, creating = creating,
+            premise = if (creating) story.seedDraft.trim().ifEmpty { null } else null,
             onStartStory = if (!story.isSetUp() && !creating) onNewStory else null,
             onListen = { text -> if (state.speaker.speaking) state.speaker.stop() else state.speaker.say(text) },
             onIdeas = { story.suggest() }, thinking = story.thinking, ideas = story.ideas,
@@ -435,8 +457,12 @@ fun StoryInfoBody(info: StoryController.StoryInfo) {
             Heading(stringResource(R.string.info_you))
             // the sheet's own headings (What you know, Established in the story) as small labels
             sheet.lines().filter { it.isNotBlank() }.forEach { l ->
-                if (l.startsWith("## ")) Text(l.removePrefix("## "), style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(top = 6.dp))
-                else Text(l, style = MaterialTheme.typography.bodyLarge)
+                when {
+                    l.startsWith("## ") -> Text(l.removePrefix("## "), style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(top = 6.dp))
+                    l.startsWith("- ") -> Row { Text("•  ", color = cs.primary)
+                        Text(l.removePrefix("- ").replace(Regex("^\\(turn -?\\d+\\) "), ""), style = MaterialTheme.typography.bodyMedium) }
+                    else -> Text(l, style = MaterialTheme.typography.bodyLarge)
+                }
             }
         }
         if (info.met.isNotEmpty()) {
@@ -456,8 +482,6 @@ fun StoryInfoBody(info: StoryController.StoryInfo) {
             Text(stringResource(R.string.info_chapter, n), style = MaterialTheme.typography.titleSmall)
             Text(text, style = MaterialTheme.typography.bodyMedium)
         }
-        if (info.spent > 0) Text(stringResource(R.string.info_spent, "$%.2f".format(info.spentSession), "$%.2f".format(info.spent)),
-            style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
     }
 }
 

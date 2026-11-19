@@ -23,6 +23,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.FileOpen
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.SaveAlt
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.FilledTonalButton
@@ -109,7 +110,10 @@ fun StoriesContent(stories: List<StorySummary>, onContinue: () -> Unit,
         if (problem != null) ErrorNote(problem)
         if (writing) Text(stringResource(R.string.stories_writing), style = MaterialTheme.typography.bodyMedium, color = cs.onSurfaceVariant)
         if (current != null) PaperCard {
-            Text(current.title ?: untitled, style = ReadingText.copy(fontSize = 24.sp, lineHeight = 32.sp), color = cs.onSurface)
+            Row(verticalAlignment = Alignment.Top) {
+                Text(current.title ?: untitled, Modifier.weight(1f), style = ReadingText.copy(fontSize = 24.sp, lineHeight = 32.sp), color = cs.onSurface)
+                StoryActions(current, !writing, onExport, onNewStory)
+            }
             Text(progress(current), style = MaterialTheme.typography.bodyMedium, color = cs.onSurfaceVariant)
             current.lastLines?.let {
                 Row(Modifier.height(IntrinsicSize.Min)) {
@@ -120,7 +124,6 @@ fun StoriesContent(stories: List<StorySummary>, onContinue: () -> Unit,
                 }
             }
             PrimaryButton(stringResource(if (current.turn == 0) R.string.begin else R.string.continue_story), onContinue, icon = Icons.AutoMirrored.Filled.MenuBook)
-            QuietButton(stringResource(R.string.stories_export), { onExport(current) }, icon = Icons.Filled.SaveAlt, enabled = !writing)
         } else {
             // nothing set up: the only thing to do here is start one
             Text(stringResource(R.string.stories_none), style = ReadingText.copy(fontSize = 22.sp, lineHeight = 30.sp))
@@ -132,7 +135,7 @@ fun StoriesContent(stories: List<StorySummary>, onContinue: () -> Unit,
             Column {
                 others.forEachIndexed { i, s ->
                     if (i > 0) HorizontalDivider(color = cs.outlineVariant)
-                    ShelfRow(s, enabled = !writing, onExport = { onExport(s) }) { confirmSwitch = s }
+                    ShelfRow(s, enabled = !writing, onExport = { onExport(s) }, onNewWithCast = { onNewStory(s) }) { onSwitch(s) }
                 }
             }
         } else if (current != null) {
@@ -154,13 +157,13 @@ fun StoriesContent(stories: List<StorySummary>, onContinue: () -> Unit,
         AlertDialog(onDismissRequest = { confirmSwitch = null }, title = { Text(stringResource(R.string.stories_continue_q, s.title ?: untitled)) },
             text = { Text(stringResource(R.string.stories_continue_where) + (current?.let { " " + stringResource(R.string.stories_stays, it.title ?: untitled) } ?: "")) },
             confirmButton = { TextButton({ confirmSwitch = null; onSwitch(s) }) { Text(stringResource(R.string.stories_continue_it)) } },
-            dismissButton = { TextButton({ confirmSwitch = null; onNewStory(s) }) { Text(stringResource(R.string.stories_new_with_cast)) } })
+            dismissButton = { TextButton({ confirmSwitch = null }) { Text(stringResource(R.string.cancel)) } })
     }
 }
 
 /** An earlier story on the shelf: its title in the reading face, where it stands, when you last played it. */
 @Composable
-private fun ShelfRow(s: StorySummary, enabled: Boolean, onExport: () -> Unit, onPick: () -> Unit) {
+private fun ShelfRow(s: StorySummary, enabled: Boolean, onExport: () -> Unit, onNewWithCast: () -> Unit, onPick: () -> Unit) {
     val cs = MaterialTheme.colorScheme
     Row(Modifier.fillMaxWidth().clickable(enabled = enabled, onClick = onPick).padding(vertical = 14.dp), verticalAlignment = Alignment.CenterVertically) {
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
@@ -168,10 +171,24 @@ private fun ShelfRow(s: StorySummary, enabled: Boolean, onExport: () -> Unit, on
             Text(progress(s), style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis)
             ago(s.lastActive)?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant) }
         }
-        androidx.compose.material3.IconButton(onExport, enabled = enabled) {
-            Icon(Icons.Filled.SaveAlt, stringResource(R.string.stories_export), tint = cs.onSurfaceVariant)
+        StoryActions(s, enabled, { onExport() }, { onNewWithCast() })
+    }
+}
+
+/** A story's rarer actions, out of the way: a backup, a new story with its people. */
+@Composable
+private fun StoryActions(s: StorySummary, enabled: Boolean, onExport: (StorySummary) -> Unit, onNewWithCast: (StorySummary) -> Unit) {
+    var open by remember { mutableStateOf(false) }
+    Box {
+        androidx.compose.material3.IconButton({ open = true }, enabled = enabled) {
+            Icon(Icons.Filled.MoreVert, stringResource(R.string.story_actions), tint = MaterialTheme.colorScheme.onSurfaceVariant)
         }
-        TextButton(onPick, enabled = enabled) { Text(stringResource(R.string.continue_story)) }
+        androidx.compose.material3.DropdownMenu(open, { open = false }) {
+            androidx.compose.material3.DropdownMenuItem({ Text(stringResource(R.string.stories_new_with_cast)) },
+                { open = false; onNewWithCast(s) }, leadingIcon = { Icon(Icons.Filled.Add, null) })
+            androidx.compose.material3.DropdownMenuItem({ Text(stringResource(R.string.stories_export)) },
+                { open = false; onExport(s) }, leadingIcon = { Icon(Icons.Filled.SaveAlt, null) })
+        }
     }
 }
 
@@ -267,9 +284,9 @@ private fun StylePage(o: StyleOption, inUse: Boolean, onPick: (StyleOption) -> U
                 }
             }
             var open by remember { mutableStateOf(false) }
-            Text(o.passage, style = ReadingText.copy(fontSize = 17.sp, lineHeight = 27.sp), maxLines = if (open) Int.MAX_VALUE else 6,
+            Text(o.passage, style = ReadingText.copy(fontSize = 17.sp, lineHeight = 27.sp), maxLines = if (open) Int.MAX_VALUE else 4,
                 overflow = TextOverflow.Ellipsis)
-            if (!open && o.passage.lines().size > 6) TextButton({ open = true }, contentPadding = PaddingValues(horizontal = 0.dp)) {
+            if (!open && o.passage.lines().size > 4) TextButton({ open = true }, contentPadding = PaddingValues(horizontal = 0.dp)) {
                 Text(stringResource(R.string.style_read_whole))
             }
             if (!inUse) FilledTonalButton({ onPick(o) }, Modifier.fillMaxWidth().heightIn(min = 48.dp)) {

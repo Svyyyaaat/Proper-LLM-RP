@@ -60,15 +60,15 @@ object StylePresets {
         ),
         StoryEngine.StyleOption(
             "Hard-boiled",
-            "Terse hard-boiled first-person narration in the past tense: short declarative sentences, dry understatement, concrete detail, sharp dialogue; one wry simile at most per scene; no sentiment.",
+            "Terse hard-boiled narration in close third person, past tense: short declarative sentences, dry understatement, concrete detail, sharp dialogue; one wry simile at most per scene; no sentiment.",
             """
             The rent was due Monday. It was Thursday.
-            I took the stairs to the landlord's flat because the lift had died in spring and nobody had buried it.
-            He opened the door on the chain. "You've got it?"
+            Dan took the stairs to the landlord's flat, because the lift had died in spring and nobody had buried it.
+            The landlord opened the door on the chain. "You've got it?"
             "Next week."
             "Next week." He said it like a word in a foreign language. "Everybody's got next week."
             "I'm good for it."
-            "So's the bank, and the bank's leaning on me." He looked at me for a while. I let him look.
+            "So's the bank, and the bank's leaning on me." He looked at Dan for a while, the way a man reads a meter.
             "Three days," he said. "Then the lock gets changed, and you can be good for it on the pavement."
             The door shut. Somewhere below, a dog started barking and didn't stop.
             """.trimIndent(),
@@ -119,13 +119,13 @@ object StylePresets {
             """.trimIndent(),
             """
             Платить надо было в понедельник. Шёл четверг.
-            Я поднялся к хозяину пешком: лифт умер ещё весной, и хоронить его никто не собирался.
-            Он приоткрыл дверь на цепочке.
+            Даня поднялся к хозяину пешком: лифт умер ещё весной, и хоронить его никто не собирался.
+            Хозяин приоткрыл дверь на цепочке.
             — Принёс?
             — На следующей неделе.
             — На следующей неделе. — Он произнёс это как слово из чужого языка. — У всех на следующей неделе.
             — Я отдам.
-            — Банк тоже так говорит, а давит на меня. — Он какое-то время смотрел на меня. Я не мешал.
+            — Банк тоже так говорит, а давит на меня. — Он какое-то время разглядывал Даню, как разглядывают счётчик.
             — Три дня, — сказал он. — Потом меняю замок, и отдавать будешь с тротуара.
             Дверь закрылась. Где-то внизу залаяла собака и не унималась.
             """.trimIndent(),
@@ -143,7 +143,7 @@ object StylePresets {
         "Mostly dialogue" to "Talk, talk, talk; one short line of action between.",
         "Light and wry" to "Lots of dialogue and a chatty narrator with jokes.",
         "Plain storybook" to "Simple, concrete narration, like a young-adult book.",
-        "Hard-boiled" to "Terse first person, dry and sharp.",
+        "Hard-boiled" to "Terse and dry, with sharp dialogue.",
     )
 
     /** Saves [o] as the story's style: the sample the writer imitates, its one-line description, and its name. */

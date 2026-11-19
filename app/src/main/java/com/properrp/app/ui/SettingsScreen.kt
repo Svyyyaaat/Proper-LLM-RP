@@ -49,7 +49,7 @@ data class SettingsValues(
     /** The picked style's name. */
     val styleLine: String? = null,
     val theme: AppState.ThemeMode = AppState.ThemeMode.SYSTEM,
-    val materialYou: Boolean = true,
+    val materialYou: Boolean = false,
     /** Claude Code in Termux instead of the API. */
     val claudeCode: Boolean = false,
     /** [Languages.SYSTEM] or a tag; with the names to show for it. */
@@ -122,8 +122,8 @@ fun SettingsContent(
                 v.theme.ordinal) { onTheme(modes[it]) }
             Hint(stringResource(R.string.theme_about))
             Text(stringResource(R.string.settings_colours), style = MaterialTheme.typography.titleSmall)
-            Segmented(listOf(stringResource(R.string.colours_wallpaper), stringResource(R.string.app_name)), if (v.materialYou) 0 else 1) { onColors(it == 0) }
-            Hint(stringResource(if (android.os.Build.VERSION.SDK_INT >= 31) R.string.colours_about else R.string.colours_about_old))
+            Segmented(listOf(stringResource(R.string.colours_app), stringResource(R.string.colours_wallpaper)), if (v.materialYou) 1 else 0) { onColors(it == 1) }
+            if (v.materialYou) Hint(stringResource(if (android.os.Build.VERSION.SDK_INT >= 31) R.string.colours_about else R.string.colours_about_old))
             HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
             Text(stringResource(R.string.settings_text_size), style = MaterialTheme.typography.titleSmall)
             Segmented(TEXT_SCALES.map { stringResource(it.second) }, TEXT_SCALES.indexOfFirst { it.first == v.textScale }.coerceAtLeast(1)) { onScale(TEXT_SCALES[it].first) }
@@ -204,7 +204,9 @@ fun LanguageDialog(selected: String, systemName: String, onPick: (String) -> Uni
             Column(Modifier.heightIn(max = 420.dp).verticalScroll(rememberScrollState())) {
                 Text(stringResource(R.string.language_dialog_about), style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(bottom = 8.dp))
-                (listOf(Languages.SYSTEM to stringResource(R.string.language_system_named, systemName)) + Languages.ALL).forEach { (tag, name) ->
+                // the phone's own language is the System line already: not listed twice
+                (listOf(Languages.SYSTEM to stringResource(R.string.language_system_named, systemName)) +
+                    Languages.ALL.filter { it.second != systemName || it.first == selected }).forEach { (tag, name) ->
                     Row(Modifier.fillMaxWidth().clickable { onPick(tag) }.padding(vertical = 2.dp), verticalAlignment = Alignment.CenterVertically) {
                         RadioButton(tag == selected, { onPick(tag) })
                         Spacer(Modifier.width(8.dp))

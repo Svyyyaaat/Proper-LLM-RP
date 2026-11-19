@@ -39,10 +39,10 @@
 
     <!-- language -->
     <string name="settings_language">Language</string>
-    <string name="settings_language_about">The app and the story are in this language. Write to the story in another one and it answers in yours.</string>
+    <string name="settings_language_about">Menus are in this language, and new stories start in it. The story always answers in the language you write in.</string>
     <!-- "System (Русский)": follow the phone; the name is the phone's language in that language -->
     <string name="language_system_named">System (%1$s)</string>
-    <string name="language_dialog_about">System follows your phone\'s language. Whatever you pick, the story answers in the language you write in.</string>
+    <string name="language_dialog_about">Menus are in this language, and new stories start in it. The story always answers in the language you write in.</string>
     <!-- a button on the welcome screen: "Language: English" -->
     <string name="language_button">Language: %1$s</string>
 
@@ -58,19 +58,19 @@
     <string name="welcome_start">Start</string>
 
     <string name="key_title">Connect Claude</string>
-    <string name="key_body_api">Claude writes the story. Paid from your Anthropic account: a few cents a passage.</string>
-    <string name="key_body_cc">Claude writes the story on your Claude subscription, through the Claude Code app in Termux.</string>
+    <string name="key_body_api">Claude writes the story. It\'s paid per use from your Anthropic account, a few cents a turn.</string>
+    <string name="key_body_cc">Claude writes the story on your Claude subscription, through Claude Code running in Termux. Nothing is billed per turn.</string>
     <string name="backend_api">API key</string>
     <string name="backend_cc">Claude Code</string>
     <string name="key_save">Save key</string>
     <string name="key_cc_unlocks">Next unlocks when the test call works.</string>
-    <string name="key_stored">Stored only on this phone, encrypted with a key from the Android Keystore. Every call\'s cost is logged.</string>
+    <string name="key_stored">Your key stays on this phone, encrypted.</string>
     <string name="key_saved">Saved on this phone, encrypted: %1$s</string>
     <string name="key_none">No key yet</string>
     <string name="key_dialog_title">Claude API key</string>
 
     <string name="story_title">Your story</string>
-    <string name="story_body">A place, a few people with their own goals and secrets, and trouble that moves while you\'re away.</string>
+    <string name="story_body">Describe a place and a situation, or tap one below. Leave it empty and you\'ll be surprised.</string>
     <string name="story_seed_label">What should it be about? (optional)</string>
     <string name="story_seed_hint">e.g. a fishing town, a debt, a family business</string>
     <string name="story_create">Create the story</string>
@@ -151,21 +151,21 @@
     <string name="busy_opening_stories">Opening your stories…</string>
     <string name="step_adjudicator">Deciding what\'s at stake…</string>
     <string name="step_offscreen">The world moves while you were away…</string>
-    <string name="step_director">Planning this session…</string>
-    <string name="step_intent">Deciding what people do…</string>
+    <string name="step_director">Planning the next scenes…</string>
+    <string name="step_intent">People decide what they do…</string>
     <string name="step_writer">Writing…</string>
     <string name="step_rewrite">Fixing the passage…</string>
     <string name="step_judge">Checking the passage…</string>
     <string name="step_scribe">Recording what changed…</string>
     <string name="step_summary">Closing the chapter…</string>
-    <string name="step_setup">Building the world…</string>
+    <string name="step_setup">The place and the people…</string>
     <string name="step_saga">Updating the long memory…</string>
     <string name="step_style_picker">Writing four styles…</string>
     <string name="notify_channel">Story in progress</string>
     <string name="notify_channel_about">Shown while a passage is being written, so it isn\'t cut off when you switch apps</string>
 
     <!-- what went wrong -->
-    <string name="err_no_network">Can\'t reach Claude: the phone couldn\'t look up api.anthropic.com. Check the internet connection (and that this app may use mobile data), then try again.</string>
+    <string name="err_no_network">No internet connection. Check Wi-Fi or mobile data, then try again.</string>
     <string name="err_cut_off">The connection dropped while Claude was writing. Try again.</string>
     <string name="err_timeout">The connection timed out. On a weak signal this happens; try again.</string>
     <string name="err_tls">The secure connection to Claude failed. A VPN, captive Wi-Fi page or filtering DNS can cause this.</string>
@@ -231,7 +231,7 @@
     <string name="preset_storybook">Plain storybook</string>
     <string name="preset_storybook_about">Simple, concrete narration, like a young-adult book.</string>
     <string name="preset_hardboiled">Hard-boiled</string>
-    <string name="preset_hardboiled_about">Terse first person, dry and sharp.</string>
+    <string name="preset_hardboiled_about">Terse and dry, with sharp dialogue.</string>
 
     <!-- settings -->
     <string name="settings_look">Look and reading</string>
@@ -241,8 +241,8 @@
     <string name="theme_dark">Dark</string>
     <string name="theme_about">System follows your phone\'s light or dark setting.</string>
     <string name="settings_colours">Colours</string>
-    <string name="colours_wallpaper">From wallpaper</string>
-    <string name="colours_about">Colours taken from your wallpaper (Material You).</string>
+    <string name="colours_wallpaper">Match wallpaper</string>
+    <string name="colours_about">Colours match your wallpaper (Android 12 and later).</string>
     <string name="colours_about_old">Wallpaper colours need Android 12; the app\'s own colours are used.</string>
     <string name="settings_text_size">Text size</string>
     <string name="size_small">Small</string>
@@ -270,9 +270,9 @@
     <!-- costs and files -->
     <string name="costs_cc">With Claude Code nothing is billed per call; these are what the same calls would cost on the API.</string>
     <!-- after the total: "in all · $0.12 this session" -->
-    <string name="costs_in_all">in all · %1$s this session</string>
+    <string name="costs_in_all">in all · %1$s since you opened the app</string>
     <string name="costs_none">Nothing spent yet.</string>
-    <string name="costs_by_job">This session, by job</string>
+    <string name="costs_by_job">Where it went (since you opened the app)</string>
     <string name="purpose_writer">Writing</string>
     <string name="purpose_rewrite">Fixing passages</string>
     <string name="purpose_judge">Checking passages</string>
@@ -318,10 +318,10 @@
     <string name="roll_success">Success</string>
     <string name="roll_cost">Success, at a cost</string>
     <string name="roll_failure">Failure</string>
-    <string name="creating_title">Building your world</string>
+    <string name="creating_title">Making your story</string>
     <string name="creating_about">The first time takes a minute or two: the place, the people and their secrets, then the opening scene. You can leave the app; it carries on.</string>
     <string name="key_looks_wrong">Anthropic keys start with sk-ant-</string>
-    <string name="key_get">Get a key at console.anthropic.com</string>
+    <string name="key_get">Open console.anthropic.com</string>
     <string name="story_create_surprise">Surprise me</string>
     <string name="story_title_sequel">What happens next</string>
     <string name="seed_1">A port town where water costs more than wine</string>
@@ -329,4 +329,26 @@
     <string name="seed_3">Smugglers on a dying space station</string>
     <string name="seed_4">A family farm, a debt, and a stranger who wants to buy it</string>
     <string name="seed_5">The last inn before the mountain pass, in winter</string>
+    <string name="done">Done</string>
+    <string name="files_undo">Undo my changes</string>
+    <string name="files_autosave">Changes are saved as you type and used from the next turn.</string>
+    <string name="colours_app">App\'s own</string>
+    <string name="key_step1">Sign in at console.anthropic.com</string>
+    <string name="key_step2">Add credit under Billing: $5 lasts many evenings</string>
+    <string name="key_step3">Create a key under API keys and paste it here</string>
+    <string name="key_paste">Paste</string>
+    <string name="key_show">Show key</string>
+    <string name="key_hide">Hide key</string>
+    <string name="key_use_cc">I have a Claude subscription: use Claude Code in Termux</string>
+    <string name="key_use_api">Use an API key instead</string>
+    <string name="story_hero_label">Who do you play? (optional)</string>
+    <string name="story_hero_hint">e.g. a clerk who skims the ledgers</string>
+    <string name="story_continue">Continue the story</string>
+    <string name="story_files_sequel_about">Anything new the game master should know: notes, a character sheet, a log.</string>
+    <string name="first_turn_hint">Type what you say or do, or tap Go on to see what happens.</string>
+    <string name="roll_tried">You tried to: %1$s</string>
+    <string name="roll_explain_title">How rolls work</string>
+    <string name="roll_explain">When what you try is risky, two dice decide, not the narrator. Harder moves take points off.\n\n10 or more: it works.\n7 to 9: it works, at a cost.\n6 or less: it fails, and that costs something real.</string>
+    <string name="info_chapter_now">Chapter %1$d (now)</string>
+    <string name="story_actions">More</string>
 </resources>

@@ -75,7 +75,13 @@ class StoryController(
     var current by mutableStateOf<ShownTurn?>(null)
 
     /** What to do about a failure, in the app's language, then its causes (so a screenshot tells what went wrong). */
-    private fun describe(e: Throwable): String = app.text(errorText(ErrorText.kind(e))) + "\n\n" + ErrorText.details(e)
+    private fun describe(e: Throwable): String {
+        val kind = ErrorText.kind(e)
+        // an unrecognised failure: its own first line says more than "something went wrong" (Termux's are actionable)
+        val head = if (kind == ErrorText.Kind.OTHER) e.message?.lineSequence()?.firstOrNull { it.isNotBlank() }?.take(220)
+            ?.let { app.text(R.string.err_other) + " " + it } else null
+        return (head ?: app.text(errorText(kind))) + "\n\n" + ErrorText.details(e)
+    }
 
     private val prefs get() = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
 
@@ -90,6 +96,16 @@ class StoryController(
         get() = seedState
         set(v) { seedState = v; prefs.edit().putString("seedDraft", v).apply() }
     private var seedState by mutableStateOf(context.getSharedPreferences("settings", Context.MODE_PRIVATE).getString("seedDraft", "").orEmpty())
+
+    /** Who the player wants to play in the new story, saved as it's typed. */
+    var heroDraft: String
+        get() = heroState
+        set(v) { heroState = v; prefs.edit().putString("heroDraft", v).apply() }
+    private var heroState by mutableStateOf(context.getSharedPreferences("settings", Context.MODE_PRIVATE).getString("heroDraft", "").orEmpty())
+
+    /** What setup is told: the story's description and who the player plays. */
+    private fun seedText(): String = listOfNotNull(seedDraft.trim().ifEmpty { null },
+        heroDraft.trim().ifEmpty { null }?.let { "The player's character: $it" }).joinToString("\n")
 
     /** The story was asked for and will be created when the story screen opens (saved: it survives a restart). */
     var creationAsked: Boolean
@@ -326,7 +342,7 @@ class StoryController(
     fun startNewStory(from: StorySummary?): Boolean {
         if (isWorking) return false
         staging.deleteRecursively()
-        seedDraft = ""
+        seedDraft = ""; heroDraft = ""
         prefs.edit().putString("newFrom", when { from == null -> ""; from.current -> CURRENT; else -> from.dir.path }).apply()
         return true
     }
@@ -389,10 +405,10 @@ class StoryController(
         if (!isSetUp()) {
             if (!creationAsked) return@work
             val from = sequelOf()
-            if (from != null) { e.carryOver(from, seedDraft); setSequelOf(null) } else e.setup(seedDraft)
+            if (from != null) { e.carryOver(from, seedText()); setSequelOf(null) } else e.setup(seedText())
             // a style to start with: the first built-in one, in the story's language (changed any time from the menu)
             if (!hasStyle()) pickStyle(presets().first())
-            seedDraft = ""; creationAsked = false
+            seedDraft = ""; heroDraft = ""; creationAsked = false
         }
         loadHistory()
         val message = outbox.takeIf { it.exists() }?.readText()?.ifBlank { null }

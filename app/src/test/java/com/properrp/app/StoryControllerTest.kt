@@ -95,7 +95,7 @@ class StoryControllerTest {
         failing += "writer"
         c.send("薬をあげる。")
         assertNull(c.current)
-        assertTrue(c.error!!, c.error!!.startsWith("Can't reach Claude"))
+        assertTrue(c.error!!, c.error!!.startsWith("No internet connection"))
         assertEquals("薬をあげる。", c.replyDraft)
         val adjudications = fake.sent("adjudicator").size
 

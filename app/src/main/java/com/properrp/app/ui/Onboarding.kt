@@ -25,6 +25,8 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.Groups
 import androidx.compose.material.icons.filled.Language
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -102,28 +104,51 @@ fun KeyStepContent(key: String, onKey: (String) -> Unit, onNext: () -> Unit, onB
                    claudeCode: Boolean = false, onBackend: (Boolean) -> Unit = {}, claudeCodeReady: Boolean = false,
                    claudeCodeSetup: @Composable () -> Unit = {}) {
     val context = LocalContext.current
+    val cs = MaterialTheme.colorScheme
+    val clipboard = androidx.compose.ui.platform.LocalClipboardManager.current
     val looksRight = key.trim().startsWith("sk-ant-")
+    var shown by remember { mutableStateOf(false) }
     StepFrame(onBack, footer = {
         if (claudeCode) StepFooter(stringResource(R.string.next), onNext, enabled = claudeCodeReady)
         else StepFooter(stringResource(R.string.key_save), onNext, enabled = looksRight)
     }) {
         StepHeader(1, SETUP_STEPS, stringResource(R.string.key_title),
             stringResource(if (claudeCode) R.string.key_body_cc else R.string.key_body_api))
-        Segmented(listOf(stringResource(R.string.backend_api), stringResource(R.string.backend_cc)), if (claudeCode) 1 else 0) { onBackend(it == 1) }
         if (claudeCode) {
             PaperCard { claudeCodeSetup() }
-            if (!claudeCodeReady) Text(stringResource(R.string.key_cc_unlocks), style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant)
+            if (!claudeCodeReady) Text(stringResource(R.string.key_cc_unlocks), style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
+            QuietButton(stringResource(R.string.key_use_api), { onBackend(false) })
             return@StepFrame
         }
-        OutlinedTextField(key, onKey, Modifier.fillMaxWidth(), label = { Text(stringResource(R.string.backend_api)) }, placeholder = { Text("sk-ant-…") },
-            singleLine = true, visualTransformation = PasswordVisualTransformation(), shape = MaterialTheme.shapes.medium,
-            isError = key.isNotBlank() && !looksRight,
-            supportingText = { if (key.isNotBlank() && !looksRight) Text(stringResource(R.string.key_looks_wrong)) })
-        QuietButton(stringResource(R.string.key_get), { runCatching {
+        // getting a key is the real task for someone new: the three steps, then the place to paste it
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            listOf(R.string.key_step1, R.string.key_step2, R.string.key_step3).forEachIndexed { i, step ->
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(Modifier.size(26.dp).clip(androidx.compose.foundation.shape.CircleShape).background(cs.surfaceContainerHigh),
+                        contentAlignment = Alignment.Center) { Text("${i + 1}", style = MaterialTheme.typography.labelMedium, color = cs.primary) }
+                    Spacer(Modifier.width(12.dp))
+                    Text(stringResource(step), style = MaterialTheme.typography.bodyLarge)
+                }
+            }
+        }
+        SecondaryButton(stringResource(R.string.key_get), { runCatching {
             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://console.anthropic.com/settings/keys")))
         } })
-        Text(stringResource(R.string.key_stored), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        OutlinedTextField(key, onKey, Modifier.fillMaxWidth(), label = { Text(stringResource(R.string.backend_api)) }, placeholder = { Text("sk-ant-…") },
+            singleLine = true, shape = MaterialTheme.shapes.medium,
+            visualTransformation = if (shown) androidx.compose.ui.text.input.VisualTransformation.None else PasswordVisualTransformation(),
+            isError = key.isNotBlank() && !looksRight,
+            supportingText = { Text(stringResource(if (key.isNotBlank() && !looksRight) R.string.key_looks_wrong else R.string.key_stored)) },
+            trailingIcon = {
+                Row {
+                    if (key.isNotBlank()) IconButton({ shown = !shown }) {
+                        Icon(if (shown) Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
+                            stringResource(if (shown) R.string.key_hide else R.string.key_show))
+                    } else TextButton({ clipboard.getText()?.text?.trim()?.let(onKey) }) { Text(stringResource(R.string.key_paste)) }
+                }
+            })
+        Spacer(Modifier.height(8.dp))
+        QuietButton(stringResource(R.string.key_use_cc), { onBackend(true) })
     }
 }
 
@@ -134,6 +159,8 @@ fun KeyStepContent(key: String, onKey: (String) -> Unit, onNext: () -> Unit, onB
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun StoryStepContent(seed: String, onSeed: (String) -> Unit, onCreate: () -> Unit, onBack: () -> Unit,
+                     /** Who the player plays (optional): the most important thing in a roleplay, asked for up front. */
+                     hero: String = "", onHero: (String) -> Unit = {},
                      language: String = "",
                      /** The text files given to the story, and how to add or drop one. */
                      files: List<String> = emptyList(), onAddFiles: () -> Unit = {}, onRemoveFile: (String) -> Unit = {},
@@ -143,8 +170,11 @@ fun StoryStepContent(seed: String, onSeed: (String) -> Unit, onCreate: () -> Uni
                      /** Starting points to tap (filled into the box). */
                      examples: List<String> = emptyList()) {
     val cs = MaterialTheme.colorScheme
-    StepFrame(onBack, footer = { StepFooter(stringResource(if (seed.isBlank() && files.isEmpty() && sequelOf == null) R.string.story_create_surprise
-        else R.string.story_create), onCreate) }) {
+    StepFrame(onBack, footer = { StepFooter(stringResource(when {
+        sequelOf != null -> R.string.story_continue
+        seed.isBlank() && hero.isBlank() && files.isEmpty() -> R.string.story_create_surprise
+        else -> R.string.story_create
+    }), onCreate) }) {
         StepHeader(2, SETUP_STEPS, stringResource(if (sequelOf != null) R.string.story_title_sequel else R.string.story_title),
             if (sequelOf != null) stringResource(R.string.story_sequel_note, sequelOf) else stringResource(R.string.story_body))
         OutlinedTextField(seed, onSeed, Modifier.fillMaxWidth().heightIn(min = 112.dp), shape = MaterialTheme.shapes.medium,
@@ -155,9 +185,12 @@ fun StoryStepContent(seed: String, onSeed: (String) -> Unit, onCreate: () -> Uni
             for (e in examples) Text(e, Modifier.clip(MaterialTheme.shapes.small).background(cs.surfaceContainerHigh).clickable { onSeed(e) }
                 .padding(horizontal = 12.dp, vertical = 8.dp), style = MaterialTheme.typography.bodyMedium)
         }
+        if (sequelOf == null) OutlinedTextField(hero, onHero, Modifier.fillMaxWidth(), shape = MaterialTheme.shapes.medium,
+            label = { Text(stringResource(R.string.story_hero_label)) }, placeholder = { Text(stringResource(R.string.story_hero_hint)) })
         Spacer(Modifier.height(4.dp))
         Text(stringResource(R.string.story_files_title), style = MaterialTheme.typography.titleSmall)
-        Text(stringResource(R.string.story_files_about), style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
+        Text(stringResource(if (sequelOf != null) R.string.story_files_sequel_about else R.string.story_files_about),
+            style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
         for (f in files) Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(Icons.Filled.Description, null, Modifier.size(18.dp), tint = cs.primary)
             Spacer(Modifier.width(10.dp))
@@ -165,9 +198,7 @@ fun StoryStepContent(seed: String, onSeed: (String) -> Unit, onCreate: () -> Uni
             IconButton({ onRemoveFile(f) }) { Icon(Icons.Filled.Close, stringResource(R.string.story_files_remove, f), Modifier.size(18.dp)) }
         }
         if (fileProblem != null) Text(fileProblem, style = MaterialTheme.typography.bodySmall, color = cs.error)
-        SecondaryButton(stringResource(R.string.story_files_add), onAddFiles, icon = Icons.Filled.AttachFile)
-        if (language.isNotBlank()) Text(stringResource(R.string.story_language_note, language), style = MaterialTheme.typography.bodySmall,
-            color = cs.onSurfaceVariant)
+        QuietButton(stringResource(R.string.story_files_add), onAddFiles, icon = Icons.Filled.AttachFile)
     }
 }
 
@@ -223,7 +254,7 @@ fun OnboardingFlow(state: AppState, onFinished: () -> Unit) {
                     files = story.attachments()
                 }
             }
-            StoryStepContent(story.seedDraft, { story.seedDraft = it },
+            StoryStepContent(story.seedDraft, { story.seedDraft = it }, hero = story.heroDraft, onHero = { story.heroDraft = it },
                 onCreate = {
                     // created on the story screen, which shows it being built
                     if (story.commitNewStory()) { state.onboardingDone = true; onFinished() }

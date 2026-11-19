@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.properrp.app.AppState
 import com.properrp.app.R
+import com.properrp.core.writeAtomic
 import java.io.File
 
 /** What the costs screen shows (plain data, so screenshots can render it). */
@@ -82,7 +83,7 @@ fun CostsContent(d: CostsData) {
             for ((k, v) in d.byPurpose.entries.sortedByDescending { it.value }) Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
                 Row {
                     Text(purposeName(k), Modifier.weight(1f), style = MaterialTheme.typography.bodySmall)
-                    Text("$%.3f".format(v), fontFamily = FontFamily.Monospace, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
+                    Text(if (v < 0.01) "< $0.01" else "$%.2f".format(v), style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
                 }
                 Box(Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)).background(cs.surfaceContainerHigh)) {
                     Box(Modifier.fillMaxWidth((if (max > 0) v / max else 0.0).toFloat()).height(6.dp).clip(RoundedCornerShape(3.dp)).background(cs.primary))
@@ -123,14 +124,24 @@ fun FilesScreen(state: AppState) {
             }
         }
     } else {
-        var text by remember(f) { mutableStateOf(f.readText()) }
+        val original = remember(f) { f.readText() }
+        var text by remember(f) { mutableStateOf(original) }
+        // saved as it's typed (a moment after the last key): leaving the screen never loses an edit
+        androidx.compose.runtime.LaunchedEffect(text) {
+            if (text == original && f.readText() == original) return@LaunchedEffect
+            kotlinx.coroutines.delay(400)
+            kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) { f.writeAtomic(text) }
+        }
+        androidx.activity.compose.BackHandler { open = null }
         Column(Modifier.fillMaxSize()) {
             Page(Modifier.weight(1f)) {
                 Text(f.relativeTo(root).path, style = MaterialTheme.typography.titleSmall)
+                Text(stringResource(R.string.files_autosave), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 OutlinedTextField(text, { text = it }, Modifier.fillMaxWidth().heightIn(min = 360.dp), shape = MaterialTheme.shapes.medium,
                     textStyle = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily.Monospace, fontSize = 13.sp))
             }
-            StepFooter(stringResource(R.string.save), { f.writeText(text); open = null }, secondary = stringResource(R.string.cancel), onSecondary = { open = null })
+            StepFooter(stringResource(R.string.done), { open = null },
+                secondary = if (text != original) stringResource(R.string.files_undo) else null, onSecondary = { text = original })
         }
     }
 }

@@ -32,9 +32,9 @@
 
     <!-- language -->
     <string name="settings_language">Язык</string>
-    <string name="settings_language_about">На этом языке приложение и история. Если напишете на другом, история ответит на нём.</string>
+    <string name="settings_language_about">На этом языке меню, и с него начинаются новые истории. А отвечает история всегда на том языке, на котором пишете вы.</string>
     <string name="language_system_named">Как в системе (%1$s)</string>
-    <string name="language_dialog_about">«Как в системе» — язык телефона. Что бы вы ни выбрали, история отвечает на языке, на котором вы пишете.</string>
+    <string name="language_dialog_about">На этом языке меню, и с него начинаются новые истории. А отвечает история всегда на том языке, на котором пишете вы.</string>
     <string name="language_button">Язык: %1$s</string>
 
     <!-- welcome and setup -->
@@ -49,19 +49,19 @@
     <string name="welcome_start">Начать</string>
 
     <string name="key_title">Подключите Claude</string>
-    <string name="key_body_api">Историю пишет Claude. Оплата с вашего аккаунта Anthropic — несколько центов за отрывок.</string>
-    <string name="key_body_cc">Историю пишет Claude по вашей подписке — через Claude Code в Termux.</string>
+    <string name="key_body_api">Историю пишет Claude. Оплата — по факту, с вашего аккаунта Anthropic: несколько центов за ход.</string>
+    <string name="key_body_cc">Историю пишет Claude по вашей подписке — через Claude Code в Termux. Оплаты за ход нет.</string>
     <string name="backend_api">API-ключ</string>
     <string name="backend_cc">Claude Code</string>
     <string name="key_save">Сохранить ключ</string>
     <string name="key_cc_unlocks">«Далее» станет доступно после успешной проверки.</string>
-    <string name="key_stored">Ключ хранится только на этом телефоне в зашифрованном виде (Android Keystore). Стоимость каждого запроса записывается.</string>
+    <string name="key_stored">Ключ хранится только на этом телефоне, в зашифрованном виде.</string>
     <string name="key_saved">Сохранён и зашифрован: %1$s</string>
     <string name="key_none">Ключ не добавлен</string>
     <string name="key_dialog_title">API-ключ Claude</string>
 
     <string name="story_title">Ваша история</string>
-    <string name="story_body">Место действия, несколько людей со своими целями и секретами — и неприятности, которые не ждут, пока вы вернётесь.</string>
+    <string name="story_body">Опишите место и ситуацию или выберите вариант ниже. Оставьте пустым — и вас удивят.</string>
     <string name="story_seed_label">О чём история? (необязательно)</string>
     <string name="story_seed_hint">например: рыбацкий посёлок, долг, семейное дело</string>
     <string name="story_create">Создать историю</string>
@@ -133,21 +133,21 @@
     <string name="busy_opening_stories">Загрузка историй…</string>
     <string name="step_adjudicator">Что поставлено на карту…</string>
     <string name="step_offscreen">Мир живёт, пока вас не было…</string>
-    <string name="step_director">Планируется сеанс…</string>
-    <string name="step_intent">Персонажи решают, что делать…</string>
+    <string name="step_director">Планируются следующие сцены…</string>
+    <string name="step_intent">Люди решают, что делать…</string>
     <string name="step_writer">Пишется…</string>
     <string name="step_rewrite">Исправляется отрывок…</string>
     <string name="step_judge">Проверяется отрывок…</string>
     <string name="step_scribe">Записывается, что изменилось…</string>
     <string name="step_summary">Глава подходит к концу…</string>
-    <string name="step_setup">Создаётся мир…</string>
+    <string name="step_setup">Место и люди…</string>
     <string name="step_style_picker">Пишутся четыре варианта…</string>
     <string name="step_saga">Обновляется память истории…</string>
     <string name="notify_channel">История пишется</string>
     <string name="notify_channel_about">Видно, пока пишется отрывок: так он не оборвётся, если вы переключитесь на другое приложение</string>
 
     <!-- what went wrong -->
-    <string name="err_no_network">Нет связи с Claude: телефон не нашёл api.anthropic.com. Проверьте интернет (и разрешён ли приложению мобильный интернет) и повторите.</string>
+    <string name="err_no_network">Нет подключения к интернету. Проверьте Wi-Fi или мобильные данные и повторите.</string>
     <string name="err_cut_off">Связь оборвалась, пока Claude писал. Повторите.</string>
     <string name="err_timeout">Сервер не ответил вовремя. Со слабым сигналом так бывает — повторите.</string>
     <string name="err_tls">Не удалось установить защищённое соединение с Claude. Так бывает из-за VPN, страницы входа в Wi-Fi или фильтрующего DNS.</string>
@@ -214,7 +214,7 @@
     <string name="preset_storybook">Простая проза</string>
     <string name="preset_storybook_about">Ясно и конкретно, короткими фразами — как в хорошей подростковой книге.</string>
     <string name="preset_hardboiled">Нуар</string>
-    <string name="preset_hardboiled_about">От первого лица, скупо и сухо, с жёсткими диалогами.</string>
+    <string name="preset_hardboiled_about">Скупо и сухо, с жёсткими диалогами.</string>
 
     <!-- settings -->
     <string name="settings_look">Оформление</string>
@@ -225,7 +225,7 @@
     <string name="theme_about">«Как в системе» — светлая или тёмная, как на телефоне.</string>
     <string name="settings_colours">Цвета</string>
     <string name="colours_wallpaper">Под обои</string>
-    <string name="colours_about">Цвета подбираются под обои (Material You).</string>
+    <string name="colours_about">Цвета подбираются под обои (Android 12 и новее).</string>
     <string name="colours_about_old">Цвета под обои доступны с Android 12, пока используются цвета приложения.</string>
     <string name="settings_text_size">Размер текста</string>
     <string name="size_small">Мелкий</string>
@@ -251,9 +251,9 @@
 
     <!-- costs and files -->
     <string name="costs_cc">С Claude Code за запросы ничего не списывается; здесь — сколько те же запросы стоили бы через API.</string>
-    <string name="costs_in_all">всего · %1$s за сеанс</string>
+    <string name="costs_in_all">всего · %1$s с открытия приложения</string>
     <string name="costs_none">Пока ничего не потрачено.</string>
-    <string name="costs_by_job">Этот сеанс по задачам</string>
+    <string name="costs_by_job">На что ушло (с открытия приложения)</string>
     <string name="purpose_writer">Текст истории</string>
     <string name="purpose_rewrite">Исправления</string>
     <string name="purpose_judge">Проверки</string>
@@ -310,10 +310,10 @@
     <string name="roll_success">Успех</string>
     <string name="roll_cost">Успех, но дорогой ценой</string>
     <string name="roll_failure">Провал</string>
-    <string name="creating_title">Создаётся ваш мир</string>
+    <string name="creating_title">История создаётся</string>
     <string name="creating_about">В первый раз это минута-две: место, люди и их секреты, потом первая сцена. Приложение можно свернуть — работа продолжится.</string>
     <string name="key_looks_wrong">Ключи Anthropic начинаются с sk-ant-</string>
-    <string name="key_get">Получить ключ на console.anthropic.com</string>
+    <string name="key_get">Открыть console.anthropic.com</string>
     <string name="story_create_surprise">Удивите меня</string>
     <string name="story_title_sequel">Что было дальше</string>
     <string name="seed_1">Портовый город, где вода дороже вина</string>
@@ -321,4 +321,26 @@
     <string name="seed_3">Контрабандисты на умирающей космической станции</string>
     <string name="seed_4">Семейная ферма, долг и чужак, который хочет её купить</string>
     <string name="seed_5">Последний трактир перед перевалом, зимой</string>
+    <string name="done">Готово</string>
+    <string name="files_undo">Вернуть как было</string>
+    <string name="files_autosave">Изменения сохраняются сами и действуют со следующего хода.</string>
+    <string name="colours_app">Свои</string>
+    <string name="key_step1">Войдите на console.anthropic.com</string>
+    <string name="key_step2">Пополните баланс в разделе Billing: $5 хватит на много вечеров</string>
+    <string name="key_step3">Создайте ключ в разделе API keys и вставьте сюда</string>
+    <string name="key_paste">Вставить</string>
+    <string name="key_show">Показать ключ</string>
+    <string name="key_hide">Скрыть ключ</string>
+    <string name="key_use_cc">У меня подписка Claude: использовать Claude Code в Termux</string>
+    <string name="key_use_api">Использовать API-ключ</string>
+    <string name="story_hero_label">Кого вы играете? (необязательно)</string>
+    <string name="story_hero_hint">например: счетовод, который подчищает книги</string>
+    <string name="story_continue">Продолжить историю</string>
+    <string name="story_files_sequel_about">Всё новое, что стоит знать мастеру: заметки, анкета персонажа, лог.</string>
+    <string name="first_turn_hint">Напишите, что вы говорите или делаете, — или нажмите «Дальше».</string>
+    <string name="roll_tried">Вы пытались: %1$s</string>
+    <string name="roll_explain_title">Как работают броски</string>
+    <string name="roll_explain">Если задуманное рискованно, решают два кубика, а не рассказчик. Чем труднее дело, тем больше вычитается.\n\n10 и больше — получилось.\n7–9 — получилось, но дорогой ценой.\n6 и меньше — провал, и он чего-то стоит.</string>
+    <string name="info_chapter_now">Глава %1$d (идёт сейчас)</string>
+    <string name="story_actions">Ещё</string>
 </resources>

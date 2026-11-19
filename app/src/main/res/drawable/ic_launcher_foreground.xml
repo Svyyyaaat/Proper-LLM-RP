@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- A twenty-sided die, face on: cream body, the front face in amber. Inside the launcher's 66dp safe circle. -->
+<!-- Two six-sided dice, bone and brass, tilted toward each other (the game rolls 2d6). Inside the 66dp safe circle. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
-    <path android:fillColor="#FFFBE3D3" android:pathData="M54,26 L77.4,39.5 L77.4,66.5 L54,80 L30.6,66.5 L30.6,39.5 Z" />
-    <path android:fillColor="#FFF0A47A" android:pathData="M54,38 L67.5,61.5 L40.5,61.5 Z" />
-    <path android:strokeColor="#FF1F4A52" android:strokeWidth="2.2" android:strokeLineJoin="round" android:strokeLineCap="round"
-        android:fillColor="#00000000" android:pathData="M54,26 L54,38 M30.6,39.5 L54,38 L77.4,39.5 M30.6,39.5 L40.5,61.5 L30.6,66.5 M40.5,61.5 L54,80 L67.5,61.5 M77.4,39.5 L67.5,61.5 L77.4,66.5" />
-    <path android:strokeColor="#FF1F4A52" android:strokeWidth="2.2" android:strokeLineJoin="round"
-        android:fillColor="#00000000" android:pathData="M54,38 L67.5,61.5 L40.5,61.5 Z" />
+    <group android:rotation="-12" android:pivotX="43" android:pivotY="49">
+        <path android:fillColor="#FFECE5D5" android:pathData="M34.9,35.5 h16.2 a5.4,5.4 0 0 1 5.4,5.4 v16.2 a5.4,5.4 0 0 1 -5.4,5.4 h-16.2 a5.4,5.4 0 0 1 -5.4,-5.4 v-16.2 a5.4,5.4 0 0 1 5.4,-5.4 z" />
+        <path android:fillColor="#FF1F4A52" android:pathData="M33.955,42.25 a2.2950000000000004,2.2950000000000004 0 1 0 4.590000000000001,0 a2.2950000000000004,2.2950000000000004 0 1 0 -4.590000000000001,0 z M47.455,42.25 a2.2950000000000004,2.2950000000000004 0 1 0 4.590000000000001,0 a2.2950000000000004,2.2950000000000004 0 1 0 -4.590000000000001,0 z M33.955,49 a2.2950000000000004,2.2950000000000004 0 1 0 4.590000000000001,0 a2.2950000000000004,2.2950000000000004 0 1 0 -4.590000000000001,0 z M47.455,49 a2.2950000000000004,2.2950000000000004 0 1 0 4.590000000000001,0 a2.2950000000000004,2.2950000000000004 0 1 0 -4.590000000000001,0 z M33.955,55.75 a2.2950000000000004,2.2950000000000004 0 1 0 4.590000000000001,0 a2.2950000000000004,2.2950000000000004 0 1 0 -4.590000000000001,0 z M47.455,55.75 a2.2950000000000004,2.2950000000000004 0 1 0 4.590000000000001,0 a2.2950000000000004,2.2950000000000004 0 1 0 -4.590000000000001,0 z" />
+    </group>
+    <group android:rotation="14" android:pivotX="64" android:pivotY="60">
+        <path android:fillColor="#FFD9A84E" android:pathData="M55.9,46.5 h16.2 a5.4,5.4 0 0 1 5.4,5.4 v16.2 a5.4,5.4 0 0 1 -5.4,5.4 h-16.2 a5.4,5.4 0 0 1 -5.4,-5.4 v-16.2 a5.4,5.4 0 0 1 5.4,-5.4 z" />
+        <path android:fillColor="#FF2A1C02" android:pathData="M54.955,53.25 a2.2950000000000004,2.2950000000000004 0 1 0 4.590000000000001,0 a2.2950000000000004,2.2950000000000004 0 1 0 -4.590000000000001,0 z M61.705,60 a2.2950000000000004,2.2950000000000004 0 1 0 4.590000000000001,0 a2.2950000000000004,2.2950000000000004 0 1 0 -4.590000000000001,0 z M68.455,66.75 a2.2950000000000004,2.2950000000000004 0 1 0 4.590000000000001,0 a2.2950000000000004,2.2950000000000004 0 1 0 -4.590000000000001,0 z" />
+    </group>
 </vector>
