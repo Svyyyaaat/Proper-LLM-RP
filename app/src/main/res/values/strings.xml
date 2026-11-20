@@ -324,11 +324,11 @@
     <string name="key_get">Open console.anthropic.com</string>
     <string name="story_create_surprise">Surprise me</string>
     <string name="story_title_sequel">What happens next</string>
-    <string name="seed_1">A dragon's egg hatches in a monastery kitchen</string>
+    <string name="seed_1">A dragon\'s egg hatches in a monastery kitchen</string>
     <string name="seed_2">The night porter at a hotel where guests never check out</string>
-    <string name="seed_3">Smugglers pick up a stowaway who claims a dead empire's throne</string>
+    <string name="seed_3">Smugglers pick up a stowaway who claims a dead empire\'s throne</string>
     <string name="seed_4">A detective in a city where memories are for sale</string>
-    <string name="seed_5">A crew robs a sorcerer's vault on the one night the wards fail</string>
+    <string name="seed_5">A crew robs a sorcerer\'s vault on the one night the wards fail</string>
     <string name="done">Done</string>
     <string name="files_undo">Undo my changes</string>
     <string name="files_autosave">Changes are saved as you type and used from the next turn.</string>
