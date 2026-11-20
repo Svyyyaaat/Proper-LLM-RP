@@ -98,7 +98,7 @@
     <string name="home_settings_about">语言、外观、Claude</string>
 
     <!-- the story -->
-    <string name="you_are">你扮演</string>
+    <string name="you_are">你的角色</string>
     <string name="reply_hint">说点什么或做点什么…</string>
     <string name="reply_waiting">正在写下一段…</string>
     <string name="go_on">下一段</string>
@@ -308,11 +308,11 @@
     <string name="key_get">打开 console.anthropic.com</string>
     <string name="story_create_surprise">给我惊喜</string>
     <string name="story_title_sequel">后来呢</string>
-    <string name="seed_1">水比酒还贵的港口小城</string>
-    <string name="seed_2">酒店夜班：这里的客人从不退房</string>
-    <string name="seed_3">垂死空间站上的走私客</string>
-    <string name="seed_4">家里的农场、一笔债，和一个想把它买下的陌生人</string>
-    <string name="seed_5">冬日里，山口前的最后一家客栈</string>
+    <string name="seed_1">修道院的厨房里，一枚龙蛋破壳了</string>
+    <string name="seed_2">一家客人从不退房的旅馆，你是夜班门房</string>
+    <string name="seed_3">走私船捡到一个偷渡客，他自称是已亡帝国的继承人</string>
+    <string name="seed_4">在一座买卖记忆的城市里当侦探</string>
+    <string name="seed_5">趁结界失效的那一夜，洗劫巫师的金库</string>
     <string name="done">完成</string>
     <string name="files_undo">撤销我的修改</string>
     <string name="files_autosave">修改边输入边保存，从下一回合起生效。</string>

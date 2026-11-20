@@ -1,7 +1,9 @@
 config/ambience.md	426e37fa1952c50e
 config/banned.txt	1ff345411c552b00
 config/complications.md	3d7f602604bb1b47
+config/complications.md	ed901f87d4158a5d
 config/plot.md	69843df2f81218ed
+config/plot.md	eff34fe806cb75b2
 config/style_line.txt	e3b0c44298fc1c14
 config/style_rules_firm.md	a00e992844cd424e
 config/style_rules_positive.md	9719b4623bb7c55d
@@ -24,6 +26,7 @@ prompts/scribe.md	537c0afde70b191e
 prompts/scribe.md	7e794e0910169a0a
 prompts/setup.md	41e21cdc73aa7a04
 prompts/setup.md	e382ab35f14b297c
+prompts/setup.md	e6b4425943181de2
 prompts/setup.md	f87a2a38b508d5e2
 prompts/setup.md	fb5b0b786a4d6c1b
 prompts/style_picker.md	d71c00757746e600

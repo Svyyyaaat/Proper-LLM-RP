@@ -98,7 +98,7 @@
     <string name="home_settings_about">言語、表示、Claude</string>
 
     <!-- the story -->
-    <string name="you_are">あなたの役</string>
+    <string name="you_are">あなたのキャラクター</string>
     <string name="reply_hint">セリフや行動を入力…</string>
     <string name="reply_waiting">続きを執筆中…</string>
     <string name="go_on">続きへ</string>
@@ -308,11 +308,11 @@
     <string name="key_get">console.anthropic.com を開く</string>
     <string name="story_create_surprise">おまかせ</string>
     <string name="story_title_sequel">その後のストーリー</string>
-    <string name="seed_1">水がワインより高い港町</string>
-    <string name="seed_2">客が誰もチェックアウトしないホテルの夜勤</string>
-    <string name="seed_3">朽ちかけた宇宙ステーションの密輸屋たち</string>
-    <string name="seed_4">家族の農場、借金、そして買い取りを迫るよそ者</string>
-    <string name="seed_5">冬、峠越え前の最後の宿</string>
+    <string name="seed_1">修道院の厨房で竜の卵がかえる</string>
+    <string name="seed_2">客が誰もチェックアウトしないホテルの夜勤フロント係</string>
+    <string name="seed_3">密輸船が拾った密航者は、滅びた帝国の後継者を名乗る</string>
+    <string name="seed_4">記憶が売り買いされる街の探偵</string>
+    <string name="seed_5">結界が消える一夜だけを狙う、魔術師の金庫破り</string>
     <string name="done">完了</string>
     <string name="files_undo">変更を取り消す</string>
     <string name="files_autosave">入力した内容は自動で保存され、次のターンから反映されます。</string>

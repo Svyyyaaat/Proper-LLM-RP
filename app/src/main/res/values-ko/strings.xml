@@ -308,11 +308,11 @@
     <string name="key_get">console.anthropic.com 열기</string>
     <string name="story_create_surprise">알아서 해 줘</string>
     <string name="story_title_sequel">그다음 이야기</string>
-    <string name="seed_1">물이 와인보다 비싼 항구 도시</string>
-    <string name="seed_2">손님이 아무도 체크아웃하지 않는 호텔의 야간 근무</string>
-    <string name="seed_3">죽어 가는 우주 정거장의 밀수꾼들</string>
-    <string name="seed_4">가족 농장, 빚, 그리고 농장을 사겠다는 낯선 사람</string>
-    <string name="seed_5">한겨울, 고갯길 앞 마지막 여관</string>
+    <string name="seed_1">수도원 부엌에서 용의 알이 깨어난다</string>
+    <string name="seed_2">손님이 아무도 체크아웃하지 않는 호텔의 야간 프런트 직원</string>
+    <string name="seed_3">밀수꾼들이 망한 제국의 후계자라는 밀항자를 태운다</string>
+    <string name="seed_4">기억을 사고파는 도시의 탐정</string>
+    <string name="seed_5">결계가 풀리는 단 하룻밤, 마법사의 금고를 턴다</string>
     <string name="done">완료</string>
     <string name="files_undo">변경 취소</string>
     <string name="files_autosave">입력하는 대로 저장되고, 다음 턴부터 적용돼요.</string>

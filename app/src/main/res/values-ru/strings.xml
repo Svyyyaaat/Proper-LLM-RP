@@ -316,11 +316,11 @@
     <string name="key_get">Открыть console.anthropic.com</string>
     <string name="story_create_surprise">Удивите меня</string>
     <string name="story_title_sequel">Что было дальше</string>
-    <string name="seed_1">Портовый город, где вода дороже вина</string>
-    <string name="seed_2">Ночная смена в гостинице, откуда гости не выезжают</string>
-    <string name="seed_3">Контрабандисты на умирающей космической станции</string>
-    <string name="seed_4">Семейная ферма, долг и чужак, который хочет её купить</string>
-    <string name="seed_5">Последний трактир перед перевалом, зимой</string>
+    <string name="seed_1">В монастырской кухне вылупился дракон</string>
+    <string name="seed_2">Ночной портье в гостинице, откуда гости не выезжают</string>
+    <string name="seed_3">Контрабандисты подбирают безбилетника — наследника мёртвой империи</string>
+    <string name="seed_4">Сыщик в городе, где торгуют воспоминаниями</string>
+    <string name="seed_5">Ограбление хранилища колдуна в ночь, когда спадают чары</string>
     <string name="done">Готово</string>
     <string name="files_undo">Вернуть как было</string>
     <string name="files_autosave">Изменения сохраняются сами и действуют со следующего хода.</string>

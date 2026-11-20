@@ -110,7 +110,7 @@
     <string name="home_settings_about">language, look, Claude</string>
 
     <!-- the story -->
-    <string name="you_are">You are</string>
+    <string name="you_are">Your character</string>
     <string name="reply_hint">Say or do something…</string>
     <string name="reply_waiting">Type your next move…</string>
     <string name="go_on">Go on</string>
@@ -324,11 +324,11 @@
     <string name="key_get">Open console.anthropic.com</string>
     <string name="story_create_surprise">Surprise me</string>
     <string name="story_title_sequel">What happens next</string>
-    <string name="seed_1">A port town where water costs more than wine</string>
-    <string name="seed_2">A night shift at a hotel where guests don\'t check out</string>
-    <string name="seed_3">Smugglers on a dying space station</string>
-    <string name="seed_4">A family farm, a debt, and a stranger who wants to buy it</string>
-    <string name="seed_5">The last inn before the mountain pass, in winter</string>
+    <string name="seed_1">A dragon's egg hatches in a monastery kitchen</string>
+    <string name="seed_2">The night porter at a hotel where guests never check out</string>
+    <string name="seed_3">Smugglers pick up a stowaway who claims a dead empire's throne</string>
+    <string name="seed_4">A detective in a city where memories are for sale</string>
+    <string name="seed_5">A crew robs a sorcerer's vault on the one night the wards fail</string>
     <string name="done">Done</string>
     <string name="files_undo">Undo my changes</string>
     <string name="files_autosave">Changes are saved as you type and used from the next turn.</string>

@@ -99,7 +99,7 @@
     <string name="home_settings_about">Sprache, Darstellung, Claude</string>
 
     <!-- the story -->
-    <string name="you_are">Du spielst</string>
+    <string name="you_are">Deine Figur</string>
     <string name="reply_hint">Was sagst oder tust du?</string>
     <string name="reply_waiting">Der nächste Abschnitt entsteht…</string>
     <string name="go_on">Weiter</string>
@@ -310,11 +310,11 @@
     <string name="key_get">console.anthropic.com öffnen</string>
     <string name="story_create_surprise">Überrasch mich</string>
     <string name="story_title_sequel">Wie es weitergeht</string>
-    <string name="seed_1">Eine Hafenstadt, in der Wasser teurer ist als Wein</string>
-    <string name="seed_2">Nachtschicht in einem Hotel, aus dem niemand auscheckt</string>
-    <string name="seed_3">Schmuggler auf einer sterbenden Raumstation</string>
-    <string name="seed_4">Ein Familienhof, Schulden und ein Fremder, der ihn kaufen will</string>
-    <string name="seed_5">Das letzte Gasthaus vor dem Pass, mitten im Winter</string>
+    <string name="seed_1">In einer Klosterküche schlüpft ein Drache</string>
+    <string name="seed_2">Nachtportier in einem Hotel, das kein Gast je verlässt</string>
+    <string name="seed_3">Schmuggler nehmen einen blinden Passagier auf – den Erben eines toten Reichs</string>
+    <string name="seed_4">Detektivin in einer Stadt, in der Erinnerungen verkauft werden</string>
+    <string name="seed_5">Ein Einbruch beim Zauberer in der einzigen Nacht ohne Bannkreis</string>
     <string name="done">Fertig</string>
     <string name="files_undo">Meine Änderungen verwerfen</string>
     <string name="files_autosave">Änderungen werden beim Tippen gespeichert und gelten ab dem nächsten Zug.</string>

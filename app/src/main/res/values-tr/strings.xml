@@ -99,7 +99,7 @@
     <string name="home_settings_about">dil, görünüm, Claude</string>
 
     <!-- the story -->
-    <string name="you_are">Karakteriniz</string>
+    <string name="you_are">Karakterin</string>
     <string name="reply_hint">Bir şey söyleyin ya da yapın…</string>
     <string name="reply_waiting">Devamı yazılıyor…</string>
     <string name="go_on">Devam</string>
@@ -310,11 +310,11 @@
     <string name="key_get">console.anthropic.com\'u aç</string>
     <string name="story_create_surprise">Beni şaşırt</string>
     <string name="story_title_sequel">Sonra ne oldu</string>
-    <string name="seed_1">Suyun şaraptan pahalı olduğu bir liman kasabası</string>
-    <string name="seed_2">Misafirlerin hiç ayrılmadığı bir otelde gece vardiyası</string>
-    <string name="seed_3">Can çekişen bir uzay istasyonunda kaçakçılar</string>
-    <string name="seed_4">Bir aile çiftliği, bir borç ve onu satın almak isteyen bir yabancı</string>
-    <string name="seed_5">Kışın, dağ geçidinden önceki son han</string>
+    <string name="seed_1">Bir manastır mutfağında ejderha yumurtası çatlıyor</string>
+    <string name="seed_2">Konukların asla ayrılmadığı bir otelin gece görevlisi</string>
+    <string name="seed_3">Kaçakçılar, ölü bir imparatorluğun varisi olduğunu söyleyen bir kaçak yolcu buluyor</string>
+    <string name="seed_4">Anıların satıldığı bir şehirde bir dedektif</string>
+    <string name="seed_5">Büyülerin tek gece çözüldüğü gece bir büyücünün hazinesini soymak</string>
     <string name="done">Bitti</string>
     <string name="files_undo">Değişikliklerimi geri al</string>
     <string name="files_autosave">Değişiklikler siz yazarken kaydedilir ve bir sonraki turdan itibaren kullanılır.</string>

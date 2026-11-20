@@ -314,11 +314,11 @@
     <string name="key_get">Відкрити console.anthropic.com</string>
     <string name="story_create_surprise">Здивуйте мене</string>
     <string name="story_title_sequel">Що було далі</string>
-    <string name="seed_1">Портове місто, де вода дорожча за вино</string>
-    <string name="seed_2">Нічна зміна в готелі, звідки гості не виїжджають</string>
-    <string name="seed_3">Контрабандисти на космічній станції, що доживає віку</string>
-    <string name="seed_4">Родинна ферма, борг і чужинець, який хоче її купити</string>
-    <string name="seed_5">Остання корчма перед перевалом, узимку</string>
+    <string name="seed_1">У монастирській кухні вилупився дракон</string>
+    <string name="seed_2">Нічний портьє в готелі, звідки гості не виїжджають</string>
+    <string name="seed_3">Контрабандисти підбирають безбілетника — спадкоємця мертвої імперії</string>
+    <string name="seed_4">Детектив у місті, де торгують спогадами</string>
+    <string name="seed_5">Пограбування сховища чаклуна в ніч, коли слабнуть чари</string>
     <string name="done">Готово</string>
     <string name="files_undo">Повернути як було</string>
     <string name="files_autosave">Зміни зберігаються самі й діють із наступного ходу.</string>

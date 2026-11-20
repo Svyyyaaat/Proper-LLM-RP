@@ -101,7 +101,7 @@
     <string name="home_settings_about">język, wygląd, Claude</string>
 
     <!-- the story -->
-    <string name="you_are">Grasz jako</string>
+    <string name="you_are">Twoja postać</string>
     <string name="reply_hint">Co mówisz albo robisz?</string>
     <string name="reply_waiting">Powstaje kolejny fragment…</string>
     <string name="go_on">Dalej</string>
@@ -314,11 +314,11 @@
     <string name="key_get">Otwórz console.anthropic.com</string>
     <string name="story_create_surprise">Zaskocz mnie</string>
     <string name="story_title_sequel">Co było dalej</string>
-    <string name="seed_1">Miasto portowe, gdzie woda jest droższa od wina</string>
-    <string name="seed_2">Nocna zmiana w hotelu, z którego goście nigdy nie wyjeżdżają</string>
-    <string name="seed_3">Przemytnicy na umierającej stacji kosmicznej</string>
-    <string name="seed_4">Rodzinne gospodarstwo, dług i obcy, który chce je kupić</string>
-    <string name="seed_5">Ostatnia karczma przed przełęczą, w środku zimy</string>
+    <string name="seed_1">W klasztornej kuchni wykluwa się smok</string>
+    <string name="seed_2">Nocny portier w hotelu, z którego goście nie wyjeżdżają</string>
+    <string name="seed_3">Przemytnicy zabierają pasażera na gapę — dziedzica martwego imperium</string>
+    <string name="seed_4">Detektyw w mieście, gdzie handluje się wspomnieniami</string>
+    <string name="seed_5">Skok na skarbiec czarnoksiężnika w noc, gdy słabną zaklęcia</string>
     <string name="done">Gotowe</string>
     <string name="files_undo">Cofnij moje zmiany</string>
     <string name="files_autosave">Zmiany zapisują się na bieżąco i działają od następnej tury.</string>

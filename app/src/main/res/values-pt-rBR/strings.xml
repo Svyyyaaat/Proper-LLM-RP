@@ -312,11 +312,11 @@
     <string name="key_get">Abrir console.anthropic.com</string>
     <string name="story_create_surprise">Me surpreenda</string>
     <string name="story_title_sequel">O que acontece depois</string>
-    <string name="seed_1">Uma cidade portuária onde a água custa mais que o vinho</string>
-    <string name="seed_2">Turno da noite num hotel de onde os hóspedes nunca saem</string>
-    <string name="seed_3">Contrabandistas numa estação espacial à beira do colapso</string>
-    <string name="seed_4">Um sítio de família, uma dívida e um forasteiro querendo comprá-lo</string>
-    <string name="seed_5">A última estalagem antes do desfiladeiro, em pleno inverno</string>
+    <string name="seed_1">Um ovo de dragão choca na cozinha de um mosteiro</string>
+    <string name="seed_2">O porteiro da noite de um hotel de onde ninguém sai</string>
+    <string name="seed_3">Contrabandistas acham um clandestino que diz ser herdeiro de um império morto</string>
+    <string name="seed_4">Uma detetive numa cidade onde memórias são vendidas</string>
+    <string name="seed_5">Um assalto ao cofre de um feiticeiro na única noite sem proteções</string>
     <string name="done">Pronto</string>
     <string name="files_undo">Desfazer minhas alterações</string>
     <string name="files_autosave">As alterações são salvas enquanto você digita e valem a partir do próximo turno.</string>
